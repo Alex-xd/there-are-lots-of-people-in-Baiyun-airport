@@ -1,0 +1,34 @@
+{
+  "name": "bigdata",
+  "version": "0.0.0",
+  "description": "There Are Lots Of People In Baiyun Airport",
+  "main": "main.js",
+  "scripts": {
+    "init": "./node_modules/.bin/commitizen init cz-conventional-changelog --save-dev --save-exact --force",
+    "commit": "git-cz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport.git"
+  },
+  "keywords": [
+    "bigdata"
+  ],
+  "author": "Alex-xd",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport/issues"
+  },
+  "homepage": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport#readme",
+  "dependencies": {
+    "commitizen": "^2.9.6"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
