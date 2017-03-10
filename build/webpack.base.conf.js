@@ -2,17 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const BUILD_PATH = path.resolve(__dirname, './static');
-const ROOT_PATH = path.resolve(__dirname, './');
-const SRC_PATH = path.resolve(__dirname, './src');
+const WebpackMd5Hash = require('webpack-md5-hash');
+const BUILD_PATH = path.resolve(__dirname, '../static');
+const ROOT_PATH = path.resolve(__dirname, '../');
+const SRC_PATH = path.resolve(__dirname, '../src');
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: BUILD_PATH,
         publicPath: '/',
-        chunkFilename: 'chunk.[id].[hash:8].js',
-        filename: '[name].[chunkhash:8].js'
+        filename: '[name].js',
+        chunkFilename: 'chunk.[id].[chunkhash:8].js'   // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
     },
     module: {
         rules: [{
@@ -29,15 +30,14 @@ module.exports = {
             test: /\.s[a|c]ss$/,
             exclude: /node_modules/,
             loader: ExtractTextPlugin.extract({
-                use: "css?souceMap!sass!postcss",
-                fallback: "style"
+                fallback: 'style',
+                use: ['css', 'postcss?sourceMap', 'sass']
             })
         }, {
             test: /\.css$/,
-            // loader:'style!css?souceMap!postcss'
             loader: ExtractTextPlugin.extract({
-                use: "css?souceMap!postcss",
-                fallback: "style"
+                fallback: "style",
+                use: ["css", "postcss"]
             })
         }, { // 支持font awesome的一组loader
             test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -65,7 +65,13 @@ module.exports = {
         }),
         new ExtractTextPlugin({
             filename: '[name].[contenthash:8].css'
-        })
+        }),
+        new WebpackMd5Hash(),
+        new webpack.ProvidePlugin({
+            $: 'jQuery',
+            jQuery: 'jQuery',
+            "window.jQuery": "jQuery"
+        }),
     ],
     resolveLoader: {
         moduleExtensions: ["-loader"]

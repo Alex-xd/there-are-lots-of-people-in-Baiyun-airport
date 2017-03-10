@@ -14,11 +14,11 @@ config.plugins = (config.plugins || []).concat([
         title: 'Demo',
         filename: '../index.html', // 相对于output.path的路径
         template: './src/index.html',
-        // favicon: './src/assets/favicon.png',
-        inject: true,
+        inject: 'body',
         minify: {
             removeComments: true
-        }
+        },
+        // favicon: './src/assets/favicon.png',
     }),
 
     new webpack.optimize.UglifyJsPlugin({

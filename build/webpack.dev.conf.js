@@ -9,6 +9,7 @@ config.plugins = (config.plugins || []).concat([
         title: 'Demo',
         filename: 'index.html',
         template: 'src/index.html',
+        inject: 'body',
         // favicon: 'src/assets/favicon.png',
     }),
 ]);

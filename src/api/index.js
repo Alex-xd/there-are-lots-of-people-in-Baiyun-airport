@@ -1,10 +1,5 @@
 /**
- * 存放各种API请求
- *   
+ * 数据处理
  */
-import * as indexPage from './apiList/indexPage'
 
-export default {
-    ...indexPage
-}
 
