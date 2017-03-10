@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const config = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-config.output.path = path.resolve(__dirname, './static/');
+config.output.path = path.resolve(__dirname, '../static/');
 
 let SOURCE_MAP = true;
 

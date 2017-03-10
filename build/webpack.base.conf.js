@@ -7,13 +7,17 @@ const BUILD_PATH = path.resolve(__dirname, '../static');
 const ROOT_PATH = path.resolve(__dirname, '../');
 const SRC_PATH = path.resolve(__dirname, '../src');
 
+
+let isDev = (process.env.NODE_ENV === 'development');
+
+
 module.exports = {
     entry: './src/main.js',
     output: {
         path: BUILD_PATH,
         publicPath: '/',
-        filename: '[name].js',
-        chunkFilename: 'chunk.[id].[chunkhash:8].js'   // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
+        filename: `[name]${isDev ? "" : ".[chunkhash:8]"}.js`,
+        chunkFilename: 'chunk.[id].[chunkhash:8].js' // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
     },
     module: {
         rules: [{
@@ -41,19 +45,19 @@ module.exports = {
             })
         }, { // 支持font awesome的一组loader
             test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "url?limit=10000&mimetype=application/font-woff"
+            loader: "url?limit=8192&mimetype=application/font-woff?name=../static/fonts/[name].[ext]"
         }, {
             test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "url?limit=10000&mimetype=application/font-woff"
+            loader: "url?limit=8192&mimetype=application/font-woff?name=../static/fonts/[name].[ext]"
         }, {
             test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "url?limit=10000&mimetype=application/octet-stream"
+            loader: "url?limit=8192&mimetype=application/octet-stream?name=../static/fonts/[name].[ext]"
         }, {
             test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "file"
+            loader: "file?name=../static/fonts/[name].[ext]"
         }, {
             test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-            loader: "url?limit=10000&mimetype=image/svg+xml"
+            loader: "url?limit=8192&mimetype=image/svg+xml?name=../static/fonts/[name].[ext]"
         }]
     },
     plugins: [
@@ -70,7 +74,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jQuery',
             jQuery: 'jQuery',
-            "window.jQuery": "jQuery"
+            "window.jQuery": "jQuery",
+            ec: 'echarts'
         }),
     ],
     resolveLoader: {

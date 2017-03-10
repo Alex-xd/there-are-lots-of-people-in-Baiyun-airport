@@ -1,4 +1,6 @@
 import 'assets/css/index.scss';
-import echarts from 'node_modules/echarts/dist/echarts';
+import echarts from 'echarts';
 
-console.log($('#app').html());
+window.echarts = echarts;
+
+

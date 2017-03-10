@@ -39,3 +39,5 @@ Thumbs.db
 
 # Others
 node_modules
+static
+index.html
