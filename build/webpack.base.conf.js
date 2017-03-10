@@ -7,7 +7,7 @@ const ROOT_PATH = path.resolve(__dirname, './');
 const SRC_PATH = path.resolve(__dirname, './src');
 
 module.exports = {
-    entry: './src/app.js',
+    entry: './src/main.js',
     output: {
         path: BUILD_PATH,
         publicPath: '/',
