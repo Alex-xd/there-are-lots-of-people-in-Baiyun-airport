@@ -6,7 +6,7 @@
     "scripts": {
         "init": "./node_modules/.bin/commitizen init cz-conventional-changelog --save-dev --save-exact --force",
         "clear": "rm -rf static&& mkdir static",
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js --open --inline --hot",
+        "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js --host 127.0.0.1 --open --inline --hot",
         "build": "npm run clear&& cross-env NODE_ENV=production webpack --config ./build/webpack.prod.conf.js --progress --hide-modules",
         "commit": "git-cz"
     },

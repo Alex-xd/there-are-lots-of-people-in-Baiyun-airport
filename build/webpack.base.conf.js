@@ -1,15 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
+const autoprefixer = require('autoprefixer');
 const BUILD_PATH = path.resolve(__dirname, '../static');
 const ROOT_PATH = path.resolve(__dirname, '../');
 const SRC_PATH = path.resolve(__dirname, '../src');
 
-
 let isDev = (process.env.NODE_ENV === 'development');
-
 
 module.exports = {
     entry: './src/main.js',
@@ -83,7 +81,8 @@ module.exports = {
     },
     resolve: {
         extensions: [
-            '.js'
+            '.js',
+            '.scss'
         ],
         alias: {
             'root': ROOT_PATH,

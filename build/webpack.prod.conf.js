@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 config.output.path = path.resolve(__dirname, '../static/');
 
-let SOURCE_MAP = true;
+let SOURCE_MAP = false;
 
 config.devtool = SOURCE_MAP ? '#source-map' : false;
 
