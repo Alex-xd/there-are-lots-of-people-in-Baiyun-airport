@@ -72,8 +72,7 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: 'jQuery',
             jQuery: 'jQuery',
-            "window.jQuery": "jQuery",
-            ec: 'echarts'
+            "window.jQuery": "jQuery"
         }),
     ],
     resolveLoader: {
