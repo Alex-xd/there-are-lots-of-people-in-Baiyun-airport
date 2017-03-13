@@ -25,6 +25,7 @@
     "homepage": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport#readme",
     "dependencies": {
         "echarts": "^3.4.0",
+        "heatmap.js": "^2.0.5",
         "jquery": "^3.1.1"
     },
     "devDependencies": {

@@ -1,50 +1,132 @@
 import 'assets/css/index.scss';
+import echarts from 'echarts';
+import h337 from 'heatmap.js'
 
-window.echarts = echarts;
+const radar = echarts.init($('#J_chart-1')[0]);
 
-const myChart = echarts.init($('#app')[0]);
-let option = null;
-
-$.get('localdata/test.json', data => {
-    let points = [].concat.apply([], data.map(function (track) {
-        return track.map(function (seg) {
-            return seg.coord.concat([1]);
-        });
-    }));
-    myChart.setOption(option = {
-        animation: true,
-        bmap: {
-            center: [113.309493,23.392435],
-            zoom: 16,
-            roam: true
-        },
-        visualMap: {
-            show: true,
-            top: 'top',
-            min: 0,
-            max: 5,
-            seriesIndex: 0,
-            calculable: true,
-            inRange: {
-                color: ['blue', 'blue', 'green', 'yellow', 'red']
+radar.setOption({
+    title: {
+        text: '人流量超标预警监控'
+    },
+    legend: {
+        data: ['临界值', '当前各区域人数']
+    },
+    radar: [
+        {
+            indicator: [
+                {text: 'E1'},
+                {text: 'E2'},
+                {text: 'E3'},
+                {text: 'W1'},
+                {text: 'W2'}
+            ],
+            center: ['25%', '50%'],
+            radius: 120,
+            startAngle: 90,
+            splitNumber: 4,
+            shape: 'circle',
+            name: {
+                formatter: '【{value}】',
+                textStyle: {
+                    color: '#72ACD1'
+                }
+            },
+            splitArea: {
+                areaStyle: {
+                    color: ['rgba(114, 172, 209, 0.2)',
+                        'rgba(114, 172, 209, 0.4)', 'rgba(114, 172, 209, 0.6)',
+                        'rgba(114, 172, 209, 0.8)', 'rgba(114, 172, 209, 1)'],
+                    shadowColor: 'rgba(0, 0, 0, 0.3)',
+                    shadowBlur: 10
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.5)'
+                }
             }
+        }
+    ],
+    series: [
+        {
+            name: '雷达图',
+            type: 'radar',
+            itemStyle: {
+                emphasis: {
+                    // color: 各异,
+                    lineStyle: {
+                        width: 4
+                    }
+                }
+            },
+            data: [
+                {
+                    value: [100, 8, 0.40, -80, 2000],
+                    name: '临界值',
+                    symbol: 'rect',
+                    symbolSize: 5,
+                    lineStyle: {
+                        normal: {
+                            type: 'dashed'
+                        }
+                    }
+                },
+                {
+                    value: [60, 5, 0.30, -100, 1500],
+                    name: '当前各区域人数',
+                    areaStyle: {
+                        normal: {
+                            color: 'rgba(255, 255, 255, 0.5)'
+                        }
+                    }
+                }
+            ]
         },
-        series: [{
-            type: 'heatmap',
-            coordinateSystem: 'bmap',
-            data: points,
-            pointSize: 5,
-            blurSize: 6
-        }]
-    });
-    if (!app.inNode) {
-        // 添加百度地图插件
-        const bmap = myChart.getModel().getComponent('bmap').getBMap();
-        bmap.addControl(new BMap.MapTypeControl());
-    }
+        {
+            name: '成绩单',
+            type: 'radar',
+            radarIndex: 1,
+            data: []
+        }
+    ]
 });
 
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
 
+
+
+// minimal heatmap instance configuration
+var heatmapInstance = h337.create({
+    // only container is required, the rest will be defaults
+    container: document.querySelector('#J_heatmap')
+});
+
+// now generate some random data
+var points = [];
+var max = 0;
+var width = 840;
+var height = 400;
+var len = 200;
+
+while (len--) {
+    var val = Math.floor(Math.random()*100);
+    max = Math.max(max, val);
+    var point = {
+        x: Math.floor(Math.random()*width),
+        y: Math.floor(Math.random()*height),
+        value: val
+    };
+    points.push(point);
+}
+// heatmap data format
+var data = {
+    max: max,
+    data: points
+};
+// if you have a set of datapoints always use setData instead of addData
+// for data initialization
+heatmapInstance.setData(data);
