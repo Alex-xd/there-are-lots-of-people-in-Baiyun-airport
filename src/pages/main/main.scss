@@ -1,0 +1,67 @@
+.heatmap-wrapper {
+    position: relative;
+    width: 600px;
+    height: 600px;
+    overflow: hidden;
+    .heatmap-canvas {
+        width: 100%;
+        height: 100%;
+    }
+    .tooltip {
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: rgba(0, 0, 0, .8);
+        color: #fff;
+        font-size: 14px;
+        padding: 5px;
+        line-height: 18px;
+        display: none;
+    }
+    .legend-area {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        #min {
+            float: left;
+        }
+        #max {
+            float: right;
+        }
+        span {
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.map {
+    background-size: 100% 100%;
+    background-image: url("~image/global.jpg");
+}
+
+.chart {
+    position: fixed;
+    z-index: 9999;
+    &-1 {
+        width: 50%;
+        height: 50%;
+        top: 10%;
+        right: -15%;
+    }
+}
+
+.center-point {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    margin: -2.5px 0 0 -2.5px;
+}

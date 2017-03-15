@@ -5,9 +5,9 @@
     "main": "main.js",
     "scripts": {
         "init": "./node_modules/.bin/commitizen init cz-conventional-changelog --save-dev --save-exact --force",
-        "clear": "rm -rf static&& mkdir static",
+        "clean":"rm -rf dist/**",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.conf.js --host 127.0.0.1 --open --inline --hot",
-        "build": "npm run clear&& cross-env NODE_ENV=production webpack --config ./build/webpack.prod.conf.js --progress --hide-modules",
+        "build": "npm run clean&& cross-env NODE_ENV=production webpack --config ./build/webpack.prod.conf.js --progress --hide-modules",
         "commit": "git-cz"
     },
     "repository": {
@@ -24,6 +24,8 @@
     },
     "homepage": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport#readme",
     "dependencies": {
+        "bootstrap": "3",
+        "bootstrap-material-design": "^0.5.10",
         "echarts": "^3.4.0",
         "heatmap.js": "^2.0.5",
         "jquery": "^3.1.1"

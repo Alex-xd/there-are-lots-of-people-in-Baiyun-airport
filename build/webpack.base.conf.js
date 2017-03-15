@@ -3,19 +3,24 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const autoprefixer = require('autoprefixer');
-const BUILD_PATH = path.resolve(__dirname, '../static');
+const BUILD_PATH = path.resolve(__dirname, '../dist');
 const ROOT_PATH = path.resolve(__dirname, '../');
 const SRC_PATH = path.resolve(__dirname, '../src');
+const MODULE_PATH = path.resolve(__dirname, '../src/modules');
+const PAGES_PATH = path.resolve(__dirname, '../src/pages');
 
 let isDev = (process.env.NODE_ENV === 'development');
 
 module.exports = {
-    entry: './src/main.js',
+    entry: {
+        "modules/common": MODULE_PATH + '/common/index',
+        'main/main': PAGES_PATH + '/main/index',
+    },
     output: {
         path: BUILD_PATH,
-        publicPath: '/',
-        filename: `[name]${isDev ? "" : ".[chunkhash:8]"}.js`,
-        chunkFilename: 'chunk.[id].[chunkhash:8].js' // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
+        publicPath: './',
+        filename: `[name].${isDev ? "" : "[chunkhash:8]"}.js`,
+        chunkFilename: 'chunk.[chunkhash:8].js' // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
     },
     module: {
         rules: [{
@@ -86,8 +91,11 @@ module.exports = {
         alias: {
             'root': ROOT_PATH,
             'src': SRC_PATH,
-            'assets': SRC_PATH + '/assets',
+            'lib': SRC_PATH + '/lib',
+            'image': SRC_PATH + '/image',
+            'components': SRC_PATH + '/components',
             'api': SRC_PATH + '/api',
+            'pages': SRC_PATH + '/pages',
             'node_modules': ROOT_PATH + '/node_modules',
         }
     }
