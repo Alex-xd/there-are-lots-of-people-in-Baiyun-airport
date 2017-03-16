@@ -39,6 +39,7 @@ Thumbs.db
 
 # Others
 node_modules
-static
+dist
 index.html
 .ided
+*.psd
