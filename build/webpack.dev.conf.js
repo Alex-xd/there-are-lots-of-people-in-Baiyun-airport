@@ -10,6 +10,8 @@ config.output.publicPath = '/';
 
 config.plugins = (config.plugins || []).concat([
     new HtmlWebpackPlugin({
+        chunks: ['common/common', 'main/main'],
+        chunksSortMode: 'dependency',
         title: 'Demo',
         filename: 'index.html',
         template: SRC_PATH + '/pages/main/index.html',

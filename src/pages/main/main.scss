@@ -1,8 +1,46 @@
+.container {
+    position: relative;
+    padding-top: 60px;
+}
+
+.container-big {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding-top: 0;
+    margin: 0;
+    box-sizing: content-box;
+    width: 2278px;
+}
+
+.container-panel {
+    position: fixed;
+    left: 0;
+    width: 30%;
+    height: 90%;
+    z-index: 9999;
+}
+
+.control-panel {
+    height: 90%;
+    background-image: url('./img/baiyun-demo.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.bs-component {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
 .heatmap-wrapper {
     position: relative;
-    width: 600px;
-    height: 600px;
-    overflow: hidden;
+    width: 2240px;
+    height: 1800px;
+    box-sizing: content-box;
     .heatmap-canvas {
         width: 100%;
         height: 100%;
@@ -19,9 +57,9 @@
         display: none;
     }
     .legend-area {
-        position: absolute;
+        position: fixed;
         bottom: 0;
-        right: 0;
+        right: 10px;
         #min {
             float: left;
         }
@@ -55,13 +93,3 @@
     }
 }
 
-.center-point {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 8px;
-    height: 8px;
-    background: #fff;
-    border-radius: 50%;
-    margin: -2.5px 0 0 -2.5px;
-}

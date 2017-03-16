@@ -13,13 +13,14 @@ let isDev = (process.env.NODE_ENV === 'development');
 
 module.exports = {
     entry: {
-        "modules/common": MODULE_PATH + '/common/index',
-        'main/main': PAGES_PATH + '/main/index',
+        'common/common': MODULE_PATH + '/common',
+        'main/main': PAGES_PATH + '/main',
+        'index/index': PAGES_PATH + '/index'
     },
     output: {
         path: BUILD_PATH,
         publicPath: './',
-        filename: `[name].${isDev ? "" : "[chunkhash:8]"}.js`,
+        filename: `[name]${isDev ? ".js" : ".[chunkhash:8].js"}`,
         chunkFilename: 'chunk.[chunkhash:8].js' // 关于chunkFilename作用 → http://www.cnblogs.com/ihardcoder/p/5623411.html
     },
     module: {
@@ -29,7 +30,7 @@ module.exports = {
             exclude: /node_modules/
         }, {
             test: /\.(png|jpg|gif)$/,
-            loader: 'url?limit=8192',
+            loader: 'url-loader?limit=25000',
             options: {
                 name: '[name].[hash:6].[ext]'
             }
@@ -70,18 +71,20 @@ module.exports = {
                 postcss: [autoprefixer]
             }
         }),
+        // new webpack.ProvidePlugin({
+        //     $: "jquery",
+        //     jQuery: "jquery"
+        // }),
         new ExtractTextPlugin({
             filename: '[name].[contenthash:8].css'
         }),
-        new WebpackMd5Hash(),
-        new webpack.ProvidePlugin({
-            $: 'jQuery',
-            jQuery: 'jQuery',
-            "window.jQuery": "jQuery"
-        }),
+        new WebpackMd5Hash()
     ],
     resolveLoader: {
         moduleExtensions: ["-loader"]
+    },
+    externals: {
+        jquery: 'window.$'
     },
     resolve: {
         extensions: [

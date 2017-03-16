@@ -10,7 +10,7 @@ config.devtool = SOURCE_MAP ? '#source-map' : false;
 
 config.plugins = (config.plugins || []).concat([
     new HtmlWebpackPlugin({
-        chunks: ['modules/common', 'main/main'],
+        chunks: ['common/common', 'main/main'],
         chunksSortMode: 'dependency',
         title: 'Demo',
         filename: 'main.html', // 相对于output.path的路径
