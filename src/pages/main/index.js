@@ -1,4 +1,4 @@
-import './main.scss';
+import './css';
 import $ from 'jquery';
 import Heatmap from './js/heatmap'
 
