@@ -5,7 +5,7 @@
 html,
 body {
     font-family: $font;
-    background: #E7E7E7;
+    background: #e7e7e7;
 }
 
 // ------------------------------
@@ -30,6 +30,63 @@ body {
 .performance {
     will-change: transform;
     transform: translateZ(0);
+}
+
+// ------------------------------
+// 动画keyframes
+// ------------------------------
+
+@keyframes animationStyle1 {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90deg) translate3d(0, 30px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+}
+
+@keyframes animationStyle2 {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg) rotateY(-90deg) translate3d(-50%, 50px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) translate3d(-50%, -50%, 0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) translate3d(-50%, -50%, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: rotateX(-90deg) rotateY(90deg) translate3d(-50%, 50px, 0);
+    }
+}
+
+@keyframes rotating {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 // ------------------------------

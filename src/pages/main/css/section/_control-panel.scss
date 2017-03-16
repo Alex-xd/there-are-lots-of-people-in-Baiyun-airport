@@ -1,11 +1,17 @@
 // 监控面板
 .container-panel {
     position: fixed;
-    left: 0;
     width: 400px;
     height: 900px;
     z-index: 9999;
     padding: 70px 0 0 0;
+    transition: all .3s ease-in-out;
+    transform: rotateX(90deg) rotateY(-90deg);
+    transform-origin: 0 30%;
+    perspective: 1000px;
+    &--showOut {
+        transform: rotate(0deg);
+    }
 }
 
 .control-panel {
@@ -34,7 +40,7 @@
             bottom: -15px;
             right: 10px;
             z-index: 99999;
-            transition: .3s;
+            transition: .3s linear;
             &:hover {
                 background-color: lighten(#028775, 5%) !important;
             }
@@ -43,6 +49,16 @@
             }
             &:focus {
                 background-color: lighten(#028775, 5%) !important;
+            }
+            &--rotating {
+                animation: {
+                    name: rotating;
+                    duration: 1s;
+                    fill-mode: forwards;
+                    iteration-count: infinite;
+                    timing-function: linear;
+                }
+                box-shadow: none;
             }
         }
     }

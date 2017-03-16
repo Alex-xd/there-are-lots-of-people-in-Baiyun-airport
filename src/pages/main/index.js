@@ -2,7 +2,10 @@ import './css';
 import $ from 'jquery';
 import Heatmap from './js/heatmap'
 
-const $configBtn = $('#J_toggle-config-panel'),
+const $showPanel = $('#J_showPanel'),
+    $ctrlPanel = $('#J_ctrlPanel'),
+    $refreshCtrlPanel = $('#J_refreshCtrlPanel'),
+    $hidePanel = $('.J_hidePanel'),
     $startupBtn = $('#J_startup');
 
 const config = {
@@ -14,6 +17,25 @@ const config = {
 };
 
 const heatmap = new Heatmap(config);
+
+
 $startupBtn.on('click', heatmap.autoPlay());
+$showPanel.on('click', () => {
+    $ctrlPanel.toggleClass('container-panel--showOut');
+});
+$hidePanel.on('click', () => {
+    $ctrlPanel.removeClass('container-panel--showOut');
+});
+$refreshCtrlPanel.on('click', () => {
+    $refreshCtrlPanel.addClass('btn--rotating');
 
+    // 强行刷新数据
+    // TODO
+    // ...
 
+    setTimeout(() => $refreshCtrlPanel.removeClass('btn--rotating'), 1500);
+});
+
+$(()=>{
+    $ctrlPanel.addClass('container-panel--showOut');
+});
