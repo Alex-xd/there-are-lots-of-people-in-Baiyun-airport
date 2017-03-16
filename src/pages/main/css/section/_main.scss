@@ -11,53 +11,57 @@
     margin: 0;
     box-sizing: content-box;
     width: 2278px;
-}
-
-.navbar-wrapper {
-    position: fixed;
-    z-index: 999999;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
-.heatmap-wrapper {
-    position: relative;
-    width: $mapWidth;
-    height: $mapHeight;
-    box-sizing: content-box;
-    .heatmap-canvas {
-        width: 100%;
-        height: 100%;
-    }
-    .tooltip {
-        position: absolute;
-        left: 15px;
-        top: -18px;
-        display: none;
-    }
-    .legend-area {
+    .navbar-wrapper {
         position: fixed;
-        bottom: 0;
-        right: 10px;
-        #min {
-            float: left;
+        z-index: 999999;
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+    .heatmap-wrapper {
+        position: relative;
+        width: $mapWidth;
+        height: $mapHeight;
+        box-sizing: content-box;
+        
+        @at-root .map {
+            background-size: 100% 100%;
+            background-image: url("~image/global.jpg");
         }
-        #max {
-            float: right;
-        }
-        span {
-            font-size: 14px;
-            margin: 0;
-            padding: 0;
-        }
-        img {
+        .heatmap-canvas {
             width: 100%;
+            height: 100%;
+        }
+        .tooltip {
+            position: absolute;
+            left: 15px;
+            top: -18px;
+            display: none;
+        }
+        .legend-area {
+            position: fixed;
+            bottom: 0;
+            right: 10px;
+            #min {
+                float: left;
+            }
+            #max {
+                float: right;
+            }
+            span {
+                font-size: 14px;
+                margin: 0;
+                padding: 0;
+            }
+            img {
+                width: 100%;
+            }
         }
     }
 }
 
-.map {
-    background-size: 100% 100%;
-    background-image: url("~image/global.jpg");
-}
+
+
+
+
+

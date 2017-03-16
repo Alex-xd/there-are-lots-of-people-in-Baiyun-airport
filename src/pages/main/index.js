@@ -36,6 +36,6 @@ $refreshCtrlPanel.on('click', () => {
     setTimeout(() => $refreshCtrlPanel.removeClass('btn--rotating'), 1500);
 });
 
-$(()=>{
-    $ctrlPanel.addClass('container-panel--showOut');
-});
+// $(()=>{
+//     $ctrlPanel.addClass('container-panel--showOut');
+// });

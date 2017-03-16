@@ -15,32 +15,51 @@
 ├── index.html                                      打包后的主html
 ├── package.json                                    项目信息
 ├── postcss.config.js                               postcss配置文件
-├── src                                             开发源文件
-│   ├── api                                         api数据层
+├── data                                            数据
+│   ├── 1.json
+│   ├── ...
+│   ├── 9.json
+│   └── default                                     原始数据备份
+│       ├── 1.json
+│       ├── ...
+│       ├── 9.json
+│       └── all.json                                未分割的原始数据
+├── dist                                            打包发布文件
+├── src                                             源文件
+│   ├── api                                         ajax请求封装
 │   │   └── index.js
-│   ├── assets                                      静态资源
-│   │   ├── css                                     css文件
-│   │   │   ├── components                          css组件
-│   │   │   ├── font-awesome.min.scss               字体图标
-│   │   │   ├── fonts                               字体
-│   │   │   │   ├── FontAwesome.otf
-│   │   │   │   ├── fontawesome-webfont.eot
-│   │   │   │   ├── fontawesome-webfont.svg
-│   │   │   │   ├── fontawesome-webfont.ttf
-│   │   │   │   ├── fontawesome-webfont.woff
-│   │   │   │   └── fontawesome-webfont.woff2
-│   │   │   ├── global.scss                         css全局属性
-│   │   │   ├── index.scss                          集中导入所有css
-│   │   │   ├── media-queries.scss                  媒体查询
-│   │   │   ├── reset.scss                          样式重置
-│   │   │   ├── sections                            按业务划分的区块css
-│   │   │   └── variables.scss                      全局变量
-│   │   ├── image                                   图片
-│   │   └── lib                                     外部依赖库（使用npm安装后软连接到此目录）
-│   │       └── echarts.js                  
-│   ├── index.html                                  源HTML文件
-│   └── main.js                                     项目入口
-├── static                                          打包生成的静态资源
+│   ├── components                                  通用组件（模态窗等）
+│   ├── image                                       可复用的图片
+│   │   ├── 3d.jpg
+│   │   └── global.jpg
+│   ├── modules                                     业务模块
+│   │   └── common                                  通用模块（每个页面都要引入的）
+│   │       ├── css
+│   │       │   ├── global.scss
+│   │       │   ├── index.scss
+│   │       │   ├── media-queries.scss
+│   │       │   ├── reset.scss
+│   │       │   └── variables.scss
+│   │       └── index.js
+│   └── pages                                       划分页面
+│       ├── index                                   Landing页
+│       │   ├── index.html
+│       │   └── index.js
+│       └── main                                    主页面
+│           ├── css                                 页面独有css
+│           │   ├── index.scss
+│           │   └── section                         区块划分
+│           │       ├── _control-panel.scss
+│           │       └── _main.scss
+│           ├── img                                 页面独有图片资源
+│           │   └── baiyun-demo.png
+│           ├── index.html                              
+│           ├── index.js                            页面js入口文件
+│           └── js                                  
+│               ├── chart.js
+│               └── heatmap
+│                   ├── index.js
+│                   └── tooltips.js
 └── yarn.lock                                       推荐使用yarn
 ```
 
