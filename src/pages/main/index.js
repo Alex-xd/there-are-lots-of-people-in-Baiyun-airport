@@ -1,12 +1,35 @@
+/*
+
+                  _ooOoo_
+                 o8888888o
+                 88" . "88
+                 (| -_- |)
+                 O\  =  /O
+               ___/`---'\____
+             .'  \\|     |//  `.
+           /  \\|||  :  |||//  \
+           /  _||||| -:- |||||-  \
+           |   | \\\  -  /// |   |
+           | \_|  ''\---/''  |   |
+             .-\__  `-`  ___/-. /  /
+        ___`. .'  /--.--\  `. . __
+     ."" '<  `.___\_<|>_/___.'  >'"".
+    | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+    \  \ `-.   \_ __\ /__ _/   .-` /  /
+======`-.____`-.___\_____/___.-`____.-'======
+                   `=---='
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                佛祖保佑，永无BUG!
+
+*/
+
 import './css';
 import $ from 'jquery';
 import Heatmap from './js/heatmap'
 
-const $showPanel = $('#J_showPanel'),
+const $html = $('html'),
     $ctrlPanel = $('#J_ctrlPanel'),
-    $refreshCtrlPanel = $('#J_refreshCtrlPanel'),
-    $hidePanel = $('.J_hidePanel'),
-    $startupBtn = $('#J_startup');
+    $refreshCtrlPanel = $('#J_refreshCtrlPanel');
 
 const config = {
     container: $('#J_heatmap')[0],
@@ -19,14 +42,14 @@ const config = {
 const heatmap = new Heatmap(config);
 
 
-$startupBtn.on('click', heatmap.autoPlay());
-$showPanel.on('click', () => {
+$html.on('click', '#J_startup', heatmap.autoPlay());
+$html.on('click', '#J_showPanel', () => {
     $ctrlPanel.toggleClass('container-panel--showOut');
 });
-$hidePanel.on('click', () => {
+$html.on('click', '.J_hidePanel', () => {
     $ctrlPanel.removeClass('container-panel--showOut');
 });
-$refreshCtrlPanel.on('click', () => {
+$html.on('click', '#J_refreshCtrlPanel', () => {
     $refreshCtrlPanel.addClass('btn--rotating');
 
     // 强行刷新数据

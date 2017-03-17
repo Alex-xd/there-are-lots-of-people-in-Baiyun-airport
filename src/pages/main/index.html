@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <META http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+
+<!--主界面-->
+<div class="container container-big col-md-12">
+    <div class="navbar-wrapper">
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target=".navbar-responsive-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="javascript:;">人流量分布大数据预测监控系统</a>
+                </div>
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active" id="J_showPanel"><a href="javascript:;">监控面板</a></li>
+                        <li class="dropdown">
+                            <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
+                                <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;" id="J_startup"><i class="material-icons">play_circle_outline</i> 启动系统</a></li>
+                                <li><a href="javascript:;"><i class="material-icons">pause_circle_outline</i> 暂停系统</a></li>
+                                <li><a href="javascript:;"><i class="material-icons">power_settings_new</i> 关闭系统</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:;">数据统计</a></li>
+                    </ul>
+                    <div class="slider shor slider-success"></div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="javascript:;">广州白云机场T1航站楼</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="jumbotron heatmap-wrapper map">
+        <span class="center-point"></span>
+        <div id="J_heatmap" class="heatmap-canvas"></div>
+        <div class="tooltip label label-primary"></div>
+        <div class="legend-area panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">人数标尺</h4>
+            </div>
+            <div class="panel-body">
+                <span id="min"></span>
+                <span id="max"></span>
+                <img alt="" id="gradient">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--监控面板-->
+<div class="container container-panel" id="J_ctrlPanel">
+    <div class="control-panel" id="J_control-panel">
+        <header>
+            <ul class="breadcrumb">
+                <li><a href="javascript:;" class="J_hidePanel">主界面</a></li>
+                <li class="active">监控面板</li>
+            </ul>
+            <p class="btn-group-sm">
+                <a href="javascript:;" class="btn btn-primary btn-fab" id="J_refreshCtrlPanel"><i
+                        class="material-icons">loop</i></a>
+            </p>
+        </header>
+        <section class="content">
+            <div class="list-group">
+                <div class="list-group-item warning">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">169</span>人</div>
+                        <h4 class="list-group-item-heading">T1 主航站楼</h4>
+
+                        <p class="list-group-item-text">该区域人数超出平均值，建议派遣工作人员引导旅客登机</p>
+
+                        <div class="btn-group">
+                            <a href="javascript:;" class="btn btn-warning">Warning</a>
+                            <a href="javascript:;" data-target="#" class="btn btn-warning dropdown-toggle"
+                               data-toggle="dropdown"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;">向警卫部发送该警告</a></li>
+                                <li><a href="javascript:;">通知塔台</a></li>
+                                <li><a href="javascript:;">提升预警等级</a></li>
+                                <li class="divider"></li>
+                                <li><a href="javascript:;">忽略此条预警</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item danger">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">288</span>人</div>
+                        <h4 class="list-group-item-heading danger">WC 安检通道</h4>
+
+                        <p class="list-group-item-text">该区域人数正在急速增加，预计将超出最大人流量限制！建议派遣工作人员前往引导维护秩序！</p>
+
+                        <div class="btn-group">
+                            <a href="javascript:;" class="btn btn-danger">Danger</a>
+                            <a href="javascript:;" data-target="#" class="btn btn-danger dropdown-toggle"
+                               data-toggle="dropdown"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:;">向警卫部发送该警告</a></li>
+                                <li><a href="javascript:;">通知塔台</a></li>
+                                <li class="divider"></li>
+                                <li><a href="javascript:;">忽略此条预警</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">89</span>人</div>
+                        <h4 class="list-group-item-heading">E1 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">88</span>人</div>
+                        <h4 class="list-group-item-heading">E2 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">95</span>人</div>
+                        <h4 class="list-group-item-heading">E3 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">76</span>人</div>
+                        <h4 class="list-group-item-heading">W1 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">45</span>人</div>
+                        <h4 class="list-group-item-heading">W2 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+            <div class="my-list-group-separator"></div>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row-content">
+                        <div class="least-content"><span class="J_panel-peopleNum">95</span>人</div>
+                        <h4 class="list-group-item-heading">W3 登机区</h4>
+
+                        <p class="list-group-item-text">该区一切正常</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+</body>
+
+</html>
+

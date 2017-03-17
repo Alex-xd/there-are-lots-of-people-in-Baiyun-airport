@@ -17,6 +17,14 @@
         width: 100%;
         top: 0;
         left: 0;
+        .dropdown-menu {
+            a {
+                text-indent: 5px;
+            }
+            i {
+                margin-top: -3px;
+            }
+        }
     }
     .heatmap-wrapper {
         position: relative;
