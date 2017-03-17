@@ -13,14 +13,14 @@ export default class Heatmap {
     constructor(config) {
         // 创建heatmap底层基类实例
         this.heatmapBaseInstance = h337.create({
-            container: config.container,
+            container: document.querySelector(config.container),
             onExtremaChange: function (data) {
                 updateLegend(data);
             }
         });
         let updateLegend = initTooltips(this.heatmapBaseInstance);
 
-        this.dom = config.container;
+        this.dom = document.querySelector(config.container);
         this.index = config.index;
         this.jsonCount = config.jsonCount;
         this.interval = config.interval;
@@ -34,7 +34,7 @@ export default class Heatmap {
             let points = data.map((el) => {
                 return {
                     // TODO:这里的数字是凑出来的，刚好能对上图片。  抽空把json计算好处理一下，以免去这一步计算
-                    x: (Math.round(el.cords.x) + 200) * 1.6,
+                    x: ((Math.round(el.cords.x) + 200) * 1.6),
                     y: -(Math.round(el.cords.y) + 200) + 1800,
                     value: Math.round(el.passengerCount)
                 }
@@ -59,15 +59,25 @@ export default class Heatmap {
     }
 
     autoPlay() {
-        let _this = this;
+        let _this = this,
+            progressBar = document.querySelector('#J_progress-bar'),
+            progress = parseInt(progressBar.style.width.slice(0, -1), 10);
+
         return async function goNext10Mins() {
             if (_this.index > _this.jsonCount) {
                 _this.index = 1;
             }
             await _this.updateHeatMap(_this.index);
             _this.index++;
+            progress++;
+            progressBar.style.width = progress + '%';
+
             setTimeout(goNext10Mins, _this.interval);
         }
+    }
+
+    pause() {
+
     }
 }
 

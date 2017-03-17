@@ -26,13 +26,19 @@
 import './css';
 import $ from 'jquery';
 import Heatmap from './js/heatmap'
+import Vue from 'vue'
+import CtrlPanel from './view/ctrl-panel'
+
+const vmCtrlPanel = new Vue({
+    ...CtrlPanel
+}).$mount('#ctrl-panel-view');
 
 const $html = $('html'),
     $ctrlPanel = $('#J_ctrlPanel'),
     $refreshCtrlPanel = $('#J_refreshCtrlPanel');
 
 const config = {
-    container: $('#J_heatmap')[0],
+    container: '#J_heatmap',
     index: 1,
     jsonCount: 18,
     interval: 2000,
@@ -40,9 +46,9 @@ const config = {
 };
 
 const heatmap = new Heatmap(config);
-
-
 $html.on('click', '#J_startup', heatmap.autoPlay());
+
+
 $html.on('click', '#J_showPanel', () => {
     $ctrlPanel.toggleClass('container-panel--showOut');
 });
@@ -59,6 +65,8 @@ $html.on('click', '#J_refreshCtrlPanel', () => {
     setTimeout(() => $refreshCtrlPanel.removeClass('btn--rotating'), 1500);
 });
 
-// $(()=>{
-//     $ctrlPanel.addClass('container-panel--showOut');
-// });
+$(() => {
+    $ctrlPanel.addClass('container-panel--showOut');
+});
+
+

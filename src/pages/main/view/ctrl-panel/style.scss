@@ -1,16 +1,18 @@
+$boxShadowDeep: 6px 0px 17px 0 rgba(0, 0, 0, 0.2), 9px 5px 20px 0 rgba(0, 0, 0, 0.19);
+$boxShadowNormal: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+
 // 监控面板
 .container-panel {
     position: fixed;
+    left: -410px;
     width: 400px;
     height: 900px;
     z-index: 9999;
     padding: 70px 0 0 0;
     transition: all .3s ease-in-out;
-    transform: rotateX(90deg) rotateY(-90deg);
-    transform-origin: 0 30%;
     perspective: 1000px;
     &--showOut {
-        transform: rotate(0deg);
+        transform: translate3d(410px, 0, 0);
     }
 }
 
@@ -29,7 +31,7 @@
         position: relative;
         width: 100%;
         height: 180px;
-        background-image: url('../img/baiyun-demo.png');
+        background-image: url('./baiyun-demo.png');
         background-size: 100% 100%;
         background-repeat: no-repeat;
         .breadcrumb {
