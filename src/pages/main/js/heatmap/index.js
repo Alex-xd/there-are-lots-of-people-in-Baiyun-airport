@@ -9,35 +9,49 @@ import h337 from 'heatmap.js'
 import {initTooltips} from './tooltips'
 import {getHeatMapData} from 'api'
 
-export default class Heatmap {
-    constructor(config) {
-        // 创建heatmap底层基类实例
-        this.heatmapBaseInstance = h337.create({
-            container: document.querySelector(config.container),
-            onExtremaChange: function (data) {
-                updateLegend(data);
-            }
-        });
-        let updateLegend = initTooltips(this.heatmapBaseInstance);
+export default function Heatmap(config) {
+    let defConf = {
+            index: 1,
+            jsonCount: 1,
+            interval: 2500,
+            maxValue: 0,
+            timer: null
+        },
+        conf = Object.assign(defConf, config);
 
-        this.dom = document.querySelector(config.container);
-        this.index = config.index;
-        this.jsonCount = config.jsonCount;
-        this.interval = config.interval;
-        this.maxValue = config.maxValue;
-        this.timer = config.timer || null;
-    }
+    // 创建heatmap底层基类实例
+    this.heatmapBaseInstance = h337.create({
+        container: document.querySelector(conf.container),
+        onExtremaChange: function (data) {
+            updateLegend(data);
+        }
+    });
+    let updateLegend = initTooltips(this.heatmapBaseInstance);
+
+    this.container = conf.container;
+    this.index = conf.index;
+    this.jsonCount = conf.jsonCount;
+    this.interval = conf.interval;
+    this.maxValue = conf.maxValue;
+    this.timer = conf.timer;
+};
+
+Heatmap.prototype = {
+    constructor: Heatmap,
 
     /**
      * 更新热图
      * @param index json数据索引值，每个json数据点之间时间相隔10分钟
      */
     updateHeatMap(index) {
-        let isSetMaxValue = (this.maxValue !== 0);
+        let isSetMaxValue = (this.maxValue !== 0),
+            scale = {
+                x: document.querySelector(this.container).scrollWidth / 2308,
+                y: document.querySelector(this.container).scrollHeight / 1800
+            };
 
-        return getHeatMapData(`/data/data_${index}.json`).then(({data}) => {
-            let maxValue;
-
+        return getHeatMapData(`/data/data_${index}.json`, scale).then(({data}) => {
+            let maxValue = 0;
             if (isSetMaxValue) {
                 maxValue = this.maxValue;
             } else {
@@ -52,7 +66,7 @@ export default class Heatmap {
                 data: data
             });
         });
-    }
+    },
 
     autoPlay() {
         const _this = this;
@@ -65,30 +79,35 @@ export default class Heatmap {
                     })
             }, _this.interval)
         }
-    }
+    },
 
     pause() {
         const _this = this;
         return () => {
             clearInterval(_this.timer);
         }
-    }
+    },
 
     stop() {
         const _this = this;
         return () => {
             clearInterval(_this.timer);
-            _this.heatmapBaseInstance.setData({
-                min: 0,
-                max: 0,
-                data: []
-            });
-            _this.heatmapBaseInstance.repaint();
+            document.querySelector(_this.container).removeChild(document.querySelector(_this.container + ' canvas'));
         };
+    },
 
+    reset() {
+        this.heatmapBaseInstance = h337.create({
+            container: document.querySelector(this.container),
+            onExtremaChange: function (data) {
+                updateLegend(data);
+            }
+        });
+        let updateLegend = initTooltips(this.heatmapBaseInstance);
+        this.stop()();
+        this.autoPlay()();
     }
-}
-
+};
 
 
 

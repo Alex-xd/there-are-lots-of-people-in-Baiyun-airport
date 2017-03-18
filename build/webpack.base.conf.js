@@ -130,6 +130,7 @@ module.exports = {
             'components': SRC_PATH + '/components',
             'api': SRC_PATH + '/api',
             'pages': SRC_PATH + '/pages',
+            'utils': SRC_PATH + '/utils',
             'node_modules': ROOT_PATH + '/node_modules',
             'vue$': ROOT_PATH + '/node_modules/vue/dist/vue.common.js' // 使用vue独立构建模式
         }

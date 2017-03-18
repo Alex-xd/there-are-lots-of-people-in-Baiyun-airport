@@ -7,9 +7,8 @@
                     <li class="active">控制面板</li>
                 </ul>
                 <p class="btn-group-sm">
-                    <a href="javascript:;" class="btn btn-primary btn-fab" :class="{'btn--rotating':refreshing}"
-                       @click="refreshCtrlPanel"><i
-                            class="material-icons">loop</i></a>
+                    <a href="javascript:;" class="btn btn-primary btn-fab"
+                       @click="scale"><i class="material-icons">{{zoomIcon}}</i></a>
                 </p>
             </header>
             <section class="content">
@@ -136,7 +135,14 @@
         data() {
             return {
                 isPanelHide: true,
-                refreshing: false
+                refreshing: false,
+                isZoomIn: false, // 是否是放大状态
+
+            }
+        },
+        computed: {
+            zoomIcon() { // 不同状态对应不同的图标
+                return this.isZoomIn ? 'all_out' : 'center_focus_strong';
             }
         },
         methods: {
@@ -149,11 +155,20 @@
                 setTimeout(() => {
                     this.refreshing = false;
                 }, 1500);
+            },
+            scale(){
+                if (this.isZoomIn) {
+                    this.isZoomIn = false;
+                    this.$emit('zoomOut');
+                } else {
+                    this.isZoomIn = true;
+                    this.$emit('zoomIn');
+                }
             }
 
         },
         mounted(){
-            this.isPanelHide = false;
+            this.isPanelHide = true;
         }
     }
 </script>
