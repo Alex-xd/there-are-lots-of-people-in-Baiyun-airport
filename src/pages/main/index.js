@@ -40,7 +40,7 @@ const heatmap = new Heatmap({
     container: '#J_heatmap',
     index: 1,
     jsonCount: 90,
-    interval: 2500,
+    interval: 10,
     maxValue: 0  // 可以指定一个最多人数，指定为0则该值自动取每次数据中的最大值
 });
 
@@ -53,7 +53,6 @@ const vmCtrlPanel = new Vue({
 let $html = $('html'),
     $ctrlPanel = $('#J_ctrlPanel'),
     map = document.querySelector('#J_map'),
-    hmCanvas = map.querySelector('canvas'),
     timer = null;
 
 vmCtrlPanel.$on('zoomIn', () => {
@@ -78,9 +77,7 @@ window.addEventListener('resize', () => {
 // navBar 功能  START-------------------------------------
 $html.on('click', '#J_startup', heatmap.autoPlay());
 $html.on('click', '#J_pause', heatmap.pause());
-$html.on('click', '#J_stop', function(){
-    console.log(this)
-});
+$html.on('click', '#J_stop', heatmap.stop());
 $html.on('click', '#J_showPanel', () => {
     $ctrlPanel.toggleClass('container-panel--hide');
 });

@@ -51,26 +51,41 @@ Heatmap.prototype = {
             };
 
         return getHeatMapData(`/data/data_${index}.json`, scale).then(({data}) => {
-            let maxValue = 0;
+            let points = data.points,
+                sectionInfo = data.sectionInfo,
+                maxValue = 0;
             if (isSetMaxValue) {
                 maxValue = this.maxValue;
             } else {
-                maxValue = data[0].value;
-                for (let i = 1, len = data.length; i < len; i++) {
-                    maxValue = data[i].value > maxValue ? data[i].value : maxValue;
+                maxValue = points[0].value;
+                for (let i = 1, len = points.length; i < len; i++) {
+                    maxValue = points[i].value > maxValue ? points[i].value : maxValue;
                 }
             }
             this.heatmapBaseInstance.setData({
                 min: 1,
                 max: maxValue,
-                data: data
+                data: points
             });
+
         });
     },
 
     autoPlay() {
         const _this = this;
         return () => {
+            if (_this.index > _this.jsonCount) {
+                _this.index = 1
+            }
+            // FIXME:内存泄漏
+            // (function go() {
+            //     _this.updateHeatMap(_this.index)
+            //         .then(() => {
+            //             _this.index++;
+            //             setTimeout(go, _this.interval);
+            //         })
+            // })();
+
             clearInterval(_this.timer);
             _this.timer = setInterval(() => {
                 _this.updateHeatMap(_this.index)
