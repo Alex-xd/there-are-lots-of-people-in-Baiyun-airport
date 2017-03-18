@@ -30,30 +30,21 @@ export default class Heatmap {
     updateHeatMap(index) {
         let isSetMaxValue = (this.maxValue !== 0);
 
-        getHeatMapData(`/data/${index}.json`, data => {
-            let points = data.map((el) => {
-                return {
-                    // TODO:这里的数字是凑出来的，刚好能对上图片。  抽空把json计算好处理一下，以免去这一步计算
-                    x: ((Math.round(el.cords.x) + 200) * 1.6),
-                    y: -(Math.round(el.cords.y) + 200) + 1800,
-                    value: Math.round(el.passengerCount)
-                }
-            });
-
+        getHeatMapData(`/data/data_${index}.json`).then(({data}) => {
             let maxValue;
+
             if (isSetMaxValue) {
                 maxValue = this.maxValue;
             } else {
-                maxValue = points[0].value;
-                for (let i = 1, len = points.length; i < len; i++) {
-                    maxValue = points[i].value > maxValue ? points[i].value : maxValue;
+                maxValue = data[0].value;
+                for (let i = 1, len = data.length; i < len; i++) {
+                    maxValue = data[i].value > maxValue ? data[i].value : maxValue;
                 }
             }
-
             this.heatmapBaseInstance.setData({
                 min: 1,
                 max: maxValue,
-                data: points
+                data: data
             });
         });
     }

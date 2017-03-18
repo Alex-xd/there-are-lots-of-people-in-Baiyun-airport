@@ -24,6 +24,7 @@
     },
     "homepage": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport#readme",
     "dependencies": {
+        "axios": "^0.15.3",
         "bootstrap": "3",
         "bootstrap-material-design": "^0.5.10",
         "echarts": "^3.4.0",
