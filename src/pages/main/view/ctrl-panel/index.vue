@@ -1,13 +1,14 @@
 <template>
-    <div class="container container-panel" id="J_ctrlPanel">
+    <div class="container container-panel" :class="{ 'container-panel--hide' : isPanelHide }" id="J_ctrlPanel">
         <div class="control-panel" id="J_control-panel">
             <header>
                 <ul class="breadcrumb">
-                    <li><a href="javascript:;" class="J_hidePanel">{{title}}</a></li>
-                    <li class="active">监控面板</li>
+                    <li><a href="javascript:;" @click="hidePanel">主界面</a></li>
+                    <li class="active">控制面板</li>
                 </ul>
                 <p class="btn-group-sm">
-                    <a href="javascript:;" class="btn btn-primary btn-fab" id="J_refreshCtrlPanel"><i
+                    <a href="javascript:;" class="btn btn-primary btn-fab" :class="{'btn--rotating':refreshing}"
+                       @click="refreshCtrlPanel"><i
                             class="material-icons">loop</i></a>
                 </p>
             </header>
@@ -134,8 +135,25 @@
         name: 'control-panel',
         data() {
             return {
-                title: 'vue'
+                isPanelHide: true,
+                refreshing: false
             }
+        },
+        methods: {
+            hidePanel(){
+                this.isPanelHide = true;
+            },
+            refreshCtrlPanel(){
+                this.refreshing = true;
+                // TODO:刷新数据
+                setTimeout(() => {
+                    this.refreshing = false;
+                }, 1500);
+            }
+
+        },
+        mounted(){
+            this.isPanelHide = false;
         }
     }
 </script>

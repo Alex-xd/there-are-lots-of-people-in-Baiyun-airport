@@ -4,15 +4,14 @@ $boxShadowNormal: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19
 // 监控面板
 .container-panel {
     position: fixed;
-    left: -410px;
     width: 400px;
     height: 900px;
     z-index: 9999;
     padding: 70px 0 0 0;
     transition: all .3s ease-in-out;
     perspective: 1000px;
-    &--showOut {
-        transform: translate3d(410px, 0, 0);
+    &--hide {
+        transform: translate3d(-410px, 0, 0);
     }
 }
 

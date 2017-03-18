@@ -23,6 +23,6 @@ export function getHeatMapData(url) {
                 }
             })
         }],
-        timeout: 3000,
+        timeout: 3000
     })
 }

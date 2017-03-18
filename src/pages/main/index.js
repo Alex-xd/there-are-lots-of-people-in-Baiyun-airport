@@ -37,36 +37,29 @@ const $html = $('html'),
     $ctrlPanel = $('#J_ctrlPanel'),
     $refreshCtrlPanel = $('#J_refreshCtrlPanel');
 
-const config = {
+const heatmap = new Heatmap({
     container: '#J_heatmap',
     index: 1,
     jsonCount: 18,
-    interval: 2000,
+    interval: 2500,
     maxValue: 0  // 可以指定一个最多人数，指定为0则该值自动取每次数据中的最大值
-};
+});
 
-const heatmap = new Heatmap(config);
+
+// navBar 功能  START-------------------------------------
+// 播放 & 暂停
+let timer = null;
 $html.on('click', '#J_startup', heatmap.autoPlay());
 
+$html.on('click', '#J_pause', heatmap.pause());
+
+$html.on('click', '#J_stop', heatmap.stop());
 
 $html.on('click', '#J_showPanel', () => {
-    $ctrlPanel.toggleClass('container-panel--showOut');
-});
-$html.on('click', '.J_hidePanel', () => {
-    $ctrlPanel.removeClass('container-panel--showOut');
-});
-$html.on('click', '#J_refreshCtrlPanel', () => {
-    $refreshCtrlPanel.addClass('btn--rotating');
-
-    // 强行刷新数据
-    // TODO
-    // ...
-
-    setTimeout(() => $refreshCtrlPanel.removeClass('btn--rotating'), 1500);
+    $ctrlPanel.toggleClass('container-panel--hide');
 });
 
-$(() => {
-    $ctrlPanel.addClass('container-panel--showOut');
-});
+// navBar 功能  END-------------------------------------
+
 
 

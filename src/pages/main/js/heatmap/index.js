@@ -25,12 +25,17 @@ export default class Heatmap {
         this.jsonCount = config.jsonCount;
         this.interval = config.interval;
         this.maxValue = config.maxValue;
+        this.timer = config.timer || null;
     }
 
+    /**
+     * 更新热图
+     * @param index json数据索引值，每个json数据点之间时间相隔10分钟
+     */
     updateHeatMap(index) {
         let isSetMaxValue = (this.maxValue !== 0);
 
-        getHeatMapData(`/data/data_${index}.json`).then(({data}) => {
+        return getHeatMapData(`/data/data_${index}.json`).then(({data}) => {
             let maxValue;
 
             if (isSetMaxValue) {
@@ -50,24 +55,36 @@ export default class Heatmap {
     }
 
     autoPlay() {
-        let _this = this,
-            progressBar = document.querySelector('#J_progress-bar'),
-            progress = parseInt(progressBar.style.width.slice(0, -1), 10);
-
-        return async function goNext10Mins() {
-            if (_this.index > _this.jsonCount) {
-                _this.index = 1;
-            }
-            await _this.updateHeatMap(_this.index);
-            _this.index++;
-            progress++;
-            progressBar.style.width = progress + '%';
-
-            setTimeout(goNext10Mins, _this.interval);
+        const _this = this;
+        return () => {
+            clearInterval(_this.timer);
+            _this.timer = setInterval(() => {
+                _this.updateHeatMap(_this.index)
+                    .then(() => {
+                        _this.index++;
+                    })
+            }, _this.interval)
         }
     }
 
     pause() {
+        const _this = this;
+        return () => {
+            clearInterval(_this.timer);
+        }
+    }
+
+    stop() {
+        const _this = this;
+        return () => {
+            clearInterval(_this.timer);
+            _this.heatmapBaseInstance.setData({
+                min: 0,
+                max: 0,
+                data: []
+            });
+            _this.heatmapBaseInstance.repaint();
+        };
 
     }
 }
