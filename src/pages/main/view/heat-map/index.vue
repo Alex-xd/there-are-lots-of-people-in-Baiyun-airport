@@ -69,22 +69,9 @@
                         this.heatmap.reset();
                 }, 500);
             }, false);
-
-//            this.$store.$on('zoomIn', () => {
-//                map.style.width = this.$const.width + 'px';
-//                map.style.height = this.$const.height + 'px';
-//                this.heatmap.reset();
-//            });
-//
-//            this.$Bus.$on('zoomOut', () => {
-//                map.style.width = '100%';
-//                map.style.height = '100%';
-//                this.heatmap.reset();
-//            });
-
         },
         mounted(){
-            // 热图
+            // 初始化热图实例
             this.heatmap = new Heatmap({
                 container: '#J_heatmap',
                 jsonCount: 90,
@@ -92,6 +79,7 @@
             });
         },
         methods: {
+            // 强行重绘热图
             forceRefresh() {
                 this.frRotating = true;
                 this.heatmap.reset();
@@ -101,6 +89,7 @@
             }
         },
         watch: {
+            // 缩放
             mapZoomed: function (nowZoom) {
                 if (this.heatmap) {
                     if (!nowZoom) {
