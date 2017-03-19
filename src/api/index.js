@@ -81,6 +81,6 @@ export function getHeatMapData(url, scale) {
                 points: points
             }
         }],
-        timeout: 3000
+        timeout: 5000
     })
 }

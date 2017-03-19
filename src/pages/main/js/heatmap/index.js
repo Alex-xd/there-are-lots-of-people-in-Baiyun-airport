@@ -54,6 +54,7 @@ Heatmap.prototype = {
             let points = data.points,
                 sectionInfo = data.sectionInfo,
                 maxValue = 0;
+
             if (isSetMaxValue) {
                 maxValue = this.maxValue;
             } else {
@@ -67,30 +68,21 @@ Heatmap.prototype = {
                 max: maxValue,
                 data: points
             });
-
         });
     },
 
     autoPlay() {
         const _this = this;
         return () => {
-            if (_this.index > _this.jsonCount) {
-                _this.index = 1
-            }
-            // FIXME:内存泄漏
-            // (function go() {
-            //     _this.updateHeatMap(_this.index)
-            //         .then(() => {
-            //             _this.index++;
-            //             setTimeout(go, _this.interval);
-            //         })
-            // })();
-
             clearInterval(_this.timer);
             _this.timer = setInterval(() => {
                 _this.updateHeatMap(_this.index)
                     .then(() => {
-                        _this.index++;
+                        if (_this.index < _this.jsonCount) {
+                            _this.index++;
+                        } else {
+                            _this.index = 1;
+                        }
                     })
             }, _this.interval)
         }

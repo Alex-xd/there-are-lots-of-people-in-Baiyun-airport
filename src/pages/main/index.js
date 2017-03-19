@@ -38,9 +38,9 @@ import {mapSize} from 'utils/constant.js'
 // 热图
 const heatmap = new Heatmap({
     container: '#J_heatmap',
-    index: 1,
+    index: 88,
     jsonCount: 90,
-    interval: 10,
+    interval: 1000,
     maxValue: 0  // 可以指定一个最多人数，指定为0则该值自动取每次数据中的最大值
 });
 
@@ -70,7 +70,8 @@ vmCtrlPanel.$on('zoomOut', () => {
 window.addEventListener('resize', () => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-        heatmap.reset();
+        if (heatmap.timer !== null)
+            heatmap.reset();
     }, 150);
 }, false);
 
