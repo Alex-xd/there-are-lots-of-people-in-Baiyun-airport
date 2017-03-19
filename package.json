@@ -24,7 +24,6 @@
     },
     "homepage": "https://github.com/Alex-xd/there-are-lots-of-people-in-Baiyun-airport#readme",
     "dependencies": {
-        "axios": "^0.15.3",
         "bootstrap": "3",
         "bootstrap-material-design": "^0.5.10",
         "echarts": "^3.4.0",
@@ -33,6 +32,7 @@
         "vue": "^2.2.4"
     },
     "devDependencies": {
+        "axios": "^0.15.3",
         "babel-core": "^6.23.1",
         "babel-loader": "^6.4.0",
         "babel-polyfill": "^6.23.0",
@@ -52,6 +52,7 @@
         "url-loader": "^0.5.8",
         "vue-loader": "^11.1.4",
         "vue-template-compiler": "^2.2.4",
+        "vuex": "^2.2.1",
         "webpack": "^2.2.1",
         "webpack-dev-server": "^2.4.1",
         "webpack-md5-hash": "^0.0.5"

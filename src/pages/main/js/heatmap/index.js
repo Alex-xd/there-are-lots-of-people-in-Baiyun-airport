@@ -7,7 +7,7 @@
  */
 import h337 from 'heatmap.js'
 import {initTooltips} from './tooltips'
-import {getHeatMapData} from 'api'
+import API from 'api'
 
 export default function Heatmap(config) {
     let defConf = {
@@ -45,14 +45,14 @@ Heatmap.prototype = {
      */
     updateHeatMap(index) {
         let isSetMaxValue = (this.maxValue !== 0),
+            // 缩放比
             scale = {
                 x: document.querySelector(this.container).scrollWidth / 2308,
                 y: document.querySelector(this.container).scrollHeight / 1800
             };
 
-        return getHeatMapData(`/data/data_${index}.json`, scale).then(({data}) => {
+        return API.getHeatMapData(`/data/data_${index}.json`, scale).then(({data}) => {
             let points = data.points,
-                sectionInfo = data.sectionInfo,
                 maxValue = 0;
 
             if (isSetMaxValue) {
@@ -72,35 +72,30 @@ Heatmap.prototype = {
     },
 
     autoPlay() {
-        const _this = this;
-        return () => {
-            clearInterval(_this.timer);
-            _this.timer = setInterval(() => {
-                _this.updateHeatMap(_this.index)
-                    .then(() => {
-                        if (_this.index < _this.jsonCount) {
-                            _this.index++;
-                        } else {
-                            _this.index = 1;
-                        }
-                    })
-            }, _this.interval)
-        }
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+            this.updateHeatMap(this.index)
+                .then(() => {
+                    if (this.index < this.jsonCount) {
+                        this.index++;
+                    } else {
+                        this.index = 1;
+                    }
+                })
+        }, this.interval)
+
     },
 
     pause() {
-        const _this = this;
-        return () => {
-            clearInterval(_this.timer);
-        }
+        clearInterval(this.timer);
     },
 
     stop() {
-        const _this = this;
-        return () => {
-            clearInterval(_this.timer);
-            document.querySelector(_this.container).removeChild(document.querySelector(_this.container + ' canvas'));
-        };
+        clearInterval(this.timer);
+        this.heatmapBaseInstance.setData({
+            data: []
+        });
+        document.querySelector(this.container).removeChild(document.querySelector(this.container + ' canvas'));
     },
 
     reset() {
@@ -111,8 +106,8 @@ Heatmap.prototype = {
             }
         });
         let updateLegend = initTooltips(this.heatmapBaseInstance);
-        this.stop()();
-        this.autoPlay()();
+        this.stop();
+        this.autoPlay();
     }
 };
 

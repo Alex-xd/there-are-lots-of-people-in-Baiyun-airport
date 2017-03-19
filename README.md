@@ -28,7 +28,7 @@
 
 1. 每次数据更新时需收集每个区域（共8个区域）的人数总和，实时更新到左边的`监控面板`中
 2. 当某区域的人数超过设定的阈值时，改变显示状态，分两级（warning和danger），danger时标题需标红
-3. 在warning和danger状态下的区块可以点击采取相应措施，如![1](./Screen Shot 2017-03-17 at 00.50.26.png)，点击后弹窗提示成功。
+3. 在warning和danger状态下的区块可以点击采取相应措施，如![1](./screenShots/Screen Shot 2017-03-17 at 00.50.26.png)，点击后弹窗提示成功。
 4. warning状态下有一个`提升警戒等级`操作需实现
 5. 点击面板上的某区块，就将视口移动到地图对应区块中央
 
@@ -54,64 +54,60 @@
 
 
 ## 项目结构
-
 ```
 .
-├── LICENSE                                         开源协议                                           
-├── README.md                                       说明                                   
-├── build                                           构建配置
-│   ├── webpack.base.conf.js                        \
-│   ├── webpack.dev.conf.js                         | webpack配置文件
-│   └── webpack.prod.conf.js                        /
-├── index.html                                      打包后的主html
-├── package.json                                    项目信息
-├── postcss.config.js                               postcss配置文件
-├── data                                            数据
-│   ├── 1.json
-│   ├── ...
-│   ├── 9.json
-│   └── default                                     原始数据备份
-│       ├── 1.json
-│       ├── ...
-│       ├── 9.json
-│       └── all.json                                未分割的原始数据
-├── dist                                            打包发布文件
-├── src                                             源文件
-│   ├── api                                         ajax请求封装
+├── LICENSE     
+├── README.md
+├── build               构建配置
+│   ├── webpack.base.conf.js
+│   ├── webpack.dev.conf.js
+│   └── webpack.prod.conf.js
+├── data                本地数据
+│   ├── data_1.json
+│   ├── ...
+│   └── data_90.json
+├── dist                打包发布
+├── package.json        依赖说明
+├── postcss.config.js   postcss配置
+├── src                 源文件目录
+│   ├── api             数据接口封装
 │   │   └── index.js
-│   ├── components                                  通用组件（模态窗等）
-│   ├── image                                       可复用的图片
+│   ├── components      组件
+│   │   └── ProgressBar.vue
+│   ├── image           全局通用图片
 │   │   ├── 3d.jpg
 │   │   └── global.jpg
-│   ├── modules                                     业务模块
-│   │   └── common                                  通用模块（每个页面都要引入的）
-│   │       ├── css
-│   │       │   ├── global.scss
-│   │       │   ├── index.scss
-│   │       │   ├── media-queries.scss
-│   │       │   ├── reset.scss
-│   │       │   └── variables.scss
-│   │       └── index.js
-│   └── pages                                       划分页面
-│       ├── index                                   Landing页
-│       │   ├── index.html
-│       │   └── index.js
-│       └── main                                    主页面
-│           ├── css                                 页面独有css
-│           │   ├── index.scss
-│           │   └── section                         区块划分
-│           │       ├── _control-panel.scss
-│           │       └── _main.scss
-│           ├── img                                 页面独有图片资源
-│           │   └── baiyun-demo.png
-│           ├── index.html                              
-│           ├── index.js                            页面js入口文件
-│           └── js                                  
-│               ├── chart.js
-│               └── heatmap
-│                   ├── index.js
-│                   └── tooltips.js
-└── yarn.lock                                       推荐使用yarn
+│   ├── modules         业务模块
+│   │   └── common      通用基础模块（每个页面自动导入）
+│   ├── pages           页面文件夹
+│   │   ├── index       Landing页
+│   │   │   ├── index.html
+│   │   │   └── index.js
+│   │   └── main        主页面
+│   │       ├── index.html
+│   │       ├── index.js    入口文件
+│   │       ├── js          一些业务逻辑封装
+│   │       │   ├── chart.js    echarts
+│   │       │   └── heatmap     热图封装
+│   │       │       ├── index.js
+│   │       │       └── tooltips.js
+│   │       └── view            视图
+│   │           ├── App.vue     根组件
+│   │           ├── ctrl-panel  控制面板组件
+│   │           │   ├── img
+│   │           │   │   └── baiyun-demo.png
+│   │           │   └── index.vue
+│   │           └── heat-map    热图组件
+│   │               └── index.vue
+│   ├── store                   状态管理
+│   │   ├── index.js            入口文件
+│   │   ├── modules             模块划分
+│   │   │   └── main.js
+│   │   └── mutation-types.js   统一管理mutation命名常量
+│   └── utils                   插件和js组件
+│       ├── constant.js         业务常量
+│       └── globalConfig.js     Vue全局环境变量配置
+└── yarn.lock                   推荐使用yarn
 ```
 
 ## 开发

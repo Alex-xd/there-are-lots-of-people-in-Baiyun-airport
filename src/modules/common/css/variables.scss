@@ -1,3 +1,4 @@
+// TODO:需要用postcss-simple-vars插件导入到全局
 $gray-lightest:     #F8F8F8;
 $gray-lighter:      #EEEEEE;
 $gray-light:        #DDDDDD;
@@ -23,3 +24,4 @@ $hover-color:       darken($link-color, 15%);
 $font: 'Roboto', 'Helvetica', "Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
 
 $border-radius:     3px;
+$main-green: #028775;

@@ -14,5 +14,3 @@ import "node_modules/bootstrap-material-design/dist/css/ripples.min.css";
 import 'node_modules/bootstrap-material-design/dist/js/material.min.js'
 import 'node_modules/bootstrap-material-design/dist/js/ripples.min.js'
 
-$.material.init();
-

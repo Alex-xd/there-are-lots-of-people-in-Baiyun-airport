@@ -62,14 +62,14 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: ExtractTextPlugin.extract({
                     fallback: 'style',
-                    use: ['css', 'postcss?sourceMap', 'sass']
+                    use: ['css?sourceMap', 'postcss', 'sass']
                 })
             },
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract({
                     fallback: "style",
-                    use: ["css", "postcss"]
+                    use: ["css?sourceMap", "postcss"]
                 })
             },
             { // 支持font awesome的一组loader
@@ -130,6 +130,7 @@ module.exports = {
             'components': SRC_PATH + '/components',
             'api': SRC_PATH + '/api',
             'pages': SRC_PATH + '/pages',
+            'store': SRC_PATH + '/store',
             'utils': SRC_PATH + '/utils',
             'node_modules': ROOT_PATH + '/node_modules',
             'vue$': ROOT_PATH + '/node_modules/vue/dist/vue.common.js' // 使用vue独立构建模式
