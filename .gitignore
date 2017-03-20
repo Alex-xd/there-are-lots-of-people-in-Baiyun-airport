@@ -40,5 +40,5 @@ Thumbs.db
 # Others
 node_modules
 dist
-.ided
+.idea
 *.psd
