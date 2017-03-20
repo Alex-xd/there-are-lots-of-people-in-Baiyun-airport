@@ -72,7 +72,7 @@
         data() {
             return {
                 state:{
-                    normal
+                    warn:0 // 0：normal  1：warning  2：danger
                 }
             }
         },

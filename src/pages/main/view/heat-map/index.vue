@@ -48,12 +48,14 @@
             }
         },
         computed: {
+            // 全局状态引入
             ...mapState({
                 mapZoomed: state => state.main.mapZoomed,
                 data: state => state.main.data
             }),
         },
         created(){
+            // 事件绑定 父组件触发
             this.$on('startUp', () => {
                 // 第一次启动强行重绘 解决bug
                 if (this.isFirstTimeRun) {
@@ -75,6 +77,7 @@
 
             this.$on('stop', this.stop);
 
+            // 响应式
             window.addEventListener('resize', () => {
                 clearTimeout(this.hmConf.timer);
                 this.hmConf.timer = setTimeout(() => {
@@ -146,6 +149,7 @@
                     }
                 })
             },
+            // 自动播放
             play(){
                 if (!this.playing) {
                     let conf = this.hmConf;
@@ -187,6 +191,7 @@
                 this.stop();
                 this.init();
             },
+            // 强行刷新  用于解决缩放后的bug
             forceRefresh(){
                 this.refreshAnimation();
                 this.reset();
