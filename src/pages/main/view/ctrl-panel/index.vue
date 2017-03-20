@@ -4,7 +4,8 @@
             <header>
                 <ul class="breadcrumb">
                     <li><a @click="hidePanel">主界面</a></li>
-                    <li class="active">控制面板</li>
+                    <li class="active"><a href="">控制面板</a></li>
+                    <li class="active">T1 航站楼</li>
                 </ul>
                 <p class="btn-group-sm">
                     <a href="javascript:;" class="btn btn-primary btn-fab"
@@ -13,137 +14,15 @@
             </header>
             <section class="content">
 
-
-                <div class="list-group">
-                    <div class="list-group-item warning">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">169</span>人</div>
-                            <h4 class="list-group-item-heading">T1 主航站楼</h4>
-
-                            <p class="list-group-item-text">该区域人数超出平均值，建议派遣工作人员引导旅客登机</p>
-
-                            <div class="btn-group">
-                                <a href="javascript:;" class="btn btn-warning">Warning</a>
-                                <a href="javascript:;" data-target="#" class="btn btn-warning dropdown-toggle"
-                                   data-toggle="dropdown"><span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:;">向警卫部发送该警告</a></li>
-                                    <li><a href="javascript:;">通知塔台</a></li>
-                                    <li><a href="javascript:;">提升预警等级</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="javascript:;">忽略此条预警</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">89</span>人</div>
-                            <h4 class="list-group-item-heading">E1 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">88</span>人</div>
-                            <h4 class="list-group-item-heading">E2 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">95</span>人</div>
-                            <h4 class="list-group-item-heading">E3 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item danger">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">288</span>人</div>
-                            <h4 class="list-group-item-heading danger">EC 通道</h4>
-
-                            <p class="list-group-item-text">该区域人数正在急速增加，预计将超出最大人流量限制！建议派遣工作人员前往引导维护秩序！</p>
-
-                            <div class="btn-group">
-                                <a href="javascript:;" class="btn btn-danger">Danger</a>
-                                <a href="javascript:;" data-target="#" class="btn btn-danger dropdown-toggle"
-                                   data-toggle="dropdown"><span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="javascript:;">向警卫部发送该警告</a></li>
-                                    <li><a href="javascript:;">通知塔台</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="javascript:;">忽略此条预警</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">76</span>人</div>
-                            <h4 class="list-group-item-heading">W1 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">45</span>人</div>
-                            <h4 class="list-group-item-heading">W2 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">95</span>人</div>
-                            <h4 class="list-group-item-heading">W3 登机区</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="my-list-group-separator"></div>
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <div class="row-content">
-                            <div class="least-content"><span class="J_panel-peopleNum">76</span>人</div>
-                            <h4 class="list-group-item-heading">WC 通道</h4>
-
-                            <p class="list-group-item-text">该区一切正常</p>
-                        </div>
-                    </div>
-                </div>
+                <div id="container"></div>
             </section>
         </div>
     </div>
 </template>
 
 <script>
-    import {MAP_ZOOM_IN,MAP_ZOOM_OUT} from 'store/mutation-types'
+    import {MAP_ZOOM_IN, MAP_ZOOM_OUT} from 'store/mutation-types';
+    import echarts from 'echarts';
 
     export default {
         name: 'control-panel',
@@ -170,6 +49,83 @@
             hidePanel(){
                 this.$emit('hidePanel');
             }
+        },
+        mounted(){
+            var dom = document.getElementById("container");
+            var myChart = echarts.init(dom);
+            var app = {};
+
+            function randomData() {
+                now = new Date(+now + oneDay);
+                value = value + Math.random() * 21 - 10;
+                return {
+                    name: now.toString(),
+                    value: [
+                        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
+                        Math.round(value)
+                    ]
+                }
+            }
+
+            var data = [];
+            var now = +new Date(1997, 9, 3);
+            var oneDay = 24 * 3600 * 1000;
+            var value = Math.random() * 1000;
+            for (var i = 0; i < 1000; i++) {
+                data.push(randomData());
+            }
+
+            setInterval(function () {
+
+                for (var i = 0; i < 5; i++) {
+                    data.shift();
+                    data.push(randomData());
+                }
+
+                myChart.setOption({
+                    series: [{
+                        data: data
+                    }]
+                });
+            }, 1000);
+
+            myChart.setOption({
+                title: {
+                    text: 'T1 航站楼人流量预测'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        params = params[0];
+                        var date = new Date(params.name);
+                        return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' : ' + params.value[1];
+                    },
+                    axisPointer: {
+                        animation: false
+                    }
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%'],
+                    splitLine: {
+                        show: false
+                    }
+                },
+                series: [{
+                    name: '模拟数据',
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: data
+                }]
+            }, true);
+
         }
     }
 </script>
@@ -177,6 +133,10 @@
 <style lang="scss" rel="stylesheet/scss" scoped>
     $boxShadowDeep: 6px -5px 17px 0 rgba(0, 0, 0, 0.2), 9px 5px 20px 0 rgba(0, 0, 0, 0.19);
     $boxShadowNormal: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    #container {
+        width: 100%;
+        height: 60%;
+    }
 
     // 监控面板
     .panel-container {
