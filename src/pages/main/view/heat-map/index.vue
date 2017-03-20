@@ -21,8 +21,9 @@
 <script>
     import {mapState} from 'vuex'
     import h337 from 'heatmap.js'
-    import {initTooltips} from '../../js/heatmap/tooltips'
+    import {initTooltips} from './tooltips'
     import API from 'api'
+    import {UPDATE_DATA} from 'store/mutation-types'
 
     export default {
         name: 'heat-map',
@@ -48,7 +49,8 @@
         },
         computed: {
             ...mapState({
-                mapZoomed: state => state.main.mapZoomed
+                mapZoomed: state => state.main.mapZoomed,
+                data: state => state.main.data
             }),
         },
         created(){
@@ -129,7 +131,7 @@
              * @param index json文件索引
              * @returns {Promise}
              */
-            getData(index){
+            updateData(index){
                 // 缩放比
                 let scale = {
                     x: document.querySelector(this.hmConf.el).scrollWidth / 2308,
@@ -137,7 +139,8 @@
                 };
                 return API.getHeatMapData(`/data/data_${index}.json`, scale).then((rsp) => {
                     if (rsp.status == 200) {
-                        return Promise.resolve(rsp.data)
+                        this.$store.commit('UPDATE_DATA', {data: rsp.data, dataIndex: index});
+                        return Promise.resolve()
                     } else {
                         return Promise.reject(rsp.statusText)
                     }
@@ -153,8 +156,9 @@
                     // 自动播放
                     clearInterval(conf.timer);
                     conf.timer = setInterval(() => {
-                        this.getData(conf.jsonIndex).then((data) => {
-                            this.updateHeatMap(data.points);
+                        this.updateData(conf.jsonIndex).then(() => {
+                            this.updateHeatMap(this.data.points);
+
                             if (conf.jsonIndex < conf.jsonCount) {
                                 conf.jsonIndex++;
                             } else {

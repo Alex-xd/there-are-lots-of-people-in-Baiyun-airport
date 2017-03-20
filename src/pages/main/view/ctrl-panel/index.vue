@@ -203,7 +203,7 @@
             position: relative;
             width: 100%;
             height: 180px;
-            background-image: url('./img/baiyun-demo.png');
+            background-image: url('./img/3d.jpg');
             background-size: 100% 100%;
             background-repeat: no-repeat;
             .breadcrumb {
