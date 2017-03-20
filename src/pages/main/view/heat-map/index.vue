@@ -19,14 +19,24 @@
 </template>
 
 <script>
-    import Heatmap from '../../js/heatmap'
     import {mapState} from 'vuex'
+    import h337 from 'heatmap.js'
+    import {initTooltips} from '../../js/heatmap/tooltips'
+    import API from 'api'
 
     export default {
         name: 'heat-map',
         data() {
             return {
                 heatmap: null,
+                hmConf: {
+                    el: '#J_heatmap',
+                    jsonIndex: 1,
+                    jsonCount: 90,
+                    maxValue: 0,
+                    interval: 1500,
+                    timer: null // 自动播放计时器
+                },
                 playing: false,
                 sizeObj: {
                     width: '100%',
@@ -43,80 +53,168 @@
         },
         created(){
             this.$on('startUp', () => {
-                this.frRotating = true;
-                setTimeout(() => {
-                    this.frRotating = false;
-                }, 400);
+                // 第一次启动强行重绘 解决bug
                 if (this.isFirstTimeRun) {
-                    this.forceRefresh();
+                    this.reset();
+                    this.play();
+                    this.isFirstTimeRun = false;
+                } else if (!this.heatmap) {
+                    // 从停止状态启动
+                    this.init();
+                    this.play();
+                } else {
+                    // 从暂停状态启动
+                    this.play();
                 }
-                if (this.heatmap && !this.playing) {
-                    this.heatmap.autoPlay();
-                    this.playing = true;
-                }
+
             });
 
-            this.$on('pause', () => {
-                if (this.heatmap && this.playing) {
-                    this.heatmap.pause();
-                    this.playing = false;
-                }
-            });
+            this.$on('pause', this.pause);
 
-            this.$on('stop', () => {
-                if (this.heatmap && this.playing) {
-                    this.heatmap.stop();
-                    this.playing = false;
-                }
-            });
+            this.$on('stop', this.stop);
 
             window.addEventListener('resize', () => {
-                clearTimeout(this.heatmap.timer);
-                this.heatmap.timer = setTimeout(() => {
-                    if (this.playing)
-                        this.heatmap.reset();
-                }, 500);
+                clearTimeout(this.hmConf.timer);
+                this.hmConf.timer = setTimeout(() => {
+                    if (this.playing) {
+                        this.reset();
+                        this.play();
+                    }
+                }, 150);
             }, false);
         },
-        mounted(){
-            // 初始化热图实例
-            this.heatmap = new Heatmap({
-                container: '#J_heatmap',
-                jsonCount: 90,
-                interval: 2500
-            });
-        },
         methods: {
-            // 强行重绘热图
-            forceRefresh() {
+            init(){
+                // 初始化热图实例
+                this.heatmap = h337.create({
+                    container: document.querySelector(this.hmConf.el),
+                    onExtremaChange: function (data) {
+                        updateLegend(data);
+                    }
+                });
+                // 初始化标尺
+                let updateLegend = initTooltips(this.heatmap);
+            },
+            /**
+             * 更新热图
+             * @param data 坐标数据{x,y,value}
+             */
+            updateHeatMap(data) {
+                if (this.heatmap) {
+                    let isSetMaxValue = (this.hmConf.maxValue !== 0),
+                        maxValue = 0;
+
+                    // 动态设定最大值
+                    if (isSetMaxValue) {
+                        maxValue = this.hmConf.maxValue;
+                    } else {
+                        maxValue = data[0].value;
+                        for (let i = 1, len = data.length; i < len; i++) {
+                            maxValue = data[i].value > maxValue ? data[i].value : maxValue;
+                        }
+                    }
+
+                    // 渲染数据
+                    this.heatmap.setData({
+                        min: 0,
+                        max: maxValue,
+                        data: data
+                    });
+                } else {
+                    console.error('heatmap实例不存在');
+                }
+            },
+            /**
+             * 获取数据
+             * @param index json文件索引
+             * @returns {Promise}
+             */
+            getData(index){
+                // 缩放比
+                let scale = {
+                    x: document.querySelector(this.hmConf.el).scrollWidth / 2308,
+                    y: document.querySelector(this.hmConf.el).scrollHeight / 1800
+                };
+                return API.getHeatMapData(`/data/data_${index}.json`, scale).then((rsp) => {
+                    if (rsp.status == 200) {
+                        return Promise.resolve(rsp.data)
+                    } else {
+                        return Promise.reject(rsp.statusText)
+                    }
+                })
+            },
+            play(){
+                if (!this.playing) {
+                    let conf = this.hmConf;
+
+                    this.playing = true;
+                    this.refreshAnimation(2500);
+
+                    // 自动播放
+                    clearInterval(conf.timer);
+                    conf.timer = setInterval(() => {
+                        this.getData(conf.jsonIndex).then((data) => {
+                            this.updateHeatMap(data.points);
+                            if (conf.jsonIndex < conf.jsonCount) {
+                                conf.jsonIndex++;
+                            } else {
+                                conf.jsonIndex = 1;
+                            }
+                        })
+                    }, conf.interval);
+                }
+            },
+            pause(){
+                if (this.playing) {
+                    clearInterval(this.hmConf.timer);
+                    this.playing = false;
+                }
+            },
+            stop(){
+                if (this.heatmap) {
+                    let conf = this.hmConf;
+                    clearInterval(conf.timer);
+                    this.heatmap = null;
+                    document.querySelector(conf.el).removeChild(document.querySelector(conf.el + ' canvas'));
+                    this.playing = false;
+                }
+            },
+            reset(){
+                this.stop();
+                this.init();
+            },
+            forceRefresh(){
+                this.refreshAnimation();
+                this.reset();
+                this.play()
+            },
+            // 刷新动画
+            refreshAnimation(time = 2500){
                 this.frRotating = true;
-                this.heatmap.reset();
                 setTimeout(() => {
                     this.frRotating = false;
-                }, 1000)
+                }, time);
             }
         },
         watch: {
             // 缩放
             mapZoomed: function (nowZoom) {
-                if (this.heatmap) {
-                    if (!nowZoom) {
-                        // zoom out
-                        this.sizeObj.width = '100%';
-                        this.sizeObj.height = '100%';
-                    } else {
-                        // zoom in
-                        this.sizeObj.width = this.$const.mapSize.width;
-                        this.sizeObj.height = this.$const.mapSize.height;
-                    }
+                if (!nowZoom) {
+                    // zoom out
+                    this.sizeObj.width = '100%';
+                    this.sizeObj.height = '100%';
+                } else {
+                    // zoom in
+                    this.sizeObj.width = this.$const.mapSize.width;
+                    this.sizeObj.height = this.$const.mapSize.height;
                 }
+
                 if (this.playing) {
-                    this.frRotating = true;
-                    // TODO:莫名其妙。。。
+                    this.refreshAnimation();
                     setTimeout(() => {
-                        this.heatmap.reset();
-                        this.frRotating = false;
-                    }, 300);
+                        this.reset();
+                        this.play();
+                    }, 300)
                 }
             }
         }
@@ -140,7 +238,7 @@
         box-sizing: content-box;
         @at-root .map {
             background-size: 100% 100%;
-            background-image: url("~image/global.jpg");
+            background-image: url("./img/global.jpg");
         }
         .heatmap-canvas {
             width: 100%;
@@ -180,7 +278,12 @@
                 cursor: pointer;
             }
             &--rotating {
-                animation: 1s rotating;
+                animation: {
+                    name: rotating;
+                    duration: 1s;
+                    iteration-count: infinite;
+                    timing-function: linear;
+                }
             }
         }
     }

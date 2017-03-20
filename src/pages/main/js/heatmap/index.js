@@ -41,33 +41,33 @@ Heatmap.prototype = {
 
     /**
      * 更新热图
-     * @param index json数据索引值，每个json数据点之间时间相隔10分钟
+     * @param points 坐标数据{x,y,value}
      */
-    updateHeatMap(index) {
+    updateHeatMap(points) {
         let isSetMaxValue = (this.maxValue !== 0),
             // 缩放比
             scale = {
                 x: document.querySelector(this.container).scrollWidth / 2308,
                 y: document.querySelector(this.container).scrollHeight / 1800
-            };
+            },
+            maxValue = 0;
+
+        if (isSetMaxValue) {
+            maxValue = this.maxValue;
+        } else {
+            maxValue = points[0].value;
+            for (let i = 1, len = points.length; i < len; i++) {
+                maxValue = points[i].value > maxValue ? points[i].value : maxValue;
+            }
+        }
+        this.heatmapBaseInstance.setData({
+            min: 1,
+            max: maxValue,
+            data: points
+        });
 
         return API.getHeatMapData(`/data/data_${index}.json`, scale).then(({data}) => {
-            let points = data.points,
-                maxValue = 0;
 
-            if (isSetMaxValue) {
-                maxValue = this.maxValue;
-            } else {
-                maxValue = points[0].value;
-                for (let i = 1, len = points.length; i < len; i++) {
-                    maxValue = points[i].value > maxValue ? points[i].value : maxValue;
-                }
-            }
-            this.heatmapBaseInstance.setData({
-                min: 1,
-                max: maxValue,
-                data: points
-            });
         });
     },
 

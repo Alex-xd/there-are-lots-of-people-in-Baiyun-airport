@@ -20,6 +20,7 @@ export default {
         return axios.request({
             url: url,
             method: 'get',
+            // 数据过滤
             transformResponse: [function (json) {
                 let data = JSON.parse(json),
                     sectionInfo = {
@@ -69,7 +70,7 @@ export default {
                             // TODO:这里的数字是凑出来的，刚好能对上图片。  抽空把json计算好处理一下，以免去这一步计算
                             // x: ((Math.round(el.cords.x) + 200) * 1.6) * scale.x,
                             // y: - (Math.round(el.cords.y) + 200) + 1800 * scale.y,
-                            x: Math.round(((el.cords.x + 200) * 1.6) * scale.x),
+                            x: Math.round(((el.cords.x + 200) * 1.63) * scale.x),
                             y: Math.round(( (-(el.cords.y + 200) + 1800) * scale.y)),
                             value: Math.round(el.passengerCount)
                         }

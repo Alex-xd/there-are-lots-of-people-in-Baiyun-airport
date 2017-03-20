@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d8ecc3-4a54-4f64-acb1-a7f4207726c1" name="Default" comment="">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/image/global.jpg" afterPath="$PROJECT_DIR$/src/pages/main/view/heat-map/img/global.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/index.js" afterPath="$PROJECT_DIR$/src/api/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/main/js/heatmap/index.js" afterPath="$PROJECT_DIR$/src/pages/main/js/heatmap/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pages/main/view/heat-map/index.vue" afterPath="$PROJECT_DIR$/src/pages/main/view/heat-map/index.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -46,7 +49,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/main/view/ctrl-panel/index.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="128">
@@ -59,10 +62,24 @@
       <file leaf-file-name="index.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/main/view/heat-map/index.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="446">
-              <caret line="48" column="23" lean-forward="false" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+            <state relative-caret-position="622">
+              <caret line="240" column="54" lean-forward="true" selection-start-line="240" selection-start-column="54" selection-end-line="240" selection-end-column="54" />
               <folding>
-                <element signature="e#747#785#0" expanded="true" />
+                <element signature="e#747#776#0" expanded="true" />
+                <element signature="e#1334#1423#0" expanded="false" />
+                <element signature="e#3164#4043#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/api/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="72" column="68" lean-forward="false" selection-start-line="72" selection-start-column="68" selection-end-line="72" selection-end-column="68" />
+              <folding>
+                <element signature="e#1176#2917#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -71,8 +88,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/main/js/heatmap/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+            <state relative-caret-position="441">
+              <caret line="109" column="24" lean-forward="true" selection-start-line="101" selection-start-column="7" selection-end-line="109" selection-end-column="24" />
               <folding>
                 <element signature="e#170#199#0" expanded="true" />
               </folding>
@@ -84,8 +101,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>J_heatmap</find>
-      <find>updateLegend</find>
       <find>o</find>
       <find>a</find>
       <find>relative</find>
@@ -114,6 +129,8 @@
       <find>@click</find>
       <find>autop</find>
       <find>resizeHM</find>
+      <find>reset</find>
+      <find>forceRefresh</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,7 +174,6 @@
         <option value="$PROJECT_DIR$/src/pages/main/view/ctrl-panel/style.scss" />
         <option value="$PROJECT_DIR$/src/pages/main/view/nav-bar/index.vue" />
         <option value="$PROJECT_DIR$/postcss.config.js" />
-        <option value="$PROJECT_DIR$/src/api/index.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/utils/globalConfig.js" />
         <option value="$PROJECT_DIR$/src/store/mutation-types.js" />
@@ -167,12 +183,13 @@
         <option value="$PROJECT_DIR$/src/pages/main/view/App.vue" />
         <option value="$PROJECT_DIR$/src/pages/main/view/ctrl-panel/index.vue" />
         <option value="$PROJECT_DIR$/src/utils/constant.js" />
-        <option value="$PROJECT_DIR$/src/pages/main/js/heatmap/index.js" />
         <option value="$PROJECT_DIR$/src/modules/common/css/global.scss" />
         <option value="$PROJECT_DIR$/src/modules/common/css/variables.scss" />
         <option value="$PROJECT_DIR$/src/pages/main/index.html" />
         <option value="$PROJECT_DIR$/src/pages/main/index.js" />
+        <option value="$PROJECT_DIR$/src/pages/main/js/heatmap/index.js" />
         <option value="$PROJECT_DIR$/src/pages/main/view/heat-map/index.vue" />
+        <option value="$PROJECT_DIR$/src/api/index.js" />
       </list>
     </option>
   </component>
@@ -329,7 +346,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -355,11 +372,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="heatmap" />
+              <option name="myItemId" value="heat-map" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -442,6 +459,42 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="there-are-lots-of-people-in-Baiyun-airport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="there-are-lots-of-people-in-Baiyun-airport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="there-are-lots-of-people-in-Baiyun-airport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="there-are-lots-of-people-in-Baiyun-airport" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -476,11 +529,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/main/view/heat-map/img" />
       <recent name="$PROJECT_DIR$/src/pages/main/view/ctrl-panel/img" />
       <recent name="$PROJECT_DIR$/src/pages/main/js" />
       <recent name="$PROJECT_DIR$/src/pages/main/view/ctrl-panel" />
       <recent name="$PROJECT_DIR$/src/pages/main/css/view" />
-      <recent name="$PROJECT_DIR$/src/pages/main/css" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/vendor" />
@@ -570,18 +623,18 @@
       <workItem from="1489220563560" duration="13392000" />
       <workItem from="1489492477718" duration="44886000" />
       <workItem from="1489591059994" duration="113390000" />
-      <workItem from="1489922326463" duration="21552000" />
+      <workItem from="1489922326463" duration="30998000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="193220000" />
+    <option name="totallyTimeSpent" value="202666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2279587" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20810167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -860,16 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="18" column="36" lean-forward="true" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding>
-            <element signature="e#1156#2897#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/main/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -891,7 +934,7 @@
         <state relative-caret-position="323">
           <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding>
-            <element signature="e#17#38#0" expanded="true" />
+            <element signature="e#17#38#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -917,10 +960,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/main/view/ctrl-panel/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="164" column="41" lean-forward="true" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/main/js/heatmap/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="82" column="21" lean-forward="true" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+        <state relative-caret-position="441">
+          <caret line="109" column="24" lean-forward="true" selection-start-line="101" selection-start-column="7" selection-end-line="109" selection-end-column="24" />
           <folding>
             <element signature="e#170#199#0" expanded="true" />
           </folding>
@@ -929,19 +980,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/main/view/heat-map/index.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="446">
-          <caret line="48" column="23" lean-forward="false" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+        <state relative-caret-position="622">
+          <caret line="240" column="54" lean-forward="true" selection-start-line="240" selection-start-column="54" selection-end-line="240" selection-end-column="54" />
           <folding>
-            <element signature="e#747#785#0" expanded="true" />
+            <element signature="e#747#776#0" expanded="true" />
+            <element signature="e#1334#1423#0" expanded="false" />
+            <element signature="e#3164#4043#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/main/view/ctrl-panel/index.vue">
+    <entry file="file://$PROJECT_DIR$/src/api/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="164" column="41" lean-forward="true" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
-          <folding />
+        <state relative-caret-position="322">
+          <caret line="72" column="68" lean-forward="false" selection-start-line="72" selection-start-column="68" selection-end-line="72" selection-end-column="68" />
+          <folding>
+            <element signature="e#1176#2917#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
