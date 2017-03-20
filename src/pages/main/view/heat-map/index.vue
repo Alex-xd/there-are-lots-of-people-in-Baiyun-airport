@@ -32,7 +32,8 @@
                     width: '100%',
                     height: '100%'
                 },
-                frRotating: false
+                frRotating: false,
+                isFirstTimeRun: true
             }
         },
         computed: {
@@ -42,6 +43,13 @@
         },
         created(){
             this.$on('startUp', () => {
+                this.frRotating = true;
+                setTimeout(() => {
+                    this.frRotating = false;
+                }, 400);
+                if (this.isFirstTimeRun) {
+                    this.forceRefresh();
+                }
                 if (this.heatmap && !this.playing) {
                     this.heatmap.autoPlay();
                     this.playing = true;
@@ -103,9 +111,11 @@
                     }
                 }
                 if (this.playing) {
+                    this.frRotating = true;
                     // TODO:莫名其妙。。。
                     setTimeout(() => {
-                        this.heatmap.reset()
+                        this.heatmap.reset();
+                        this.frRotating = false;
                     }, 300);
                 }
             }
@@ -166,6 +176,9 @@
             right: 8px;
             bottom: 130px;
             color: #028775;
+            &:hover {
+                cursor: pointer;
+            }
             &--rotating {
                 animation: 1s rotating;
             }
