@@ -16,7 +16,7 @@
                         </div>
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li>
                                     <a @click="togglePanel">控制面板</a>
                                 </li>
                                 <li class="dropdown">
@@ -32,7 +32,7 @@
                                             关闭系统</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:;">数据统计</a></li>
+                                <li class="active"><a href="javascript:;">数据统计</a></li>
                             </ul>
                             <div class="slider shor slider-success"></div>
                             <ul class="nav navbar-nav navbar-right">
@@ -49,6 +49,16 @@
 
         <!--控制面板-->
         <CtrlPanel :class="{'panel--show': isPanelShow}" @hidePanel="togglePanel"></CtrlPanel>
+
+
+        <div class="panel-container">
+            <div class="panel">
+                <section class="content">
+
+
+                </section>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -83,7 +93,7 @@
         },
         mounted(){
             // 初始化MD点击涟漪效果
-            $.material.init();
+//            $.material.init();
 
             // 显示面板
             setTimeout(() => {
@@ -93,7 +103,7 @@
     }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
     .container {
         position: relative;
         padding-top: 60px;
@@ -128,4 +138,84 @@
         transform: translate3d(410px, 0, 0);
     }
 
+    
+    
+    
+    $boxShadowDeep: 0px -2px 17px 0 rgba(0, 0, 0, 0.2), 0px 5px 20px 0 rgba(0, 0, 0, 0.19);
+    $boxShadowNormal: 0px -2px 17px 0 rgba(0, 0, 0, 0.2), 0px 5px 20px 0 rgba(0, 0, 0, 0.19);
+
+    // 监控面板
+    .panel-container {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        width: 700px;
+        height: 700px;
+        z-index: 9999;
+        padding: 70px 0 0 0;
+    }
+
+    .panel {
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        box-shadow: $boxShadowDeep;
+        background: #fff;
+        transition: box-shadow .8s ease-in-out;
+        &:hover {
+            box-shadow: $boxShadowNormal;
+        }
+
+        .content {
+            overflow: auto;
+            height: 650px;
+            padding: 12px 15px 15px 15px;
+            > div {
+                transition: .4s;
+                &:hover {
+                    background-color: #eaeaea;
+                    cursor: pointer;
+                }
+            }
+
+            .list-group {
+                margin: 0;
+                .list-group-item {
+                    padding: 16px;
+                    overflow: visible;
+                    .row-content {
+                        width: 183px;
+                        .least-content {
+                            top: auto;
+                            bottom: 20px;
+                            height: 16px;
+                        }
+                    }
+                    .danger {
+                        color: #f12923
+                    }
+                    .btn-group {
+                        position: absolute;
+                        right: 0;
+                        top: 2px;
+                        .btn {
+                            padding: 8px 5px;
+                        }
+                        .dropdown-menu {
+                            left: -76px;
+                        }
+                    }
+                }
+            }
+
+            // 分割线
+            .my-list-group-separator {
+                content: "";
+                width: 80%;
+                margin: 0 auto;
+                border-bottom: 1px solid rgba(0, 0, 0, .1);
+            }
+        }
+    }
 </style>
