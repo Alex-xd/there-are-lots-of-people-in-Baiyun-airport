@@ -1,20 +1,20 @@
 <template>
     <!--地图和热图-->
-    <div class="jumbotron heatmap-wrapper map" :style="sizeObj">
+    <div class="jumbotron heatmap-wrapper map">
         <div id="J_heatmap" class="heatmap-canvas"></div>
         <div class="tooltip label label-primary"></div>
-        <div class="legend-area panel panel-primary">
-            <div class="panel-heading">
-                <h4 class="panel-title">人数标尺</h4>
-            </div>
-            <div class="panel-body">
-                <span id="min"></span>
-                <span id="max"></span>
-                <img alt="" id="gradient">
-            </div>
-        </div>
-        <i class="material-icons force-refresh-btn" :class="{'force-refresh-btn--rotating':frRotating}"
-           @click="forceRefresh">replay</i>
+        <!--<div class="legend-area panel panel-primary">-->
+            <!--<div class="panel-heading">-->
+                <!--<h4 class="panel-title">人数标尺</h4>-->
+            <!--</div>-->
+            <!--<div class="panel-body">-->
+                <!--<span id="min"></span>-->
+                <!--<span id="max"></span>-->
+                <!--<img alt="" id="gradient">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<i class="material-icons force-refresh-btn" :class="{'force-refresh-btn&#45;&#45;rotating':frRotating}"-->
+           <!--@click="forceRefresh">replay</i>-->
     </div>
 </template>
 
@@ -226,12 +226,8 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-    //$mapWidth: 2308px;
-    //$mapHeight: 1800px;
-
-    /*默认未缩放*/
-    $mapWidth: 100%;
-    $mapHeight: 100%;
+    $mapWidth: 1548px;
+    $mapHeight: 1054px;
 
     .heatmap-wrapper {
         position: relative;
@@ -242,7 +238,8 @@
         box-sizing: content-box;
         @at-root .map {
             background-size: 100% 100%;
-            background-image: url("./img/global.jpg");
+            /*background-image: url("./img/global.jpg");*/
+            background-image: url("./img/chengdu.png");
         }
         .heatmap-canvas {
             width: 100%;
