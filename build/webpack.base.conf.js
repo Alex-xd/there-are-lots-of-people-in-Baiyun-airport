@@ -29,17 +29,14 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue',
                 options: {
-                    autoprefixer: {
-                        browsers: ['last 2 versions']
-                    },
                     loaders: {
                         js: 'babel',
                         css: ExtractTextPlugin.extract({
-                            use: 'css?souceMap',
+                            use: ['css?sourceMap', 'postcss'],
                             fallback: 'vue-style'
                         }),
                         scss: ExtractTextPlugin.extract({
-                            use: 'css?souceMap!sass',
+                            use: ['css?sourceMap', 'postcss', 'sass'],
                             fallback: 'vue-style'
                         }),
                     }
@@ -95,16 +92,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            options: {
-                context: __dirname,
-                postcss: [autoprefixer]
-            },
-            vue: {
-                // 配置让所有vue组件中的样式都pipe through postcss
-                postcss: [require('autoprefixer')()]
-            }
-        }),
         new ExtractTextPlugin({
             filename: '[name].[contenthash:8].css'
         }),

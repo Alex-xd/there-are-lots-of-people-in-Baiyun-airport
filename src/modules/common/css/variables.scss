@@ -1,27 +1,8 @@
-// TODO:需要用postcss-simple-vars插件导入到全局
-$gray-lightest:     #F8F8F8;
-$gray-lighter:      #EEEEEE;
-$gray-light:        #DDDDDD;
-$gray:              #CCCCCC;
-$gray-dark:         #999999;
-$gray-darker:       #666666;
-$gray-darkest:      #333333;
+$main-color: #008675;
+$sub-color: #f2f2f2;
+$hover-color: #eaeaea;
 
-$green:             #156F78;
-$purple:            #493252;
-$red:               #E25440;
-$orange:            #FB9C50;
-$slate:             #3D4260;
-$blue:              #2568A3;
-$catred:            #BF1827;
+$font: 'Roboto', 'Helvetica', "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 
-$primary-color:     $catred;
-$secondary-color:   #5BA4E5;
+$border-radius: 3px;
 
-$link-color:        $primary-color;
-$hover-color:       darken($link-color, 15%);
-
-$font: 'Roboto', 'Helvetica', "Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
-
-$border-radius:     3px;
-$main-green: #028775;

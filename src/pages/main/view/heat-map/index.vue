@@ -226,12 +226,14 @@
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-    //$mapWidth: 2308px;
-    //$mapHeight: 1800px;
-
-    /*默认未缩放*/
+    // 底图尺寸
+    // 未缩放的
     $mapWidth: 100%;
     $mapHeight: 100%;
+
+    // 缩放的
+    //$mapWidth: 2308px;
+    //$mapHeight: 1800px;
 
     .heatmap-wrapper {
         position: relative;

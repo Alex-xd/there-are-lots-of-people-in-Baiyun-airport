@@ -17,6 +17,5 @@ export default {
         [types.MAP_ZOOM_OUT] (state) {
             state.mapZoomed = false;
         },
-
     }
 }
