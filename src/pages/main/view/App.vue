@@ -16,7 +16,8 @@
                         </div>
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li :class="{'active':isPanelShow}" >
+                                    <!--难道是isPanelShow连着下面的clas绑定？-->
                                     <a @click="togglePanel">控制面板</a>
                                 </li>
                                 <li class="dropdown">
@@ -32,7 +33,7 @@
                                             关闭系统</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:;">数据统计</a></li>
+                                <li :class="{'active':isDataShow}"><a @click="toggleData">数据统计</a></li>
                             </ul>
                             <div class="slider shor slider-success"></div>
                             <ul class="nav navbar-nav navbar-right">
@@ -48,30 +49,40 @@
         </div>
 
         <!--控制面板-->
+        <!--@hidePanel当子组件触发了hidePandel，这里将会监听到，执行togglePane方法，从而实现点击子组件也隐藏的功能，避免冗余-->
         <CtrlPanel :class="{'panel--show': isPanelShow}" @hidePanel="togglePanel"></CtrlPanel>
+        <!--数据统计-->
+        <DataCount :class="{'data--show': isDataShow}" ></DataCount>
     </div>
 </template>
 
 <script>
     import HeatMap from './heat-map';
     import CtrlPanel from './ctrl-panel';
+    import DataCount from './data-count'
 
     export default {
         name: 'root-component',
         components: {
             HeatMap,
-            CtrlPanel
+            CtrlPanel,
+            DataCount
         },
         data() {
             return {
-                isPanelShow: false
+                isPanelShow: false,
+                isDataShow:false
             }
         },
         methods: {
             togglePanel(){
                 this.isPanelShow = !this.isPanelShow;
             },
+            toggleData(){
+                this.isDataShow=!this.isDataShow;
+            },
             startUp(){
+//                特殊情况：父组件触发，子组件监听
                 this.$refs.heatmap.$emit('startUp');
             },
             pause(){
@@ -88,6 +99,7 @@
             // 显示面板
             setTimeout(() => {
                 this.isPanelShow = true;
+                this.isDataShow = true;
             }, 500);
         }
     }
@@ -126,6 +138,9 @@
 
     .panel--show {
         transform: translate3d(410px, 0, 0);
+    }
+    .data--show{
+        transform: translate3d(-410px, 0, 0);
     }
 
 </style>

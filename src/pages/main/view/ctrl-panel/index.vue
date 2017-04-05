@@ -147,9 +147,10 @@
         name: 'control-panel',
         data() {
             return {
-                isZoomIn: false, // 是否是放大状态
+                isZoomIn: false // 是否是放大状态
             }
         },
+//        计算属性依赖缓存
         computed: {
             zoomIcon() { // 不同状态对应不同的图标
                 return this.isZoomIn ? 'all_out' : 'center_focus_strong';
@@ -158,6 +159,7 @@
         methods: {
             resizeHM(){
                 if (this.isZoomIn) {
+//                    改变vuex store的状态
                     this.$store.commit('MAP_ZOOM_OUT');
                     this.isZoomIn = false;
                 } else {
@@ -166,7 +168,8 @@
                 }
             },
             hidePanel(){
-                this.$emit('hidePanel');
+//                单向通信（子组件触发，父组件监听）
+               this.$emit('hidePanel');
             }
         }
     }

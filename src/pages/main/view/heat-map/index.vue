@@ -12,9 +12,10 @@
                 <span id="max"></span>
                 <img alt="" id="gradient">
             </div>
+            <i class="material-icons force-refresh-btn" :class="{'force-refresh-btn--rotating':frRotating}"
+               @click="forceRefresh">replay</i>
         </div>
-        <i class="material-icons force-refresh-btn" :class="{'force-refresh-btn--rotating':frRotating}"
-           @click="forceRefresh">replay</i>
+
     </div>
 </template>
 
@@ -260,6 +261,7 @@
             position: fixed;
             bottom: 0;
             right: 10px;
+            z-index: 999999;
             #min {
                 float: left;
             }
