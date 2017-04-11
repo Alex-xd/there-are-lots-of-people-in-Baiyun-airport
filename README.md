@@ -1,5 +1,7 @@
 # there-are-lots-of-people-in-Baiyun-airport
 
+# 项目已重构  忽略这份readme里的内容！
+
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ## 开发任务
