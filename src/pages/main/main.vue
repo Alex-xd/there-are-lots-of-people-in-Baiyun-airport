@@ -63,17 +63,28 @@
                    @click="forceRefresh">replay</i>
             </div>
         </div>
+
+        <sidePanel :show="isPanelShow">
+            <template slot="breadcrumb">
+                <li><a @click="togglePanel">主界面</a></li>
+                <li class="active">控制面板</li>
+            </template>
+        </sidePanel>
     </div>
 </template>
+
 
 <script>
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
     import API from '@/api';
+    import sidePanel from '@/components/sidePanel';
 
     export default {
         name: 'main',
-        components: {},
+        components: {
+            sidePanel
+        },
         data() {
             return {
                 isPanelShow: false,  // 左侧面板显示隐藏
@@ -241,7 +252,7 @@
     }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 
     // 底图尺寸
     // 未缩放的
