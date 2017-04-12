@@ -104,11 +104,6 @@
             },
             // 启动热图
             startUp(){
-//                if (this.heatmap.isFirstTimeRun) { // 第一次启动强行重绘 解决bug
-//                    this._resetHM();
-//                    this._runHM();
-//                    this.heatmap.isFirstTimeRun = false;
-//                } else
                 if (this.heatmap.instance === null) {
                     // 从停止状态启动
                     this._initHM();
@@ -134,9 +129,10 @@
             },
             // 强行刷新
             forceRefresh(){
-                this._refreshAnimation();
-                this._resetHM();
-                this._runHM()
+                if (this.heatmap.playing) {
+                    this.stop();
+                }
+                this.startUp();
             },
             // 刷新动画
             _refreshAnimation(time = 2500){
@@ -164,6 +160,7 @@
                     const conf = this.heatmap.config;
 
                     this.heatmap.playing = true;
+                    this._refreshAnimation();
 
                     // 自动播放
                     clearInterval(this.heatmap.timer);
