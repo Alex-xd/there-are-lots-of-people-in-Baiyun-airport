@@ -23,8 +23,8 @@
 
 */
 import Vue from 'vue';
+import store from 'vuex';
 import 'bootstrap';
-import App from './App';
 import router from './router';
 // 加载roboto字体和字体图标
 import '../static/fonts/roboto/roboto.css';
@@ -41,8 +41,6 @@ Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
     router,
-    template: '<App/>',
-    components: { App },
-});
+    store
+}).$mount('#app');

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-link to="/main">登录</router-link>
+        <router-link :to="'/main'">登录</router-link>
     </div>
 </template>
 
@@ -13,6 +13,6 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

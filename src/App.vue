@@ -1,12 +1,20 @@
 <template>
-    <div id="app">
+    <div>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'app',
+        mounted() {
+            // 初始化MD点击涟漪效果
+            /* eslint-disable no-undef */
+            $.material.init();
+        },
+        updated() {
+            /* eslint-disable no-undef */
+            $.material.init();
+        }
     };
 </script>
 
