@@ -17,9 +17,9 @@ const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用�
  * @returns {AxiosPromise}
  */
 export default {
-    // 数据变换 JSON原始数据 => { timeStamp, sectionInfo, points }
+    // 数据变换 JSON原始数据 => { sectionInfo, points }
     getHeatmapData: (timeStamp, scale) => {
-        const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun3/data_${timeStamp}.json`;
+        const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun5/data_${timeStamp}.json`;
         return axios.request({
             url: url,
             method: 'get',
@@ -118,7 +118,6 @@ export default {
                 });
 
                 return {
-                    timeStamp: buildUnixTime(data[0].slice10min),
                     sectionInfo: sectionInfo,
                     points: points
                 }

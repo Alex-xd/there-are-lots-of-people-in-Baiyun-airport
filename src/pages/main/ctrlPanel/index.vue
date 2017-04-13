@@ -27,13 +27,6 @@
         },
         data(){
             return {
-                // sectionInfo = {
-                //     T1: {
-                //         name: 'T1 主航站楼',
-                //         pNum: 0,
-                //         state: 0 // 0：normal    1：warning   2：danger
-                //     },
-                // }
             }
         },
         computed: {

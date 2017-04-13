@@ -167,11 +167,7 @@
                 // 初始化标尺
                 updateLegend = initTooltips(this.heatmap.instance);
             },
-            /**
-             * 获取热图数据
-             * @param timeStamp 数据时间戳
-             * @returns {Promise}
-             */
+            // 获取热图数据
             async getData(){
                 const rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
                 if (rsp.status === 200) {

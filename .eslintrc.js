@@ -35,6 +35,7 @@ module.exports = {
         }],
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
         "indent": ["error", 4],
         "comma-dangle": 0,
         "semi": 0,
@@ -59,6 +60,7 @@ module.exports = {
         "consistent-return": 0,
         "no-multiple-empty-lines": 0,
         "no-undef": 0,
-        "max-len": 0
+        "max-len": 0,
+        "padded-blocks": 1
     }
 };
