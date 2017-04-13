@@ -23,6 +23,7 @@ export default {
         return axios.request({
             url: url,
             method: 'get',
+            timeout: 5000,
             // 数据过滤: 分离出各区域点坐标数据 和 各区域数据
             transformResponse: [json => {
                 const data = JSON.parse(json);
@@ -122,7 +123,6 @@ export default {
                     points: points
                 }
             }],
-            timeout: 5000
         })
     }
 }

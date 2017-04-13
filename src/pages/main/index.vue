@@ -72,7 +72,7 @@
 <script>
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
-    import ctrlPanel from './ctrlPanel';
+    import ctrlPanel from './leftPanels/ctrlPanel';
     import { CHANGE_LEFTPANEL_SHOW, UPDATE_SECTION_INFO } from '@/store/mutation-types';
     import { buildDate } from '@/utils/formateDate';
 
@@ -169,17 +169,11 @@
             },
             // 获取热图数据
             async getData(){
-                let rsp;
-                if (this.$storage.getStore()) {
-// TODO:
-                } else {
-                    rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
-                }
+                const rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
                 if (rsp && rsp.status === 200) {
                     // 区域数据推送到全局状态
                     this.$store.commit(UPDATE_SECTION_INFO, rsp.data.sectionInfo);
                     // 缓存数据
-                    this.$storage.setStore(this.heatmap.timeStamp, rsp);
                     return Promise.resolve(rsp.data.points);
                 }
                 return Promise.reject(rsp.statusText)
@@ -314,8 +308,16 @@
         }
         .tooltip {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: -33px;
+            top: -37px;
+            width: 20px;
+            height: 20px;
+            font-size: .8em;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
             display: none;
         }
         .legend-area {

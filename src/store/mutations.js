@@ -14,10 +14,10 @@ export default {
     [types.UPDATE_SECTION_INFO](state, sectionInfo) {
         for (const key in sectionInfo) {
             if (sectionInfo.hasOwnProperty(key)) {
-                if (sectionInfo[key].pNum >= constants.sectionSettings.key.warning) {
-                    sectionInfo[key].state = 1;
-                } else if (sectionInfo[key].pNum >= constants.sectionSettings.key.danger) {
+                if (sectionInfo[key].pNum >= constants.sectionSettings[key].danger) {
                     sectionInfo[key].state = 2;
+                } else if (sectionInfo[key].pNum >= constants.sectionSettings[key].warning) {
+                    sectionInfo[key].state = 1;
                 } else {
                     sectionInfo[key].state = 0;
                 }

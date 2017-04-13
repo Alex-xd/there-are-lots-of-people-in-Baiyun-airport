@@ -7,8 +7,8 @@
         <template slot="main">
             <section class="content">
                 <template v-for="(value, key, index) in sectionInfo">
-                    <listItem :item="value" :key="key"></listItem>
-                    <div v-if="index < 8" class="my-list-group-separator"></div> <!--最后一项不渲染分割线-->
+                    <listItem :section="value" :key="key" @click.native="showDetails(key)"></listItem>
+                    <div v-if="index < 8" class="my-list-group-separator"></div> <!--最后一项不渲染-->
                 </template>
             </section>
         </template>
@@ -26,15 +26,18 @@
             listItem
         },
         data(){
-            return {
-            }
+            return {}
         },
         computed: {
             sectionInfo(){
                 return this.$store.state.sectionInfo;
             }
         },
-        methods: {}
+        methods: {
+            showDetails(key){
+
+            }
+        }
 
     }
 </script>
@@ -44,13 +47,6 @@
         overflow: auto;
         height: 650px;
         padding: 12px 15px 15px 15px;
-        > div {
-            transition: .4s;
-            &:hover {
-                background-color: #eaeaea;
-                cursor: pointer;
-            }
-        }
 
         // 分割线
         .my-list-group-separator {
