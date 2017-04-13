@@ -23,9 +23,9 @@
 
 */
 import Vue from 'vue';
-import store from 'vuex';
 import 'bootstrap';
 import router from './router';
+import store from '@/store';
 // 加载roboto字体和字体图标
 import '../static/fonts/roboto/roboto.css';
 import '../static/fonts/material-icons/index.css';
@@ -36,6 +36,11 @@ import '../node_modules/bootstrap-material-design/dist/css/bootstrap-material-de
 import '../node_modules/bootstrap-material-design/dist/css/ripples.min.css';
 import '../node_modules/bootstrap-material-design/dist/js/material.min';
 import '../node_modules/bootstrap-material-design/dist/js/ripples.min';
+
+import globalConfig from '@/utils/globalConfig';
+
+// 导入全局配置
+Vue.use(globalConfig);
 
 Vue.config.productionTip = false;
 

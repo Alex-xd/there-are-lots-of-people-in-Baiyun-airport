@@ -23,11 +23,11 @@
                                     <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="javascript:;" @click="startUp"><i
+                                        <li><a href="javascript:;"><i
                                             class="material-icons">play_circle_outline</i> 启动系统</a></li>
-                                        <li><a href="javascript:;" @click="pause"><i
+                                        <li><a href="javascript:;"><i
                                             class="material-icons">pause_circle_outline</i> 暂停系统</a></li>
-                                        <li><a href="javascript:;" @click="stop"><i
+                                        <li><a href="javascript:;"><i
                                             class="material-icons">power_settings_new</i>
                                             关闭系统</a></li>
                                     </ul>
@@ -43,57 +43,51 @@
                 </div>
             </div>
 
-            <!--热图-->
-            <HeatMap ref="heatmap"></HeatMap>
-        </div>
 
-        <!--控制面板-->
-        <CtrlPanel :class="{'panel--show': isPanelShow}" @hidePanel="togglePanel"></CtrlPanel>
+            <!--地图和热图-->
+            <div class="jumbotron heatmap-wrapper map">
+            </div>
+        </div>
+        <router-view></router-view>
+        <sharePlatform></sharePlatform>
     </div>
 </template>
 
+
 <script>
-    import HeatMap from './heat-map';
-    import CtrlPanel from './ctrl-panel';
+    import sharePlatform from './sharePlatform';
+    import { CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
 
     export default {
-        name: 'root-component',
+        name: 'main',
         components: {
-            HeatMap,
-            CtrlPanel
+            sharePlatform
         },
         data() {
             return {
-                isPanelShow: false
+
+            }
+        },
+        computed: {
+            showLeftPanel(){ // 左侧面板显示隐藏状态
+                return this.$store.state.showLeftPanel;
             }
         },
         methods: {
             togglePanel(){
-                this.isPanelShow = !this.isPanelShow;
+                this.$store.commit(CHANGE_LEFTPANEL_SHOW);
             },
-            startUp(){
-                this.$refs.heatmap.$emit('startUp');
-            },
-            pause(){
-                this.$refs.heatmap.$emit('pause');
-            },
-            stop(){
-                this.$refs.heatmap.$emit('stop');
-            }
-        },
-        mounted(){
-            // 初始化MD点击涟漪效果
-            $.material.init();
-
-            // 显示面板
-            setTimeout(() => {
-                this.isPanelShow = true;
-            }, 500);
         }
     }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" scoped="">
+
+    // 底图尺寸
+    // 未缩放的
+    $mapWidth: 100%;
+    $mapHeight: 100%;
+
     .container {
         position: relative;
         padding-top: 60px;
@@ -124,8 +118,16 @@
         }
     }
 
-    .panel--show {
-        transform: translate3d(410px, 0, 0);
+    .heatmap-wrapper {
+        position: relative;
+        width: $mapWidth;
+        height: $mapHeight;
+        padding: 0 !important;
+        margin: 10px 0 19px 0 !important;
+        box-sizing: content-box;
+        @at-root .map {
+            background-size: 100% 100%;
+            background-image: url("img/global.jpg");
+        }
     }
-
 </style>

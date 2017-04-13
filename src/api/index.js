@@ -3,6 +3,7 @@
  */
 
 import axios from 'axios';
+import { buildUnixTime } from '@/utils/formateDate';
 
 const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用，保持永远缓存，资源更新时打hash
     headers: { 'Cache-Control': 'max-age=31104000' },
@@ -16,54 +17,91 @@ const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用�
  * @returns {AxiosPromise}
  */
 export default {
-    getHeatMapData: (dataIndex, scale) => {
-        const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun/data_${dataIndex}.json`;
+    // 数据变换 JSON原始数据 => { sectionInfo, points }
+    getHeatmapData: (timeStamp, scale) => {
+        const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun5/data_${timeStamp}.json`;
         return axios.request({
             url: url,
             method: 'get',
-            // 数据过滤
+            // 数据过滤: 分离出各区域点坐标数据 和 各区域数据
             transformResponse: [(json) => {
                 const data = JSON.parse(json);
                 const sectionInfo = {
-                    T1: { totle: 0 },
-                    W1: { totle: 0 },
-                    W2: { totle: 0 },
-                    W3: { totle: 0 },
-                    WC: { totle: 0 },
-                    E1: { totle: 0 },
-                    E2: { totle: 0 },
-                    E3: { totle: 0 },
-                    EC: { totle: 0 }
+                    T1: {
+                        name: 'T1 主航站楼',
+                        pNum: 0,
+                        state: 0 // 0：normal    1：warning   2：danger
+                    },
+                    W1: {
+                        name: 'W1 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    W2: {
+                        name: 'W2 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    W3: {
+                        name: 'W3 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    WC: {
+                        name: 'WC 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    E1: {
+                        name: 'E1 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    E2: {
+                        name: 'E2 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    E3: {
+                        name: 'E3 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    },
+                    EC: {
+                        name: 'EC 主航站楼',
+                        pNum: 0,
+                        state: 0
+                    }
                 };
                 const points = data.map((el) => {
                     const key = el.WIFIAPTag.slice(0, 2);
                     switch (key) {
                         case 'T1':
-                            sectionInfo.E1.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.T1.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'W1':
-                            sectionInfo.W1.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.W1.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'W2':
-                            sectionInfo.W2.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.W2.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'W3':
-                            sectionInfo.W3.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.W3.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'WC':
-                            sectionInfo.WC.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.WC.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'E1':
-                            sectionInfo.E1.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.E1.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'E2':
-                            sectionInfo.E2.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.E2.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'E3':
-                            sectionInfo.E3.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.E3.pNum += parseInt(el.passengerCount, 10);
                             break;
                         case 'EC':
-                            sectionInfo.EC.totle += parseInt(el.passengerCount, 10);
+                            sectionInfo.EC.pNum += parseInt(el.passengerCount, 10);
                             break;
                         default:
                             break;
