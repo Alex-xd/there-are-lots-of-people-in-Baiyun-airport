@@ -4,14 +4,10 @@
 import * as types from './mutation-types';
 
 export default {
-    [types.UPDATE_DATA](state, payload){
-        state.data = payload.data;
-        state.dataIndex = payload.dataIndex;
+    [types.CHANGE_HEATMAP_ZOOM](state) {
+        state.heatmapZoomed = !state.heatmapZoomed;
     },
-    [types.MAP_ZOOM_IN](state) {
-        state.mapZoomed = true;
-    },
-    [types.MAP_ZOOM_OUT](state) {
-        state.mapZoomed = false;
-    },
+    [types.CHANGE_LEFTPANEL_SHOW](state){
+        state.showLeftPanel = !state.showLeftPanel;
+    }
 };

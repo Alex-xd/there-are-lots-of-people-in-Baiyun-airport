@@ -1,7 +1,7 @@
 /**
- *  存放mutation名称常量 注：按module分代码块
+ *  存放mutation名称常量
  */
 
-export const MAP_ZOOM_IN = 'MAP_ZOOM_IN';
-export const MAP_ZOOM_OUT = 'MAP_ZOOM_OUT';
-export const UPDATE_DATA = 'UPDATE_DATA';
+export const CHANGE_HEATMAP_ZOOM = 'CHANGE_HEATMAP_ZOOM';
+export const CHANGE_LEFTPANEL_SHOW = 'CHANGE_LEFTPANEL_SHOW';
+

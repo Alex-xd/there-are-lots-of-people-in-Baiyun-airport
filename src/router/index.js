@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import App from '@/App';
 
-const index = r => require.ensure([], () => r(require('@/pages/index/index')), 'index');
-const main = r => require.ensure([], () => r(require('@/pages/main/main')), 'main');
+const index = r => require.ensure([], () => r(require('@/pages/index')), 'index');
+const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
 
 Vue.use(Router);
 

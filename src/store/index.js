@@ -8,9 +8,8 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        data: {},
-        dataIndex: 1,
-        mapZoomed: false,
+        showLeftPanel: false, // 左侧面板显示状态
+        heatmapZoomed: false, // 热图缩放状态
     },
     getters,
     mutations,

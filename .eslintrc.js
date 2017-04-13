@@ -54,6 +54,7 @@ module.exports = {
         "prefer-template": 1,
         "eqeqeq": 1,
         "no-restricted-syntax": 0,
-        "no-prototype-builtins": 0
+        "no-prototype-builtins": 0,
+        "import/prefer-default-export": 1
     }
 };
