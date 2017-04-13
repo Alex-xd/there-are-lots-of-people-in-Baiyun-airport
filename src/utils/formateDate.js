@@ -22,12 +22,14 @@ export function buildUnixTime(str) {
     }
 
     const cuts = str.match(/(\d+)/g);
+    cuts[4] = `${cuts[4]}0`;
+    cuts[1] = `${cuts[1] - 1}`;
     return new Date(...cuts).getTime();
 }
 
 /**
  * 根据时间戳返回对应日期时间
- * unixToTime(1476428400000)  =>  "2016/9/14 15:00"
+ * unixToTime(1473836400000)  =>  "2016/9/14 15:00"
  */
 export function unixToTime(time) {
     time = parseInt(time, 10);

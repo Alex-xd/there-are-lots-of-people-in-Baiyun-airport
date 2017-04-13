@@ -26,18 +26,3 @@ export default {
 };
 
 
-// sectionInfo = {
-//     T1: {
-//         name: 'T1 主航站楼',
-//         pNum: 0,
-//         state: 0 // 0：normal    1：warning   2：danger
-//     },
-
-// 各区域临界值设定
-// sectionSettings: {
-//     T1: {
-//         max: 600
-//     },
-//     W1: {
-//         max: 400
-//     },
