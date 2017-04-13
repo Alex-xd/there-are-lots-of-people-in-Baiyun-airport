@@ -24,7 +24,7 @@ export default {
             url: url,
             method: 'get',
             // 数据过滤: 分离出各区域点坐标数据 和 各区域数据
-            transformResponse: [(json) => {
+            transformResponse: [json => {
                 const data = JSON.parse(json);
                 const sectionInfo = {
                     T1: {

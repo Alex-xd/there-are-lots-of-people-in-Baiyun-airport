@@ -169,11 +169,18 @@
             },
             // 获取热图数据
             async getData(){
-                const rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
-                if (rsp.status === 200) {
-                    // 区域数据推送到全局状态中
+                let rsp;
+                if (this.$storage.getStore()) {
+// TODO:
+                } else {
+                    rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
+                }
+                if (rsp && rsp.status === 200) {
+                    // 区域数据推送到全局状态
                     this.$store.commit(UPDATE_SECTION_INFO, rsp.data.sectionInfo);
-                    return Promise.resolve(rsp.data.points)
+                    // 缓存数据
+                    this.$storage.setStore(this.heatmap.timeStamp, rsp);
+                    return Promise.resolve(rsp.data.points);
                 }
                 return Promise.reject(rsp.statusText)
             },
@@ -299,7 +306,7 @@
         box-sizing: content-box;
         @at-root .map {
             background-size: 100% 100%;
-            background-image: url("img/global.jpg");
+            background-image: url("~assets/img/global.jpg");
         }
         .heatmap-canvas {
             width: 100%;
