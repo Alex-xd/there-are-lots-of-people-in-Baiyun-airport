@@ -17,7 +17,7 @@
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a @click="togglePanel">控制面板</a>
+                                    <router-link to="/main/sharePlatform">控制面板</router-link>
                                 </li>
                                 <li class="dropdown">
                                     <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
@@ -48,40 +48,30 @@
             <div class="jumbotron heatmap-wrapper map">
             </div>
         </div>
-        <router-view></router-view>
-        <sharePlatform></sharePlatform>
+        <transition name="slide">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
 
 <script>
-    import sharePlatform from './sharePlatform';
-    import { CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
-
     export default {
         name: 'main',
-        components: {
-            sharePlatform
-        },
+        components: {},
         data() {
-            return {
-
-            }
+            return {}
         },
         computed: {
-            showLeftPanel(){ // 左侧面板显示隐藏状态
-                return this.$store.state.showLeftPanel;
-            }
+
         },
         methods: {
-            togglePanel(){
-                this.$store.commit(CHANGE_LEFTPANEL_SHOW);
-            },
+
         }
     }
 </script>
 
-<style lang="scss" scoped="">
+<style lang="scss" scoped>
 
     // 底图尺寸
     // 未缩放的
@@ -127,7 +117,17 @@
         box-sizing: content-box;
         @at-root .map {
             background-size: 100% 100%;
-            background-image: url("img/global.jpg");
+            background-image: url("~assets/img/global.jpg");
         }
+    }
+
+    .slide-enter,
+    .slide-leave-active {
+        transform: translate3d(-410px, 0, 0);
+    }
+
+    .slide-enter-active,
+    .slide-leave-active {
+        transition: all .3s ease-in-out;
     }
 </style>

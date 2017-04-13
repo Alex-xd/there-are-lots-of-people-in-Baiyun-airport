@@ -4,8 +4,10 @@ import App from '@/App';
 
 const index = r => require.ensure([], () => r(require('@/pages/index')), 'index');
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
+const sharePlatform = r => require.ensure([], () => r(require('@/pages/main/sharePlatform')), 'sharePlatform');
 const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentIn')), 'rentIn');
 
+console.log(sharePlatform)
 Vue.use(Router);
 
 export default new Router({
@@ -30,7 +32,11 @@ export default new Router({
                     component: main,
                     children: [
                         {
-                            path: 'sharePlatform', // 仓储租用
+                            path: 'sharePlatform', // 共享平台
+                            component: sharePlatform
+                        },
+                        {
+                            path: 'rentIn', // 仓储租用
                             component: rentIn
                         }
                     ]

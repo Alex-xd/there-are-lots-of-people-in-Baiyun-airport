@@ -1,8 +1,8 @@
 <template>
-    <div class="panel-container" :class="{'panel-container--show': show}">
+    <div class="panel-container">
         <div class="panel">
             <ul class="breadcrumb">
-                <li><a @click="hidePanel">主界面</a></li>
+                <li><router-link to="/main">主界面</router-link></li>
                 <slot name="breadcrumb"></slot>
             </ul>
 
@@ -12,22 +12,10 @@
 </template>
 
 <script>
-    import { CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
-
     export default {
         name: 'leftPanelBaseComponent',
         data() {
             return {}
-        },
-        computed: {
-            show(){
-                return this.$store.state.showLeftPanel;
-            }
-        },
-        methods: {
-            hidePanel(){
-                this.$store.commit(CHANGE_LEFTPANEL_SHOW);
-            }
         }
     }
 </script>
@@ -40,15 +28,11 @@
     .panel-container {
         position: fixed;
         top: 0;
-        left: -410px;
+        left: 0;
         width: 400px;
         height: 900px;
         z-index: 9999;
         padding: 70px 0 0 0;
-        transition: all .3s ease-in-out;
-        &--show {
-            transform: translate3d(410px, 0, 0);
-        }
     }
 
     .panel {
@@ -63,6 +47,4 @@
             box-shadow: $boxShadowNormal;
         }
     }
-
-
 </style>

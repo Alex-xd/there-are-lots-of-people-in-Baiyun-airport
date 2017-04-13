@@ -11,7 +11,9 @@
                     <a href="" data-target="#" class="btn btn-primary btn-raised dropdown-toggle"
                        data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><router-link to="/main/sharePlatform">租用</router-link></li>
+                        <li>
+                            <router-link to="/main/rentIn">租用</router-link>
+                        </li>
                         <li><a>出租</a></li>
                     </ul>
                 </div>
@@ -52,7 +54,7 @@
         display: flex;
         height: 100%;
         width: 40%;
-        margin:0 auto;
+        margin: 0 auto;
         justify-content: center;
         align-items: center;
     }

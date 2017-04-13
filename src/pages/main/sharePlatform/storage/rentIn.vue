@@ -2,7 +2,7 @@
     <div>
         <leftPanel>
             <template slot="breadcrumb">
-                <li>共享平台</li>
+                <li><router-link to="/main/sharePlatform">共享平台</router-link></li>
                 <li class="active">仓储租用</li>
             </template>
         </leftPanel>
