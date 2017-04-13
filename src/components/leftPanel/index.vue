@@ -1,13 +1,15 @@
 <template>
-    <div class="panel-container" :class="{'panel-container--show': show}">
-        <div class="panel">
-            <header>
-                <ul class="breadcrumb">
-                    <li><a @click="hidePanel">主界面</a></li>
+    <div class="leftpanel-container">
+        <div class="panel leftpanel">
+            <header class="leftpanel-header">
+                <ul class="breadcrumb leftpanel-breadcrumb">
+                    <li>
+                        <router-link to="/main">主界面</router-link>
+                    </li>
                     <slot name="breadcrumb"></slot>
                 </ul>
                 <p class="btn-group-sm">
-                    <a href="javascript:;" class="btn btn-primary btn-fab"
+                    <a href="javascript:;" class="btn btn-primary btn-fab leftpanel-zoombtn"
                        @click="resizeHeatmap"><i class="material-icons">{{zoomIcon}}</i></a>
                 </p>
             </header>
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-    import { CHANGE_HEATMAP_ZOOM, CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
+    import { CHANGE_HEATMAP_ZOOM } from '@/store/mutation-types';
 
     export default {
         name: 'leftPanelBaseComponent',
@@ -30,15 +32,9 @@
         computed: {
             zoomIcon() { // 不同状态对应不同的图标
                 return this.isZoomIn ? 'all_out' : 'center_focus_strong';
-            },
-            show(){
-                return this.$store.state.showLeftPanel;
             }
         },
         methods: {
-            hidePanel(){
-                this.$store.commit(CHANGE_LEFTPANEL_SHOW);
-            },
             resizeHeatmap(){
                 this.isZoomIn = !this.isZoomIn;
                 this.$store.commit(CHANGE_HEATMAP_ZOOM);
@@ -52,21 +48,17 @@
     $boxShadowNormal: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
 
     // 监控面板
-    .panel-container {
+    .leftpanel-container {
         position: fixed;
         top: 0;
-        left: -410px;
+        left: 0;
         width: 400px;
         height: 900px;
         z-index: 9999;
         padding: 70px 0 0 0;
-        transition: all .3s ease-in-out;
-        &--show {
-            transform: translate3d(410px, 0, 0);
-        }
     }
 
-    .panel {
+    .leftpanel {
         padding: 0;
         width: 100%;
         height: 100%;
@@ -77,7 +69,7 @@
         &:hover {
             box-shadow: $boxShadowNormal;
         }
-        header {
+        .leftpanel-header {
             position: relative;
             width: 100%;
             height: 180px;
@@ -86,10 +78,10 @@
                 size: 100% 100%;
                 repeat: no-repeat;
             }
-            .breadcrumb {
+            .leftpanel-breadcrumb {
                 border-radius: 0;
             }
-            .btn {
+            .leftpanel-zoombtn {
                 position: absolute;
                 bottom: -15px;
                 right: 10px;

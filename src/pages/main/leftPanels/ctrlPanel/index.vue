@@ -35,7 +35,7 @@
         },
         methods: {
             showDetails(key){
-
+                this.$router.push({ name: 'sectionDetails', params: { section: key } });
             }
         }
 

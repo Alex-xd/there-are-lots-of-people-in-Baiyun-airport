@@ -4,6 +4,8 @@ import App from '@/App';
 
 const index = r => require.ensure([], () => r(require('@/pages/index')), 'index');
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
+const ctrlPanel = r => require.ensure([], () => r(require('@/pages/main/leftPanels/ctrlPanel')), 'ctrlPanel');
+const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/leftPanels/sectionDetails')), 'sectionDetails');
 
 Vue.use(Router);
 
@@ -26,7 +28,18 @@ export default new Router({
                 // 主页面
                 {
                     path: '/main',
-                    component: main
+                    component: main,
+                    children: [
+                        {
+                            path: 'ctrlPanel',
+                            component: ctrlPanel
+                        },
+                        {
+                            path: 'sectionDetails/:section',
+                            name: 'sectionDetails',
+                            component: sectionDetails
+                        }
+                    ]
                 }
             ]
         },

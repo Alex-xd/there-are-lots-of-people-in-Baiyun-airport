@@ -8,9 +8,6 @@ export default {
     [types.CHANGE_HEATMAP_ZOOM](state) {
         state.heatmapZoomed = !state.heatmapZoomed;
     },
-    [types.CHANGE_LEFTPANEL_SHOW](state){
-        state.showLeftPanel = !state.showLeftPanel;
-    },
     [types.UPDATE_SECTION_INFO](state, sectionInfo) {
         for (const key in sectionInfo) {
             if (sectionInfo.hasOwnProperty(key)) {

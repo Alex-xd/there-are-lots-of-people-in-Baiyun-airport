@@ -107,7 +107,6 @@ export default {
                         default:
                             break;
                     }
-
                     return {
                         // TODO:这里的数字是凑出来的，刚好能对上图片。  抽空把json计算好处理一下，以免去这一步计算
                         // x: ((Math.round(el.cords.x) + 200) * 1.6) * scale.x,

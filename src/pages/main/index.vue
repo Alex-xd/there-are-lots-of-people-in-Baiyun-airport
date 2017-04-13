@@ -17,7 +17,7 @@
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <a @click="togglePanel">控制面板</a>
+                                    <a @click="toggleCtrlPanel">控制面板</a>
                                 </li>
                                 <li class="dropdown">
                                     <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
@@ -63,8 +63,9 @@
                    @click="refreshHM">replay</i>
             </div>
         </div>
-
-        <ctrlPanel></ctrlPanel>
+        <transition name="slide">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
@@ -72,15 +73,11 @@
 <script>
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
-    import ctrlPanel from './leftPanels/ctrlPanel';
     import { CHANGE_LEFTPANEL_SHOW, UPDATE_SECTION_INFO } from '@/store/mutation-types';
     import { buildDate } from '@/utils/formateDate';
 
     export default {
         name: 'main',
-        components: {
-            ctrlPanel
-        },
         data() {
             return {
                 frRotating: false, // 刷新按钮旋转
@@ -107,16 +104,10 @@
         computed: {
             heatmapZoomed(){ // 热图缩放状态
                 return this.$store.state.heatmapZoomed;
-            },
-            showLeftPanel(){ // 左侧面板显示隐藏状态
-                return this.$store.state.showLeftPanel;
             }
         },
         // 热图状态转移：stop -> init -> run
         methods: {
-            togglePanel(){
-                this.$store.commit(CHANGE_LEFTPANEL_SHOW);
-            },
             // 启动热图
             startUp(){
                 if (this.heatmap.playing) return;
@@ -208,6 +199,14 @@
                     this.frRotating = false;
                 }, time);
             },
+            // 显示隐藏控制面板
+            toggleCtrlPanel(){
+                if (window.location.hash === '#/main/ctrlPanel') {
+                    this.$router.push('/main');
+                } else {
+                    this.$router.push('/main/ctrlPanel');
+                }
+            }
         },
         watch: {
             // 缩放
@@ -356,5 +355,15 @@
                 }
             }
         }
+    }
+
+    .slide-enter,
+    .slide-leave-active {
+        transform: translate3d(-410px, 0, 0);
+    }
+
+    .slide-enter-active,
+    .slide-leave-active {
+        transition: all .3s ease-in-out;
     }
 </style>
