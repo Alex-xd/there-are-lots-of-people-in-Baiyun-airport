@@ -21,6 +21,7 @@
     import { CHANGE_HEATMAP_ZOOM, CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
 
     export default {
+        name: 'leftPanelBaseComponent',
         data() {
             return {
                 isZoomIn: false, // 是否是放大状态

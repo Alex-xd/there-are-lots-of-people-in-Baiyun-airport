@@ -55,6 +55,10 @@ module.exports = {
         "eqeqeq": 1,
         "no-restricted-syntax": 0,
         "no-prototype-builtins": 0,
-        "import/prefer-default-export": 1
+        "import/prefer-default-export": 1,
+        "consistent-return": 0,
+        "no-multiple-empty-lines": 0,
+        "no-undef": 0,
+        "max-len": 0
     }
 };

@@ -73,7 +73,8 @@
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
     import ctrlPanel from './ctrlPanel';
-    import { CHANGE_LEFTPANEL_SHOW } from '@/store/mutation-types';
+    import { CHANGE_LEFTPANEL_SHOW, UPDATE_SECTION_INFO } from '@/store/mutation-types';
+    import { buildDate } from '@/utils/formateDate';
 
     export default {
         name: 'main',
@@ -84,22 +85,22 @@
             return {
                 frRotating: false, // 刷新按钮旋转
                 heatmap: { // 热图相关
+                    timeStamp: this.$const.timeRange.start, // 开始时间
                     instance: null,
-                    isFirstTimeRun: true, // 是否第一次运行
                     playing: false,
                     timer: null, // 自动播放计时器引用
-                    data: null, // 热图数据 getData方法获取后填充
+                    scale: {    // 缩放比
+                        x: 0,
+                        y: 0
+                    },
                     config: { // 相关配置
                         el: '#J_heatmap',
-                        jsonIndex: 1,   // json数据索引
-                        jsonCount: 90,  // json总数
-                        maxValue: 0,    // 最大值（设为0则动态自动设定）
                         interval: 1500,  // 自动播放间隔
                         size: { // 画布大小
                             width: '100%',
                             height: '100%'
-                        },
-                    },
+                        }
+                    }
                 }
             }
         },
@@ -118,14 +119,25 @@
             },
             // 启动热图
             startUp(){
+                if (this.heatmap.playing) return;
                 if (this.heatmap.instance === null) {
-                    // 从停止状态启动
                     this.initHM();
-                    this.runHM();
-                } else {
-                    // 从暂停状态启动
-                    this.runHM();
                 }
+                this.heatmap.playing = true;
+                this.refreshAnimation();
+                // 自动播放
+                clearInterval(this.heatmap.timer);
+                this.heatmap.timer = setInterval(async () => {
+                    // 获取数据 & 更新热图
+                    const data = await this.getData();
+                    this.updateHM(data);
+                    // 推进时间 到头就循环
+                    if (this.heatmap.timeStamp < this.$const.timeRange.end) {
+                        this.heatmap.timeStamp += this.$const.timeRange.delta;
+                    } else {
+                        this.heatmap.timeStamp = this.$const.timeRange.start;
+                    }
+                }, this.heatmap.config.interval);
             },
             // 暂停热图
             pause(){
@@ -136,17 +148,11 @@
             },
             // 停止热图 销毁dom
             stop(){
+                this.heatmap.playing = false;
                 clearInterval(this.heatmap.timer);
                 this.heatmap.instance = null;
-                document.querySelector(this.heatmap.config.el).removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
-                this.heatmap.playing = false;
-            },
-            // 刷新动画
-            refreshAnimation(time = 2500){
-                this.frRotating = true;
-                setTimeout(() => {
-                    this.frRotating = false;
-                }, time);
+                document.querySelector(this.heatmap.config.el)
+                    .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
             },
             // 初始化热图
             initHM(){
@@ -161,69 +167,27 @@
                 // 初始化标尺
                 updateLegend = initTooltips(this.heatmap.instance);
             },
-            // 启动热图底层调用
-            runHM(){
-                if (!this.heatmap.playing) {
-                    const conf = this.heatmap.config;
-
-                    this.heatmap.playing = true;
-                    this.refreshAnimation();
-                    // 自动播放
-                    clearInterval(this.heatmap.timer);
-                    this.heatmap.timer = setInterval(() => {
-                        this.getData(conf.jsonIndex).then(() => {
-                            this.updateHM(this.heatmap.data.points);
-
-                            if (conf.jsonIndex < conf.jsonCount) {
-                                conf.jsonIndex++;
-                            } else {
-                                conf.jsonIndex = 1;
-                            }
-                        })
-                    }, conf.interval);
-                }
-            },
-            // 刷新热图
-            refreshHM(){
-                if (this.heatmap.playing) {
-                    this.stop();
-                }
-                this.initHM();
-                this.runHM();
-            },
             /**
              * 获取热图数据
-             * @param index json文件索引
+             * @param timeStamp 数据时间戳
              * @returns {Promise}
              */
-            async getData(index){
-                // 缩放比
-                const scale = {
-                    x: document.querySelector(this.heatmap.config.el).scrollWidth / 2308,
-                    y: document.querySelector(this.heatmap.config.el).scrollHeight / 1800
-                };
-                const rsp = await this.$API.getHeatMapData(index, scale);
-
+            async getData(){
+                const rsp = await this.$API.getHeatmapData(this.heatmap.timeStamp, this.heatmap.scale);
                 if (rsp.status === 200) {
-                    this.heatmap.data = rsp.data;
-                    return Promise.resolve()
+                    // 区域数据推送到全局状态中
+                    this.$store.commit(UPDATE_SECTION_INFO, rsp.data.sectionInfo);
+                    return Promise.resolve(rsp.data.points)
                 }
                 return Promise.reject(rsp.statusText)
             },
             // 更新热图数据
             updateHM(data) {
                 if (this.heatmap.instance !== null) {
-                    const isMaxValueSet = (this.heatmap.config.maxValue !== 0);
-                    let maxValue = 0;
+                    let maxValue = data[0].value;
 
-                    // 动态设定最大值
-                    if (isMaxValueSet) {
-                        maxValue = this.heatmap.config.maxValue;
-                    } else {
-                        maxValue = data[0].value;
-                        for (let i = 1, len = data.length; i < len; i++) {
-                            maxValue = data[i].value > maxValue ? data[i].value : maxValue;
-                        }
+                    for (let i = 1, len = data.length; i < len; i++) {
+                        maxValue = data[i].value > maxValue ? data[i].value : maxValue;
                     }
                     // 渲染数据
                     this.heatmap.instance.setData({
@@ -233,7 +197,20 @@
                     });
                 }
             },
-
+            // 刷新热图
+            refreshHM(){
+                if (this.heatmap.playing) {
+                    this.stop();
+                }
+                this.startUp();
+            },
+            // 刷新动画
+            refreshAnimation(time = 2500){
+                this.frRotating = true;
+                setTimeout(() => {
+                    this.frRotating = false;
+                }, time);
+            },
         },
         watch: {
             // 缩放
@@ -244,8 +221,8 @@
                     this.heatmap.config.size.height = '100%';
                 } else {
                     // zoom in
-                    this.heatmap.config.size.width = this.$const.heatmapSize.width;
-                    this.heatmap.config.size.height = this.$const.heatmapSize.height;
+                    this.heatmap.config.size.width = `${this.$const.heatmapSize.width}px`;
+                    this.heatmap.config.size.height = `${this.$const.heatmapSize.height}px`;
                 }
 
                 if (this.heatmap.playing) {
@@ -258,14 +235,20 @@
         },
         mounted(){
             let timer = null;
-            window.addEventListener('resize', () => {
+
+            window.addEventListener('resize', () => {   // TODO: 封装一个节流函数 throttle(func,150);
                 clearTimeout(timer);
                 timer = setTimeout(() => {
+                    this.heatmap.scale.x = document.querySelector(this.heatmap.config.el).scrollWidth / this.$const.heatmapSize.width;
+                    this.heatmap.scale.y = document.querySelector(this.heatmap.config.el).scrollHeight / this.$const.heatmapSize.height;
                     if (this.heatmap.playing) {
                         this.refreshHM();
                     }
                 }, 150);
             }, false);
+
+            this.heatmap.scale.x = document.querySelector(this.heatmap.config.el).scrollWidth / this.$const.heatmapSize.width;
+            this.heatmap.scale.y = document.querySelector(this.heatmap.config.el).scrollHeight / this.$const.heatmapSize.height;
         }
     }
 </script>

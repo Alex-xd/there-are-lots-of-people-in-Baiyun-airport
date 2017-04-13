@@ -3,7 +3,7 @@
  */
 
 import API from '@/api';
-import constant from './constant';
+import constant from './constants';
 
 export default function plugin(Vue) {
     // api 全局注入
