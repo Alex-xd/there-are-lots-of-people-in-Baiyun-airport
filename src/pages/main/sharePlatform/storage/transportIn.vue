@@ -3,24 +3,27 @@
         <leftPanel>
             <template slot="breadcrumb">
                 <li><router-link to='/main/sharePlatform'>共享平台</router-link></li>
-                <li class="active">仓储出租</li>
+                <li class="active">运输租用</li>
             </template>
 
             <template slot="main">
                 <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput2">仓储地点</label>
+                    <label class="control-label" for="focusedInput2">运输起点</label>
                     <input class="form-control" id="focusedInput2" type="text">
-                    <p class="help-block">请输入您要出租的仓库编号或大致位置</p>
+                    <p class="help-block">请输入您运送货物的起点</p>
+                </div>
+
+                <div class="form-group label-floating">
+                    <label class="control-label" for="focusedInput1">运输目的地</label>
+                    <input class="form-control" id="focusedInput1" type="text">
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput2">存储货物总量</label>
-                    <input class="form-control" id="focusedInput2" type="text">
-                    <p class="help-block">请输入您预计存储的货物量</p>
+                    <label class="control-label" for="focusedInput1">货物量</label>
+                    <input class="form-control" id="focusedInput1" type="text">
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput2">仓储出租时间</label>
-                    <input class="form-control" id="focusedInput2" type="text">
-                    <p class="help-block">请输入您预计出租的时间</p>
+                    <label class="control-label" for="focusedInput1">发货时间</label>
+                    <input class="form-control" id="focusedInput1" type="text">
                 </div>
             </template>
         </leftPanel>
@@ -31,7 +34,7 @@
     import leftPanel from '@/components/leftPanel';
 
     export default {
-        name: 'rentOut',
+        name: 'transportIn',
         components:{
             leftPanel
         },

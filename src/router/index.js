@@ -6,6 +6,9 @@ const index = r => require.ensure([], () => r(require('@/pages/index')), 'index'
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
 const sharePlatform = r => require.ensure([], () => r(require('@/pages/main/sharePlatform')), 'sharePlatform');
 const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentIn')), 'rentIn');
+const rentOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentOut')), 'rentOut');
+const transportIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportIn')), 'transportIn');
+const transportOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportOut')), 'transportOut');
 
 console.log(sharePlatform)
 Vue.use(Router);
@@ -38,7 +41,19 @@ export default new Router({
                         {
                             path: 'rentIn', // 仓储租用
                             component: rentIn
-                        }
+                        },
+                        {
+                            path: 'rentOut', // 仓储出租
+                            component: rentOut
+                        },
+                        {
+                            path: 'transportIn', // 运输租用
+                            component: transportIn
+                        },
+                        {
+                            path: 'transportOut', // 运输出租
+                            component: transportOut
+                        },
                     ]
                 }
             ]

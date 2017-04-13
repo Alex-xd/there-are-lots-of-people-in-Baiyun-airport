@@ -14,20 +14,23 @@
                         <li>
                             <router-link to="/main/rentIn">租用</router-link>
                         </li>
-                        <li><a>出租</a></li>
+                        <li>
+                            <router-link to="/main/rentOut">出租</router-link>
+                        </li>
                     </ul>
                 </div>
                 <br>
                 <div class="btn-group">
-                    <a class="btn btn-primary btn-raised">Primary raised</a>
+                    <a class="btn btn-primary btn-raised">运输租用/出租</a>
                     <a href="" data-target="#" class="btn btn-primary btn-raised dropdown-toggle"
                        data-toggle="dropdown"><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a>Action</a></li>
-                        <li><a>Another action</a></li>
-                        <li><a>Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a>Separated link</a></li>
+                        <li>
+                            <router-link to="/main/transportIn">租用</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/main/transportOut">出租</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>

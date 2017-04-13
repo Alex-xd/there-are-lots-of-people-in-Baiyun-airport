@@ -12,12 +12,12 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a class="navbar-brand" href="javascript:;">人流量分布大数据预测监控系统</a>
+                            <a class="navbar-brand" href="javascript:;">物流共享合作平台</a>
                         </div>
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
                                 <li class="active">
-                                    <router-link to="/main/sharePlatform">控制面板</router-link>
+                                    <router-link to="/main/sharePlatform">共享平台</router-link>
                                 </li>
                                 <li class="dropdown">
                                     <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
@@ -32,11 +32,11 @@
                                             关闭系统</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:;">数据统计</a></li>
+                                <li><a href="javascript:;">我的仓储</a></li>
                             </ul>
                             <div class="slider shor slider-success"></div>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a href="javascript:;">广州白云机场T1航站楼</a></li>
+                                <li><a href="javascript:;">成都市</a></li>
                             </ul>
                         </div>
                     </div>
@@ -48,6 +48,8 @@
             <div class="jumbotron heatmap-wrapper map">
             </div>
         </div>
+
+        <!--侧边栏-->
         <transition name="slide">
             <router-view></router-view>
         </transition>
@@ -117,7 +119,7 @@
         box-sizing: content-box;
         @at-root .map {
             background-size: 100% 100%;
-            background-image: url("~assets/img/global.jpg");
+            background-image: url("~assets/img/chengdu.png");
         }
     }
 
