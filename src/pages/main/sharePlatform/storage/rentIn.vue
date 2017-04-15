@@ -7,6 +7,7 @@
             </template >
 
             <template slot="main">
+                <div class="container">
                 <div class="form-group label-floating">
                     <label class="control-label" for="focusedInput2">仓储地点</label>
                     <input class="form-control" id="focusedInput2" type="text">
@@ -21,6 +22,7 @@
                     <label class="control-label" for="focusedInput2">仓储租用时间</label>
                     <input class="form-control" id="focusedInput2" type="text">
                     <p class="help-block">请输入您预计租用的时间</p>
+                </div>
                 </div>
             </template>
         </leftPanel>

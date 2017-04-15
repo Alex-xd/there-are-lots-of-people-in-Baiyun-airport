@@ -7,6 +7,7 @@
             </template>
 
             <template slot="main">
+                <div class="container">
                 <div class="form-group label-floating">
                     <label class="control-label" for="focusedInput2">运输起点</label>
                     <input class="form-control" id="focusedInput2" type="text">
@@ -24,6 +25,7 @@
                 <div class="form-group label-floating">
                     <label class="control-label" for="focusedInput1">发货时间</label>
                     <input class="form-control" id="focusedInput1" type="text">
+                </div>
                 </div>
             </template>
         </leftPanel>

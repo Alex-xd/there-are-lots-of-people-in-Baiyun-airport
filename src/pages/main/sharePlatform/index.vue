@@ -6,7 +6,7 @@
 
         <template slot="main">
             <div class="my-container">
-                <div class="btn-group">
+                <div class="btn-group  ">
                     <a class="btn btn-primary btn-raised">仓储租用/出租</a>
                     <a href="" data-target="#" class="btn btn-primary btn-raised dropdown-toggle"
                        data-toggle="dropdown"><span class="caret"></span></a>
@@ -19,7 +19,6 @@
                         </li>
                     </ul>
                 </div>
-                <br>
                 <div class="btn-group">
                     <a class="btn btn-primary btn-raised">运输租用/出租</a>
                     <a href="" data-target="#" class="btn btn-primary btn-raised dropdown-toggle"
@@ -55,10 +54,13 @@
 <style lang="scss" scoped>
     .my-container {
         display: flex;
-        height: 100%;
-        width: 40%;
-        margin: 0 auto;
-        justify-content: center;
+        /*justify-content: center;*/
         align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+
+    }
+    .btn-group{
+        margin-top: 80px;
     }
 </style>

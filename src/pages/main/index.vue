@@ -20,7 +20,7 @@
                                     <router-link to="/main/sharePlatform">共享平台</router-link>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
+                                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">我的仓储
                                         <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="javascript:;"><i
@@ -32,7 +32,7 @@
                                             关闭系统</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="javascript:;">我的仓储</a></li>
+                                <li><a href="javascript:;">我的运输</a></li>
                             </ul>
                             <div class="slider shor slider-success"></div>
                             <ul class="nav navbar-nav navbar-right">
