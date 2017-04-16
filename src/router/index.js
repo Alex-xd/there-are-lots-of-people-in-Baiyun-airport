@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import App from '@/App';
 
-const index = r => require.ensure([], () => r(require('@/pages/index')), 'index');
+const login = r => require.ensure([], () => r(require('@/pages/login')), 'login');
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
 const sharePlatform = r => require.ensure([], () => r(require('@/pages/main/sharePlatform')), 'sharePlatform');
 const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentIn')), 'rentIn');
@@ -11,8 +11,6 @@ const transportIn = r => require.ensure([], () => r(require('@/pages/main/shareP
 const transportOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportOut')), 'transportOut');
 const myTransport = r => require.ensure([], () => r(require('@/pages/main/myTransport')), 'myTransport');
 const transportInformation = r => require.ensure([], () => r(require('@/pages/main/myTransport/transportStore/transportInformation')), 'transportInformation');
-
-
 
 Vue.use(Router);
 
@@ -25,12 +23,12 @@ export default new Router({
                 // 地址为空时跳转landing登录页
                 {
                     path: '',
-                    redirect: '/index'
+                    redirect: '/login'
                 },
                 // landing登录页
                 {
-                    path: '/index',
-                    component: index
+                    path: '/login',
+                    component: login
                 },
                 // 主页面
                 {

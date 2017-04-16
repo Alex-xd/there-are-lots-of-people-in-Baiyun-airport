@@ -20,5 +20,5 @@
 
 <style lang="scss">
     /*引入全局通用样式*/
-    @import "./styles/common/index";
+    @import "styles/index";
 </style>

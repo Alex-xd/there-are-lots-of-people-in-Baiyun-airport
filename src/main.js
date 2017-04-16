@@ -36,9 +36,14 @@ import '../node_modules/bootstrap-material-design/dist/css/bootstrap-material-de
 import '../node_modules/bootstrap-material-design/dist/css/ripples.min.css';
 import '../node_modules/bootstrap-material-design/dist/js/material.min';
 import '../node_modules/bootstrap-material-design/dist/js/ripples.min';
-
 import globalConfig from '@/utils/globalConfig';
-// import axios from 'axios';
+import FastClick from 'fastclick'
+
+if ('addEventListener' in document) {
+    document.addEventListener('DOMContentLoaded', function() {
+        FastClick.attach(document.body);
+    }, false);
+}
 
 // 导入全局配置
 Vue.use(globalConfig);
