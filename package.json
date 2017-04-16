@@ -18,6 +18,7 @@
     "bootstrap": "3",
     "bootstrap-material-design": "^0.5.10",
     "echarts": "^3.4.0",
+    "fastclick": "^1.0.6",
     "heatmap.js": "^2.0.5",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0"

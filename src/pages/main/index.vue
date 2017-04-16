@@ -1,58 +1,6 @@
 <template>
     <div>
-        <div class="container container-big">
-            <!--导航栏-->
-            <div class="navbar-wrapper">
-                <div class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                    data-target=".navbar-responsive-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="javascript:;">物流共享合作平台</a>
-                        </div>
-                        <div class="navbar-collapse collapse navbar-responsive-collapse">
-                            <ul class="nav navbar-nav">
-                                <li :class="{active:showShare}">
-                                    <a @click="toggleShare">共享平台</a>
-                                </li>
-                                <li>
-                                    <a>我的仓储</a>
-                                </li>
-                                <li :class="{active:showMyTrans}">
-                                    <a @click="toggleMyTrans">我的运输</a>
-                                </li>
-
-                                <li>
-                                    <router-link to="/main/myTransport">韧曦金服</router-link>
-                                </li>
-
-                                <li>
-                                    <router-link to="/main/myTransport">账号设置</router-link>
-                                </li>
-                            </ul>
-                            <div class="slider shor slider-success"></div>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="javascript:;">成都市</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--地图和热图-->
-            <div class="jumbotron heatmap-wrapper map">
-            </div>
-        </div>
-
-        <!--侧边栏-->
-        <transition name="slide">
-            <router-view></router-view>
-        </transition>
+        <router-link to="/login">登录</router-link>
     </div>
 </template>
 
