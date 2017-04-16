@@ -38,6 +38,7 @@ import '../node_modules/bootstrap-material-design/dist/js/material.min';
 import '../node_modules/bootstrap-material-design/dist/js/ripples.min';
 
 import globalConfig from '@/utils/globalConfig';
+// import axios from 'axios';
 
 // 导入全局配置
 Vue.use(globalConfig);
@@ -49,3 +50,5 @@ new Vue({
     router,
     store
 }).$mount('#app');
+
+

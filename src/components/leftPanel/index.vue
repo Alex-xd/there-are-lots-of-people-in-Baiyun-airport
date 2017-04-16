@@ -31,6 +31,7 @@
         left: 0;
         width: 400px;
         height: 900px;
+        /*height: 100%;*/
         z-index: 9999;
         padding: 70px 0 0 0;
     }
@@ -38,8 +39,8 @@
     .panel {
         padding: 0;
         width: 100%;
-        height: 100%;
-        overflow: hidden;
+        height: 900px;
+        overflow: auto;
         box-shadow: $boxShadowDeep;
         background: #fff;
         transition: box-shadow .8s ease-in-out;

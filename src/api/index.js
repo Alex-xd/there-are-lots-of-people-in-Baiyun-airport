@@ -4,6 +4,14 @@
 
 import axios from 'axios';
 import { buildUnixTime } from '@/utils/formateDate';
+import MockAdapter from 'axios-mock-adapter';
+import * as transportInformatin from '@/api/mock/transportInformatin'
+
+
+// 模拟数据请求
+const mock = new MockAdapter(axios);
+mock.onPost('／match_vehicle').reply(200,transportInformatin.gettransportIn);
+
 
 const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用，保持永远缓存，资源更新时打hash
     headers: { 'Cache-Control': 'max-age=31104000' },

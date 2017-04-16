@@ -9,8 +9,11 @@ const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatfo
 const rentOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentOut')), 'rentOut');
 const transportIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportIn')), 'transportIn');
 const transportOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportOut')), 'transportOut');
+const myTransport = r => require.ensure([], () => r(require('@/pages/main/myTransport')), 'myTransport');
+const transportInformation = r => require.ensure([], () => r(require('@/pages/main/myTransport/transportStore/transportInformation')), 'transportInformation');
 
-console.log(sharePlatform)
+
+
 Vue.use(Router);
 
 export default new Router({
@@ -54,6 +57,14 @@ export default new Router({
                             path: 'transportOut', // 运输出租
                             component: transportOut
                         },
+                        {
+                            path: 'myTransport',  //我的运输
+                            component: myTransport
+                        },
+                        {
+                            path: 'transportInformation', //运输匹配结果信息
+                            component: transportInformation
+                        }
                     ]
                 }
             ]

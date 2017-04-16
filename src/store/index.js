@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        showLeftPanel: false,   // 左侧面板显示状态
+        
     },
     getters,
     mutations,
