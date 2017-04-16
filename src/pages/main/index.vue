@@ -16,21 +16,21 @@
                         </div>
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
-                                <li>
-                                    <router-link to="/main/sharePlatform">共享平台</router-link>
+                                <li :class="{active:showShare}">
+                                    <a @click="toggleShare">共享平台</a>
                                 </li>
                                 <li>
                                     <a>我的仓储</a>
                                 </li>
-                                <li >
-                                    <router-link to="/main/myTransport">我的运输</router-link>
+                                <li :class="{active:showMyTrans}">
+                                    <a @click="toggleMyTrans">我的运输</a>
                                 </li>
 
-                                <li >
+                                <li>
                                     <router-link to="/main/myTransport">韧曦金服</router-link>
                                 </li>
 
-                                <li >
+                                <li>
                                     <router-link to="/main/myTransport">账号设置</router-link>
                                 </li>
                             </ul>
@@ -63,6 +63,8 @@
         components: {},
         data() {
             return {
+                showShare: false,
+                showMyTrans: false,
                 btnActive: {
                     a: 0,
                     b: 0,
@@ -70,10 +72,25 @@
                 }
             }
         },
-        computed: {
-
-        },
-        methods: {}
+        computed: {},
+        methods: {
+            toggleShare(){
+                if (this.showShare) {
+                    this.$router.push('/main');
+                } else {
+                    this.$router.push('/main/sharePlatform');
+                }
+                this.showShare = !this.showShare;
+            },
+            toggleMyTrans(){
+                if (this.showMyTrans) {
+                    this.$router.push('/main');
+                } else {
+                    this.$router.push('/main/myTransport');
+                }
+                this.showMyTrans = !this.showMyTrans;
+            }
+        }
     }
 </script>
 
