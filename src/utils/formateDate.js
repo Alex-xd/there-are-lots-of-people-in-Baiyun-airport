@@ -11,8 +11,9 @@ export function unixToTime(time) {
     const day = `${date.getDate() < 10 ? 0 : ''}${date.getDate()}`;
     const hours = `${date.getHours() < 10 ? 0 : ''}${date.getHours()}`;
     const minutes = `${date.getMinutes() < 10 ? 0 : ''}${date.getMinutes()}`;
+    const seconds = `${date.getSeconds() < 10 ? 0 : ''}${date.getSeconds()}`;
 
-    return `${year}/${month}/${day} ${hours}:${minutes}`;
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 

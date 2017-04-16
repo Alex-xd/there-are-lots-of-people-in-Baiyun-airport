@@ -16,23 +16,23 @@
                         </div>
                         <div class="navbar-collapse collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="active">
+                                <li>
                                     <router-link to="/main/sharePlatform">共享平台</router-link>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">我的仓储
-                                        <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="javascript:;"><i
-                                            class="material-icons">play_circle_outline</i> 启动系统</a></li>
-                                        <li><a href="javascript:;"><i
-                                            class="material-icons">pause_circle_outline</i> 暂停系统</a></li>
-                                        <li><a href="javascript:;"><i
-                                            class="material-icons">power_settings_new</i>
-                                            关闭系统</a></li>
-                                    </ul>
+                                <li>
+                                    <a>我的仓储</a>
                                 </li>
-                                <li><a href="javascript:;">我的运输</a></li>
+                                <li >
+                                    <router-link to="/main/myTransport">我的运输</router-link>
+                                </li>
+
+                                <li >
+                                    <router-link to="/main/myTransport">韧曦金服</router-link>
+                                </li>
+
+                                <li >
+                                    <router-link to="/main/myTransport">账号设置</router-link>
+                                </li>
                             </ul>
                             <div class="slider shor slider-success"></div>
                             <ul class="nav navbar-nav navbar-right">
@@ -62,14 +62,18 @@
         name: 'main',
         components: {},
         data() {
-            return {}
+            return {
+                btnActive: {
+                    a: 0,
+                    b: 0,
+                    c: 1
+                }
+            }
         },
         computed: {
 
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 
