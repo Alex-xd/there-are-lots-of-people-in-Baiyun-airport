@@ -26,16 +26,21 @@
             listItem
         },
         data(){
-            return {}
+            return {
+                isRotating: false
+            }
         },
         computed: {
+            // 获取当前时间下的各区域数据
             sectionInfo(){
-                return this.$store.state.sectionInfo;
+                if (this.$store.state.data) {
+                    return this.$store.getters.curData.sectionInfo;
+                }
             }
         },
         methods: {
-            showDetails(key){
-                this.$router.push({ name: 'sectionDetails', params: { section: key } });
+            showDetails(section){
+                this.$router.push({ name: 'sectionDetails', params: { section: section } });
             }
         }
 

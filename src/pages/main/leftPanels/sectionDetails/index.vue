@@ -9,27 +9,33 @@
 
         <template slot="main">
             <section class="content">
-                <!--TODO: 实现按钮功能-->
-                <div v-show="section.state !== 0" class="btn-group">
-                    <a href="javascript:;" class="btn" :class="section.state===1 ? 'btn-warning':'btn-danger'">{{stateText}}</a>
-                    <a href="javascript:;" data-target="#" class="btn btn-warning dropdown-toggle"
-                       data-toggle="dropdown"><span class="caret"></span></a>
-                    <ul v-if="section.state===1" class="dropdown-menu">
-                        <li><a>向警卫部发送该警告</a></li>
-                        <li><a>通知塔台</a></li>
-                        <li><a>提升预警等级</a></li>
-                        <li class="divider"></li>
-                        <li><a>忽略此条预警</a></li>
-                    </ul>
-                    <ul v-else class="dropdown-menu">
-                        <li><a>向警卫部发送该警告</a></li>
-                        <li><a>通知塔台</a></li>
-                        <li class="divider"></li>
-                        <li><a>忽略此条预警</a></li>
-                    </ul>
+                <header class="clear-fix">{{section.name}}人流量预测
+                    <div v-show="section.state !== 0" class="btn-group">
+                        <a class="btn" :class="section.state===1 ? 'btn-warning':'btn-danger'">{{stateText}}</a>
+                        <a data-target="#" class="btn btn-warning dropdown-toggle"
+                           data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul v-if="section.state===1" class="dropdown-menu">
+                            <li><a>向警卫部发送该警告</a></li>
+                            <li><a>通知塔台</a></li>
+                            <li><a>提升预警等级</a></li>
+                            <li class="divider"></li>
+                            <li><a>忽略此条预警</a></li>
+                        </ul>
+                        <ul v-else class="dropdown-menu">
+                            <li><a>向警卫部发送该警告</a></li>
+                            <li><a>通知塔台</a></li>
+                            <li class="divider"></li>
+                            <li><a>忽略此条预警</a></li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="echart-leftpanel">
+                    <div id="J_echart-leftpanel"></div>
+                    <!--<template v-show="echart">-->
+                    <div class="spinner"></div>
+                    <span class="now">当前时间：{{curTime}}</span>
+                    <!--</template>-->
                 </div>
-
-                <!--TODO: 实现动态折线图-->
             </section>
         </template>
     </leftPanel>
@@ -37,6 +43,7 @@
 
 <script>
     import leftPanel from '@/components/leftPanel';
+    import { unixToTime } from '@/utils/formateDate';
 
     export default {
         name: 'sectionDetails',
@@ -45,24 +52,154 @@
         },
         data() {
             return {
-                section: null
+                echart: null, // echart实例
+                data: [] // echart数据
             }
         },
         computed: {
+            section(){
+                if (this.$store.state.data) {
+                    return this.$store.getters.curData.sectionInfo[this.$route.params.section];
+                }
+                return {
+                    name: '-',
+                    pNum: '-',
+                    state: 0
+                }
+            },
             stateText(){
                 if (this.section.state !== 0) {
                     return this.section.state === 1 ? 'warning' : 'danger';
                 }
+            },
+            curTime(){
+                return unixToTime(this.$store.getters.curTime);
             }
         },
-        created(){
-            // 获取本区域数据
-            this.section = this.$store.state.sectionInfo[this.$route.params.section];
-        }
+        watch: {
+            section(newVal){
+                // 更新数据
+                this.data.shift();
+                this.data.push({
+                    value: [
+                        unixToTime(this.$store.getters.fur4hours),
+                        newVal.pNum
+                    ]
+                });
+                // 更新📈
+                if (this.echart) {
+                    this.echart.setOption({
+                        series: [{
+                            data: this.data
+                        }]
+                    });
+                }
+            }
+        },
+        mounted(){
+            if (this.$store.state.data) {
+                // 填充起始数据
+                this.$store.state.data.forEach(el => {
+                    this.data.push({
+                        value: [
+                            unixToTime(el.timeStamp),
+                            el.sectionInfo[this.$route.params.section].pNum
+                        ]
+                    })
+                });
+            }
+
+
+            this.echart = this.$echarts.init(document.querySelector('#J_echart-leftpanel'));
+            this.echart.setOption({
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function (params) {
+                        return `${params[0].data.value[0]}  ${params[0].data.value[1]}人`;
+                    },
+                    axisPointer: {
+                        animation: false
+                    }
+                },
+                xAxis: {
+                    type: 'time',
+                    splitLine: {
+                        show: false
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    boundaryGap: [0, '100%'],
+                    splitLine: {
+                        show: true
+                    }
+                },
+                series: [{
+                    type: 'line',
+                    showSymbol: false,
+                    hoverAnimation: false,
+                    data: this.data
+                }]
+            })
+        },
     }
+
 </script>
 
 <style lang="scss" scoped>
+    .content {
+        width: 100%;
+        height: 500px;
+    }
 
+    header {
+        padding: 10px 20px;
+        width: 100%;
+        height: 56px;
+        line-height: 36px;
+        font-size: 1.2em;
+    }
+
+    .btn-group {
+        margin: 0 0 0 15px;
+        .btn {
+            padding: 8px 5px;
+        }
+        .btn-danger {
+            color: #f12923
+        }
+        .dropdown-menu {
+            left: -76px;
+        }
+    }
+
+    .echart-leftpanel {
+        position: relative;
+        width: 100%;
+        height: 80%;
+        .spinner {
+            width: 1px;
+            height: 281px;
+            position: absolute;
+            left: 146px;
+            top: 40px;
+            background: #000;
+        }
+        .now {
+            position: absolute;
+            left: 150px;
+            top: 52px;
+        }
+    }
+
+    #J_echart-leftpanel {
+        position: relative;
+        top: -20px;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 

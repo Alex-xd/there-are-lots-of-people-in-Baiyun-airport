@@ -5,23 +5,31 @@ import * as types from './mutation-types';
 import constants from '@/utils/constants';
 
 export default {
-    [types.CHANGE_HEATMAP_ZOOM](state) {
-        state.heatmapZoomed = !state.heatmapZoomed;
-    },
-    [types.UPDATE_SECTION_INFO](state, sectionInfo) {
-        for (const key in sectionInfo) {
-            if (sectionInfo.hasOwnProperty(key)) {
-                if (sectionInfo[key].pNum >= constants.sectionSettings[key].danger) {
-                    sectionInfo[key].state = 2;
-                } else if (sectionInfo[key].pNum >= constants.sectionSettings[key].warning) {
-                    sectionInfo[key].state = 1;
+    // 更新数据
+    [types.UPDATE_DATA](state, data) {
+        // 计算获得各区域状态
+        const secInfo = data.sectionInfo;
+        for (const key in secInfo) {
+            if (secInfo.hasOwnProperty(key)) {
+                if (secInfo[key].pNum >= constants.sectionSettings[key].danger) {
+                    secInfo[key].state = 2;
+                } else if (secInfo[key].pNum >= constants.sectionSettings[key].warning) {
+                    secInfo[key].state = 1;
                 } else {
-                    sectionInfo[key].state = 0;
+                    secInfo[key].state = 0;
                 }
             }
         }
-        state.sectionInfo = sectionInfo;
+
+        state.data.shift();
+        state.data.push({
+            timeStamp: data.timeStamp,
+            points: data.points,
+            sectionInfo: secInfo
+        });
+    },
+    // 初始化数据  // 2016/09/14 15:00 ~ 2016/09/14 20:50  共36组数据
+    [types.INIT_DEFAULT_DATA](state, defaultData){
+        state.data = defaultData;
     }
 };
-
-

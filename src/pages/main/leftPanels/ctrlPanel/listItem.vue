@@ -57,15 +57,15 @@
                     height: 16px;
                 }
             }
-            .danger {
-                color: #f12923
-            }
             .btn-group {
                 position: absolute;
                 right: 5px;
                 top: 2px;
                 .btn {
                     padding: 8px 5px;
+                }
+                .btn-danger {
+                    color: #f12923
                 }
                 .dropdown-menu {
                     left: -76px;

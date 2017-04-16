@@ -4,8 +4,8 @@ import App from '@/App';
 
 const index = r => require.ensure([], () => r(require('@/pages/index')), 'index');
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
-const ctrlPanel = r => require.ensure([], () => r(require('@/pages/main/leftPanels/ctrlPanel')), 'ctrlPanel');
-const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/leftPanels/sectionDetails')), 'sectionDetails');
+const ctrlPanel = r => require.ensure([], () => r(require('@/pages/main/leftPanels/ctrlPanel')), 'panels');
+const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/leftPanels/sectionDetails')), 'panels');
 
 Vue.use(Router);
 

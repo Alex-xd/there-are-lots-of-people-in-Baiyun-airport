@@ -1,71 +1,49 @@
 <template>
-    <div class="leftpanel-container">
-        <div class="panel leftpanel">
-            <header class="leftpanel-header">
-                <ul class="breadcrumb leftpanel-breadcrumb">
-                    <li>
-                        <router-link to="/main">主界面</router-link>
-                    </li>
-                    <slot name="breadcrumb"></slot>
-                </ul>
-                <p class="btn-group-sm">
-                    <a href="javascript:;" class="btn btn-primary btn-fab leftpanel-zoombtn"
-                       @click="resizeHeatmap"><i class="material-icons">{{zoomIcon}}</i></a>
-                </p>
-            </header>
+    <div class="panel leftpanel">
+        <header class="leftpanel-header">
+            <ul class="breadcrumb leftpanel-breadcrumb">
+                <li>
+                    <router-link to="/main">主界面</router-link>
+                </li>
+                <slot name="breadcrumb"></slot>
+            </ul>
+            <p class="btn-group-sm">
+                <a class="btn btn-primary btn-fab leftpanel-btn" @click="goBack"><i slot="btn"
+                                                                                    class="material-icons">reply</i></a>
+            </p>
+        </header>
 
-            <slot name="main"></slot>
-        </div>
+        <slot name="main"></slot>
     </div>
 </template>
 
 <script>
-    import { CHANGE_HEATMAP_ZOOM } from '@/store/mutation-types';
-
     export default {
         name: 'leftPanelBaseComponent',
-        data() {
-            return {
-                isZoomIn: false, // 是否是放大状态
-            }
-        },
-        computed: {
-            zoomIcon() { // 不同状态对应不同的图标
-                return this.isZoomIn ? 'all_out' : 'center_focus_strong';
-            }
-        },
         methods: {
-            resizeHeatmap(){
-                this.isZoomIn = !this.isZoomIn;
-                this.$store.commit(CHANGE_HEATMAP_ZOOM);
+            goBack(){
+                this.$router.go(-1);
             }
         }
     }
 </script>
 
 <style lang="scss" scoped>
+
     $boxShadowDeep: 6px -5px 17px 0 rgba(0, 0, 0, 0.2), 9px 5px 20px 0 rgba(0, 0, 0, 0.19);
     $boxShadowNormal: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
 
-    // 监控面板
-    .leftpanel-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 400px;
-        height: 900px;
-        z-index: 9999;
-        padding: 70px 0 0 0;
-    }
-
     .leftpanel {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        z-index: 9999;
         padding: 0;
-        width: 100%;
-        height: 100%;
+        width: 400px;
         overflow: hidden;
         box-shadow: $boxShadowDeep;
         background: #fff;
-        transition: box-shadow .8s ease-in-out;
+        transition: all .8s ease-in-out;
         &:hover {
             box-shadow: $boxShadowNormal;
         }
@@ -81,7 +59,7 @@
             .leftpanel-breadcrumb {
                 border-radius: 0;
             }
-            .leftpanel-zoombtn {
+            .leftpanel-btn {
                 position: absolute;
                 bottom: -15px;
                 right: 10px;

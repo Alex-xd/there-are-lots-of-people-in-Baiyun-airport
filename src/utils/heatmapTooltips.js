@@ -27,8 +27,8 @@ export default function initTooltips(heatmapInstance) {
         const y = ev.layerY;
         // getValueAt gives us the value for a point p(x/y)
         const value = heatmapInstance.getValueAt({
-            x: x,
-            y: y
+            x: x - 10,
+            y: y - 10
         });
         tooltip.style.display = 'block';
         updateTooltip(x, y, value);

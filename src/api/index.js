@@ -3,7 +3,6 @@
  */
 
 import axios from 'axios';
-import { buildUnixTime } from '@/utils/formateDate';
 
 const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用，保持永远缓存，资源更新时打hash
     headers: { 'Cache-Control': 'max-age=31104000' },
@@ -13,13 +12,15 @@ const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用�
 /**
  * 获取热图的坐标点数据 [{x:120,y:130,value:15},...,{x:122,y:1330,value:35}]
  * @param url {String} json文件路径
- * @param scale {Object} 缩放比例{x:0.3, y:0.5}
- * @returns {AxiosPromise}
  */
 export default {
-    // 数据变换 JSON原始数据 => { sectionInfo, points }
-    getHeatmapData: (timeStamp, scale) => {
-        const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun5/data_${timeStamp}.json`;
+    /**
+     * 数据过滤
+     * JSON原始数据 => { sectionInfo, points }
+     * @param timeStamp 时间戳
+     */
+    getHeatmapData(timeStamp) {
+        const url = `https://zhangboyuan-10039837.file.myqcloud.com/baiyun5/data_${timeStamp}.json`;
         return axios.request({
             url: url,
             method: 'get',
@@ -75,6 +76,7 @@ export default {
                     }
                 };
                 const points = data.map((el) => {
+                    // 统计各区域人数
                     const key = el.WIFIAPTag.slice(0, 2);
                     switch (key) {
                         case 'T1':
@@ -107,21 +109,28 @@ export default {
                         default:
                             break;
                     }
+                    // 转换热图所需点坐标
                     return {
                         // TODO:这里的数字是凑出来的，刚好能对上图片。  抽空把json计算好处理一下，以免去这一步计算
-                        // x: ((Math.round(el.cords.x) + 200) * 1.6) * scale.x,
-                        // y: - (Math.round(el.cords.y) + 200) + 1800 * scale.y,
-                        x: Math.round(((el.cords.x + 200) * 1.63) * scale.x),
-                        y: Math.round(((-(el.cords.y + 200) + 1800) * scale.y)),
+                        x: Math.round((el.cords.x + 200) * 1.63),
+                        y: Math.round((-(el.cords.y + 200) + 1800)),
                         value: Math.round(el.passengerCount)
                     }
                 });
 
+                // 接口返回数据
                 return {
+                    timeStamp: timeStamp,
                     sectionInfo: sectionInfo,
                     points: points
                 }
             }],
         })
+    },
+    /**
+     * 获取初始数据
+     */
+    getInitialData(){
+        return axios.get('https://zhangboyuan-10039837.file.myqcloud.com/baiyun5/defaultData.json');
     }
 }
