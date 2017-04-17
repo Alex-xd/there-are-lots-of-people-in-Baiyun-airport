@@ -4,9 +4,9 @@
             <fieldset>
                 <legend class="platform">注册</legend>
                 <div class="form-group">
-                    <label for="UserName" class="col-md-2 control-label">用户姓名</label>
+                    <label for="UserName" class="col-md-2 control-label">用户名</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" id="UserName" placeholder="用户姓名">
+                        <input type="text" class="form-control" id="UserName" placeholder="用户名">
                     </div>
                 </div>
                 <div class="form-group">

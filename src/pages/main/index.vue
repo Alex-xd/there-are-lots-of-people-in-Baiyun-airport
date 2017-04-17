@@ -24,7 +24,6 @@
                             <li :class="{active:showMyTrans}">
                                 <a @click="toggleMyTrans">我的运输</a>
                             </li>
-
                             <li>
                                 <router-link to="/main/myTransport">韧曦金服</router-link>
                             </li>
@@ -104,7 +103,7 @@
         left: 0;
         background-color: #fff;
         .navbar {
-            width: 1200px;
+            max-width: 1200px;
             margin: 0 auto;
             color: #333;
             background-color: #fff !important;
@@ -143,11 +142,6 @@
                         }
                     }
                 }
-            }
-
-            .navbar-toggle {
-                margin-top: 25px;
-                margin-bottom: 25px;
             }
         }
         .dropdown-menu {
