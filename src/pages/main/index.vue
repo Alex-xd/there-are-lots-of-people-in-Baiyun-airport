@@ -128,18 +128,13 @@
 <style lang="scss" scoped>
     @import '~assets/lib/fullpage/jquery.fullpage.css';
 
-    // 底图尺寸
-    // 未缩放的
-    /*$mapWidth: 100%;
-    $mapHeight: 100%;*/
-
     .main-wrapper {
         height: 100%;
     }
 
     .navbar-wrapper {
         position: fixed;
-        z-index: 999999;
+        z-index: 9999;
         width: 100%;
         top: 0;
         left: 0;
@@ -149,11 +144,9 @@
             margin: 0 auto;
             color: #333;
             background-color: #fff !important;
-            .navbar-header {
-                .navbar-brand {
-                    font-size: 1.5em;
-                    font-weight: 500;
-                }
+            .navbar-brand {
+                font-size: 1.5em;
+                font-weight: 500;
             }
             .navbar-collapse {
                 position: relative;
@@ -170,6 +163,7 @@
                     }
                     .navbar-login {
                         .btn {
+                            font-size: 14px;
                             margin: 0;
                             padding: 3px 18px;
                         }
