@@ -28,14 +28,24 @@
                             <li>
                                 <router-link to="/main/myTransport">韧曦金服</router-link>
                             </li>
+
                             <li><a class="spinner">|</a></li>
-                            <li>
+
+                            <li v-if="hasLogin">
                                 <router-link to="/main/myTransport">账号设置</router-link>
                             </li>
-                            <li class="navbar-login">
-                                <router-link to="/login" class="btn btn-raised btn-info">登录</router-link>
-                                <router-link to="/login/register" class="btn btn-raised btn-default">注册</router-link>
-                            </li>
+
+                            <template v-else>
+                                <li>
+                                    <router-link to="/login" class="navbar-login btn btn-raised btn-info">登录
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/login/register" class="navbar-login btn btn-raised btn-default">注册
+                                    </router-link>
+                                </li>
+                            </template>
+
                         </ul>
                         <div class="slider shor slider-success"></div>
                     </div>
@@ -44,14 +54,14 @@
         </nav>
 
         <!-- 轮播（Carousel）项目 -->
-        <div id="myCarousel" class="carousel-container carousel slide" data-ride="carousel">
-            <!-- 轮播（Carousel）指标 -->
+        <div id="myCarousel" class="carousel-container carousel slide"><!--data-ride="carousel"-->
+                                                                       <!-- 轮播（Carousel）指标 -->
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
-            <!-- 轮播（Carousel）项目 -->
+                                                                       <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
                     <img src="~assets/img/global.jpg" alt="First slide">
@@ -63,7 +73,7 @@
                     <img src="~assets/img/global.jpg" alt="Third slide">
                 </div>
             </div>
-            <!-- 轮播（Carousel）导航 -->
+                                                                       <!-- 轮播（Carousel）导航 -->
             <a class="carousel-control left" href="#myCarousel"
                data-slide="prev">&lsaquo;
             </a>
@@ -101,7 +111,11 @@
                 }
             }
         },
-        computed: {},
+        computed: {
+            hasLogin(){
+                return this.$store.state.hasLogin;
+            }
+        },
         methods: {
             toggleShare(){
                 if (this.showShare) {
@@ -151,21 +165,29 @@
             .navbar-collapse {
                 position: relative;
                 .navbar-nav {
-                    width: 644px;
                     position: absolute;
                     left: 45%;
                     margin-left: -244px;
                     > li > a {
+                        padding-left: 25px;
+                        padding-right: 25px;
                         font-size: 16px;
                     }
                     .spinner {
                         width: 20px;
+                        margin-right: 20px;
                     }
                     .navbar-login {
-                        .btn {
-                            font-size: 14px;
-                            margin: 0;
-                            padding: 3px 18px;
+                        font-size: 14px;
+                        margin: 19px 5px;
+                        padding: 1px 15px;
+                        @media (max-width: 1199px) {
+                            font-size: 12px;
+                            padding: 1px 8px;
+                            margin: 13px 5px;
+                        }
+                        &:hover {
+                            color: #fff;
                         }
                     }
                 }
@@ -186,10 +208,10 @@
         }
     }
 
+    /*轮播*/
     .carousel-container {
         height: 100%;
-        padding-top: 80px;
-        &-inner {
+        .carousel-inner {
             height: 100%;
         }
         .carousel-indicators {
