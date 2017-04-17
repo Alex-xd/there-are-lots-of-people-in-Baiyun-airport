@@ -15,24 +15,63 @@
                     </div>
                     <div class="navbar-collapse collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
-                            <li :class="{active:showShare}">
-                                <a @click="toggleShare">共享平台</a>
+                            <li>
+                                <a href="javascript:void(0)" class="btn" data-toggle="dropdown">仓储管理</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)">货物记录(免费)</a></li>
+                                    <li><a href="javascript:void(0)">压力预测(免费)</a></li>
+                                    <li><a href="javascript:void(0)">推荐管理(免费)</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript:void(0)">建设规划(付费)</a></li>
+                                </ul>
                             </li>
                             <li>
-                                <a>我的仓储</a>
+                                <a href="javascript:void(0)" class="btn" data-toggle="dropdown">运输管理</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)">运输记录(免费)</a></li>
+                                    <li><a href="javascript:void(0)">车辆调配(免费)</a></li>
+                                    <li><a href="javascript:void(0)">推荐路径(免费)</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="javascript:void(0)">未来规划(付费)</a></li>
+                                </ul>
                             </li>
-                            <li :class="{active:showMyTrans}">
-                                <a @click="toggleMyTrans">我的运输</a>
+                            <li>
+                                <a href="javascript:void(0)" class="btn" data-toggle="dropdown">共享用呗</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)">仓库租用(免费)</a></li>
+                                    <li><a href="javascript:void(0)">仓库出租(免费)</a></li>
+                                    <li><a href="javascript:void(0)">货主寻车(免费)</a></li>
+                                    <li><a href="javascript:void(0)">车主寻货(免费)</a></li>
+                                    <li><a href="javascript:void(0)">共享拼仓(免费)</a></li>
+                                    <li><a href="javascript:void(0)">共享拼车(免费)</a></li>
+                                </ul>
                             </li>
 
                             <li>
-                                <router-link to="/main/myTransport">韧曦金服</router-link>
+                                <a href="javascript:void(0)" class="btn" data-toggle="dropdown">韧曦金服</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)">尊贵VIP</a></li>
+                                    <li><a href="javascript:void(0)">信用花呗</a></li>
+                                    <li><a href="javascript:void(0)">提现转账</a></li>
+                                    <li><a href="javascript:void(0)">积分兑换</a></li>
+                                    <li><a href="javascript:void(0)">我的钱包</a></li>
+                                    <li><a href="javascript:void(0)">保险理财</a></li>
+                                    <li><a href="javascript:void(0)">推荐工具</a></li>
+                                    <li><a href="javascript:void(0)">附近服务</a></li>
+                                </ul>
                             </li>
 
                             <li><a class="spinner">|</a></li>
 
                             <li v-if="hasLogin">
-                                <router-link to="/main/myTransport">账号设置</router-link>
+
+                                <a href="javascript:void(0)" class="btn" data-toggle="dropdown">账号设置</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)">账号登录</a></li>
+                                    <li><a href="javascript:void(0)">我的订单</a></li>
+                                    <li><a href="javascript:void(0)">账户管理</a></li>
+                                    <li><a href="javascript:void(0)">用户认证</a></li>
+                                </ul>
                             </li>
                         </ul>
                         <div class="slider shor slider-success"></div>
@@ -158,6 +197,10 @@
                 margin-top: 25px;
                 margin-bottom: 25px;
             }
+        }
+        /*新增*/
+        .btn{
+            margin: 0;
         }
         .dropdown-menu {
             a {
