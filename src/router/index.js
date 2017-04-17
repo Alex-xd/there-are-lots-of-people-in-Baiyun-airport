@@ -9,14 +9,21 @@ const login = r => require.ensure([], () => r(require('@/pages/login')), 'login'
 const signUp = r => require.ensure([], () => r(require('@/pages/login/signUp')), 'login');
 const signIn = r => require.ensure([], () => r(require('@/pages/login/signIn')), 'login');
 
-const sharePlatform = r => require.ensure([], () => r(require('@/pages/main/sharePlatform')), 'sharePlatform');
-const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentIn')), 'sharePlatform');
-const rentOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/rentOut')), 'sharePlatform');
+const rentIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/rentIn')), 'sharePlatform');
+const rentOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/rentOut')), 'sharePlatform');
+const searchCar = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/searchCar')), 'sharePlatform');
+const searchGoods = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/searchGoods')), 'sharePlatform');
+const shareDepot = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/shareDepot')), 'sharePlatform');
+const shareCar = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/shareCar')), 'sharePlatform');
 
-const transportIn = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportIn')), 'transport');
-const transportOut = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/storage/transportOut')), 'transport');
-const myTransport = r => require.ensure([], () => r(require('@/pages/main/myTransport')), 'transport');
-const transportInformation = r => require.ensure([], () => r(require('@/pages/main/myTransport/transportStore/transportInformation')), 'transport');
+
+const transportRecord = r => require.ensure([], () => r(require('@/pages/main/transportation/transportRecord')), 'transportation');
+const recommendPath = r => require.ensure([], () => r(require('@/pages/main/transportation/recommendPath')), 'transportation');
+
+const goodsRecord = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsRecord')), 'wareHouse');
+const constructionPlan = r => require.ensure([], () => r(require('@/pages/main/wareHouse/constructionPlan')), 'wareHouse');
+
+
 
 Vue.use(Router);
 
@@ -41,7 +48,7 @@ export default new Router({
                             component: signIn
                         },
                         {
-                            path: 'register',
+                            path: 'signUp',
                             component: signUp
                         }
                     ]
@@ -55,36 +62,46 @@ export default new Router({
                             path: '', // 轮播
                             component: carousel
 
+                        },{
+                            path: 'goodsRecord', //货物记录
+                            component: goodsRecord
+                        },{
+                            path:'constructionPlan', //建设规划
+                            component: constructionPlan
                         },
                         {
-                            path: 'sharePlatform', // 共享平台
-                            component: sharePlatform,
-                            meta: { requiresAuth: true }
+                            path: 'transportRecord',//运输记录
+                            component: transportRecord
                         },
                         {
-                            path: 'rentIn', // 仓储租用
+                            path: 'recommendPath', //推荐路径
+                            component: recommendPath
+                        },
+                        {
+                            path: 'rentIn',//仓库租用
                             component: rentIn
                         },
                         {
-                            path: 'rentOut', // 仓储出租
+                            path: 'rentOut',//仓库出租
                             component: rentOut
                         },
                         {
-                            path: 'transportIn', // 运输租用
-                            component: transportIn
+                            path: 'searchCar',//货主寻车
+                            component: searchCar
                         },
                         {
-                            path: 'transportOut', // 运输出租
-                            component: transportOut
+                            path: 'searchGoods',//车主寻货
+                            component: searchGoods
                         },
                         {
-                            path: 'myTransport',  //我的运输
-                            component: myTransport
+                            path: 'shareDepot',//共享拼仓
+                            component: shareDepot
                         },
                         {
-                            path: 'transportInformation', //运输匹配结果信息
-                            component: transportInformation
-                        }
+                            path: 'shareCar',//共享拼车
+                            component: shareCar
+                        },
+
                     ]
 
                 },

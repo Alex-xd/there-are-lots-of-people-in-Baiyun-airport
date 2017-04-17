@@ -18,19 +18,19 @@
                             <li>
                                 <a href="javascript:void(0)" class="btn" data-toggle="dropdown">仓储管理</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)">货物记录(免费)</a></li>
+                                    <li><router-link to="/main/goodsRecord">货物记录(免费)</router-link></li>
                                     <li><a href="javascript:void(0)">压力预测(免费)</a></li>
                                     <li><a href="javascript:void(0)">推荐管理(免费)</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="javascript:void(0)">建设规划(付费)</a></li>
+                                    <li><router-link to="/main/constructionPlan">建设规划(付费)</router-link></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0)" class="btn" data-toggle="dropdown">运输管理</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)">运输记录(免费)</a></li>
+                                    <li><router-link to="/main/transportRecord">运输记录(免费)</router-link></li>
                                     <li><a href="javascript:void(0)">车辆调配(免费)</a></li>
-                                    <li><a href="javascript:void(0)">推荐路径(免费)</a></li>
+                                    <li><router-link to="/main/recommendPath">推荐路径(免费)</router-link></li>
                                     <li class="divider"></li>
                                     <li><a href="javascript:void(0)">未来规划(付费)</a></li>
                                 </ul>
@@ -38,12 +38,12 @@
                             <li>
                                 <a href="javascript:void(0)" class="btn" data-toggle="dropdown">共享用呗</a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="javascript:void(0)">仓库租用(免费)</a></li>
-                                    <li><a href="javascript:void(0)">仓库出租(免费)</a></li>
-                                    <li><a href="javascript:void(0)">货主寻车(免费)</a></li>
-                                    <li><a href="javascript:void(0)">车主寻货(免费)</a></li>
-                                    <li><a href="javascript:void(0)">共享拼仓(免费)</a></li>
-                                    <li><a href="javascript:void(0)">共享拼车(免费)</a></li>
+                                    <li><router-link to="/main/rentIn">仓库租用(免费)</router-link></li>
+                                    <li><router-link to="/main/rentOut">仓库出租(免费)</router-link></li>
+                                    <li><router-link to="/main/searchCar">货主寻车(免费)</router-link></li>
+                                    <li><router-link to="/main/searchGoods">车主寻货(免费)</router-link></li>
+                                    <li><router-link to="/main/shareDepot">共享拼仓(免费)</router-link></li>
+                                    <li><router-link to="/main/shareCar">共享拼车(免费)</router-link></li>
                                 </ul>
                             </li>
 
@@ -80,7 +80,7 @@
             </div>
         </nav>
 
-        <keep-alive include="carousel">
+        <keep-alive>
             <router-view></router-view>
         </keep-alive>
     </div>
@@ -157,6 +157,7 @@
                     position: absolute;
                     left: 45%;
                     margin-left: -244px;
+                    /*font-weight: 100;*/
                     > li > a {
                         padding-left: 25px;
                         padding-right: 25px;
@@ -192,6 +193,7 @@
         /*新增*/
         .btn{
             margin: 0;
+            font-weight: 100;
         }
         .dropdown-menu {
             a {
@@ -202,7 +204,6 @@
             }
         }
     }
-
     .slide-enter,
     .slide-leave-active {
         transform: translate3d(-410px, 0, 0);
