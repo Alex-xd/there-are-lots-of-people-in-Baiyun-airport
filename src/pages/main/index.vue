@@ -80,26 +80,19 @@
             </div>
         </nav>
 
-        <router-view></router-view>
-
-        <section class="footer">
-            <div class="foot-tips">
-                <h2>{{footTips}}</h2>
-            </div>
-        </section>
+        <keep-alive include="carousel">
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 
 
 <script>
-    import 'assets/lib/fullpage/jquery.fullpage';
-
     export default {
         name: 'main',
         components: {},
         data() {
             return {
-                footTips: '欢迎使用Exp-Solver物流智能共享平台',
                 showShare: false,
                 showMyTrans: false,
                 btnActive: {
@@ -138,8 +131,6 @@
 </script>
 
 <style lang="scss" scoped>
-    @import '~assets/lib/fullpage/jquery.fullpage.css';
-
     .main-wrapper {
         height: 100%;
     }
@@ -208,29 +199,6 @@
             }
             i {
                 margin-top: -3px;
-            }
-        }
-    }
-
-    .footer {
-        height: 60px;
-        overflow: hidden;
-        z-index: 101;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        background: rgba(0, 0, 0, .3);
-        .foot-tips {
-            width: 1200px;
-            height: 100%;
-            margin: 0 auto;
-            h2 {
-                font-size: 18px;
-                color: #fff;
-                height: 60px;
-                line-height: 60px;
-                margin: 0;
             }
         }
     }
