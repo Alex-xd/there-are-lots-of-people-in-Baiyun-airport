@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <!--<keep-alive>-->
-            <transition name="slide">
+            <transition>
                 <router-view></router-view>
             </transition>
         <!--</keep-alive>-->
@@ -37,17 +37,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .slide-enter,
-    .slide-leave-active {
-        transform: translate3d(-410px, 0, 0) !important;
-    }
-
-    .slide-enter-active,
-    .slide-leave-active {
-        transition: all 1s ease-in-out !important;
-    }
-
-
     .wrapper {
         background: #50a3a2;
         background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
