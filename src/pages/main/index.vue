@@ -32,10 +32,6 @@
                             <li>
                                 <router-link to="/main/myTransport">账号设置</router-link>
                             </li>
-                            <li class="navbar-login">
-                                <router-link to="/login" class="btn btn-raised btn-info">登录</router-link>
-                                <router-link to="/login/register" class="btn btn-raised btn-default">注册</router-link>
-                            </li>
                         </ul>
                         <div class="slider shor slider-success"></div>
                     </div>
