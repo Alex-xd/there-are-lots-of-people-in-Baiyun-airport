@@ -85,6 +85,6 @@ export default new Router({
             ]
         },
     ],
-    mode: 'hash',
+    mode: 'history',
     strict: process.env.NODE_ENV !== 'production'
 });
