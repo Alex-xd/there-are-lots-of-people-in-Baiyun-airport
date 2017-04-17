@@ -88,6 +88,7 @@
             max-width: 1200px;
             height: 100%;
             margin: 0 auto;
+            text-align: center;
             h2 {
                 font-size: 18px;
                 color: #fff;
