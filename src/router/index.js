@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import App from '@/App';
 
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
+const carousel = r => require.ensure([], () => r(require('@/pages/main/carousel')), 'main');
 
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login');
 const signUp = r => require.ensure([], () => r(require('@/pages/login/signUp')), 'login');
@@ -50,6 +51,11 @@ export default new Router({
                     path: '/main',
                     component: main,
                     children: [
+                        {
+                            path: '', // 轮播
+                            component: carousel
+
+                        },
                         {
                             path: 'sharePlatform', // 共享平台
                             component: sharePlatform,

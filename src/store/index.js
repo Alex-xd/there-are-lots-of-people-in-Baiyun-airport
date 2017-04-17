@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        hasLogin: false
+        hasLogin: true
     },
     getters,
     mutations,
