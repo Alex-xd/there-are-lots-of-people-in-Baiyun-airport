@@ -2,7 +2,7 @@
     <div class="well">
         <form class="form-horizontal">
             <fieldset>
-                <legend class="platform">信息注册平台</legend>
+                <legend class="platform">注册</legend>
                 <div class="form-group">
                     <label for="UserName" class="col-md-2 control-label">用户姓名</label>
                     <div class="col-md-10">
@@ -22,13 +22,13 @@
                             <label>
                                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
                                 个人
-                              </label>
+                            </label>
                         </div>
                         <div class="radio ">
                             <label>
                                 <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
                                 企业
-                              </label>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -69,13 +69,13 @@
                             <label>
                                 <input type="radio" name="optionsRadio" id="optionsRadio1" value="option1" checked="">
                                 免费共享版
-                              </label>
+                            </label>
                         </div>
                         <div class="radio ">
                             <label>
                                 <input type="radio" name="optionsRadio" id="optionsRadio2" value="option2">
                                 专属定制版
-                              </label>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -83,9 +83,9 @@
                 <div class="form-group signIn">
                     <div>
                         <button type="button" class="btn btn-primary" @click="signIn">注册</button>
+                        <button type="button" class="btn btn-default" @click="signIn">登录</button>
                     </div>
                 </div>
-
 
             </fieldset>
         </form>
@@ -114,19 +114,28 @@
         transform: translate(-50%, -50%);
         z-index: 999999;
     }
+
     .platform {
         width: 440px;
     }
-    .form-group{
+
+    .form-group {
         margin-top: 10px;
     }
-    .radio{
+
+    /*.col-md-2 .control-label .versionCho {*/
+        /*transition: all .4s;*/
+    /*}*/
+
+    .radio {
         display: inline;
     }
-    .versionCho{
+
+    .versionCho {
         margin: 0 !important;
     }
-    .signIn{
+
+    .signIn {
         text-align: center;
     }
 

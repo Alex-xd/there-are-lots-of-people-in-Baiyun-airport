@@ -1,8 +1,10 @@
 <template>
     <div class="wrapper">
-        <transition name="slide">
-            <router-view></router-view>
-        </transition>
+        <!--<keep-alive>-->
+            <transition name="slide">
+                <router-view></router-view>
+            </transition>
+        <!--</keep-alive>-->
 
         <!-- 动画 -->
         <ul class="bg-bubbles">

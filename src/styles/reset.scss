@@ -1,6 +1,6 @@
 /**
  * css reset
- * 
+ *
  * @author ZhangBoyuan
  */
 html,
@@ -95,7 +95,8 @@ html {
 }
 
 html,
-body {
+body,
+#app {
     height: 100%;
     position: relative;
     -webkit-overflow-scrolling: touch;

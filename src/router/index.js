@@ -28,7 +28,22 @@ export default new Router({
                 // 地址为空时跳转主页面
                 {
                     path: '',
-                    redirect: '/main'
+                    redirect: '/login'
+                },
+                // 登录注册页面
+                {
+                    path: '/login',
+                    component: login,
+                    children: [
+                        {
+                            path: '',
+                            component: signIn
+                        },
+                        {
+                            path: 'register',
+                            component: signUp
+                        }
+                    ]
                 },
                 // 主页面
                 {
@@ -67,24 +82,10 @@ export default new Router({
                     ]
 
                 },
-                // 登录注册页面
-                {
-                    path: '/login',
-                    component: login,
-                    children: [
-                        {
-                            path: '',
-                            component: signIn
-                        },
-                        {
-                            path: 'register',
-                            component: signUp
-                        }
-                    ]
-                },
+
             ]
         },
     ],
-    mode: 'hash',
+    mode: 'history',
     strict: process.env.NODE_ENV !== 'production'
 });
