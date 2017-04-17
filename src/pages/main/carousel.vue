@@ -8,13 +8,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="~assets/img/global.jpg">
+                    <img src="~assets/img/global1.jpg">
                 </div>
                 <div class="item">
-                    <img src="~assets/img/global.jpg">
+                    <img src="~assets/img/global2.jpg">
                 </div>
                 <div class="item">
-                    <img src="~assets/img/global.jpg">
+                    <img src="~assets/img/global3.jpg">
                 </div>
             </div>
             <a class="carousel-control left" href="#myCarousel"
