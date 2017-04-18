@@ -41,7 +41,7 @@
                 this.$router.push("/main");
             },
             signUp(){
-                this.$router.push('/login/signUp');
+                this.$router.push("/login/signUp");
             }
         }
     }

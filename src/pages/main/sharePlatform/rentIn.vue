@@ -1,5 +1,5 @@
 <template>
-    <mainPage>
+    <popupWindow>
         <template slot="breadcrumb">
             <li class="active">仓储租用</li>
         </template>
@@ -7,16 +7,16 @@
         <template slot="main">
 
         </template>
-    </mainPage>
+    </popupWindow>
 </template>
 
 <script>
-    import mainPage from '@/components/mainPage';
+    import popupWindow from '@/components/popupWindow';
 
     export default {
         name: 'rentIn',
         components: {
-            mainPage
+           popupWindow
         },
         data(){
             return {}

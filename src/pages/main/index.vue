@@ -84,13 +84,18 @@
             <router-view></router-view>
         </keep-alive>
     </div>
+
 </template>
 
 
 <script>
+//    import rentIn from '@/pages/sharePlatform/rentIn';
+
     export default {
         name: 'main',
-        components: {},
+        components: {
+//            rentIn
+        },
         data() {
             return {
                 showShare: false,
