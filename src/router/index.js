@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import App from '@/App';
+import auth from '@/utils/auth';
 
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
 const carousel = r => require.ensure([], () => r(require('@/pages/main/carousel')), 'main');
@@ -24,10 +25,9 @@ const goodsRecord = r => require.ensure([], () => r(require('@/pages/main/wareHo
 const constructionPlan = r => require.ensure([], () => r(require('@/pages/main/wareHouse/constructionPlan')), 'wareHouse');
 
 
-
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
     routes: [
         {
             path: '/',
@@ -62,11 +62,11 @@ export default new Router({
                             path: '', // 轮播
                             component: carousel
 
-                        },{
+                        }, {
                             path: 'goodsRecord', //货物记录
                             component: goodsRecord
-                        },{
-                            path:'constructionPlan', //建设规划
+                        }, {
+                            path: 'constructionPlan', //建设规划
                             component: constructionPlan
                         },
                         {
@@ -112,3 +112,23 @@ export default new Router({
     mode: 'history',
     strict: process.env.NODE_ENV !== 'production'
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // 如果这个页面要求登录，检查是否登录了
+        // 如果未登录，则跳转到登录页面
+        if (!auth.checkIfLoggedIn()) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // 确保一定要调用 next()
+    }
+});
+
+export default router;
+

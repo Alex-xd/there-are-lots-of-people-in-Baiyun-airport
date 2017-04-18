@@ -24,7 +24,7 @@
 <style lang="scss" scoped>
     .panel-container {
         width:100%;
-        margin-top: 10px;
+        padding-top: 10px;
         .breadcrumb {
             margin-bottom: 15px
         }

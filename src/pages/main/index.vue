@@ -102,23 +102,20 @@
 
         <router-view></router-view>
     </div>
+
 </template>
 
 
 <script>
     import { LOG_OUT } from '@/store/mutation-types';
+
     export default {
         name: 'main',
-        components: {},
+        components: {
+        },
         data() {
             return {
-                showShare: false,
-                showMyTrans: false,
-                btnActive: {
-                    a: 0,
-                    b: 0,
-                    c: 1
-                }
+                isShow: true
             }
         },
         computed: {
@@ -144,16 +141,19 @@
     .navbar-wrapper {
         width: 100%;
         background-color: #fff;
+        position: absolute;
+        top: 0;
+        z-index: 9999;
         .navbar {
             max-width: 1200px;
             margin: 0 auto;
             color: #333;
             background-color: #fff !important;
-            .navbar-brand {
+            &-brand {
                 font-size: 1.5em;
                 font-weight: 500;
             }
-            .navbar-collapse {
+            &-collapse {
                 position: relative;
                 &[aria-expanded=true] {
                     .navbar-nav .spinner {
@@ -178,23 +178,14 @@
                             font-size: 14px;
                             margin: 19px 5px;
                             padding: 1px 15px;
-                            /*@media (max-width: 1199px) {*/
-                            /*font-size: 12px;*/
-                            /*padding: 1px 8px;*/
-                            /*margin: 13px 5px;*/
-                            /*}*/
                             &:hover {
                                 color: #fff;
                             }
                         }
                     }
-                    /*.spinner {*/
-                    /*display: none;*/
-                    /*}*/
                 }
             }
         }
-        /*新增*/
         .btn {
             margin: 0;
             font-weight: 100;
@@ -207,6 +198,10 @@
                 margin-top: -3px;
             }
         }
+    }
+
+    .show {
+        display: none;
     }
 
     .slide-enter,

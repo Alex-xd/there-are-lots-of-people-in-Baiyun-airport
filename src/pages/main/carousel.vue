@@ -59,7 +59,7 @@
             li {
                 margin: 0 5px;
             }
-            bottom: 60px;
+            bottom: 110px;
         }
         .item img {
             width: 100%;

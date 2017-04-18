@@ -16,15 +16,12 @@
                         <input type="password" class="form-control" id="inputPassword" placeholder="密码">
                     </div>
                 </div>
-
                 <div class="form-group">
                     <div class="col-md-10 col-md-offset-2">
                         <button type="button" class="btn btn-default" @click="signIn">登录</button>
                         <button type="submit" class="btn btn-primary" @click="signUp">注册</button>
                     </div>
                 </div>
-
-
             </fieldset>
         </form>
     </div>
@@ -46,7 +43,7 @@
                 // else 弹窗
             },
             signUp(){
-                this.$router.push('/login/signUp');
+                this.$router.push("/login/signUp");
             }
         }
     }
@@ -58,7 +55,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 99999;
+        z-index: 9999;
     }
 
     .platform {
