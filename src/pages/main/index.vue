@@ -82,7 +82,7 @@
 
                             <li><a class="spinner">|</a></li>
 
-                            <li v-if="hasLogin">
+                            <li>
                                 <a class="btn" data-toggle="dropdown">账号设置</a>
                                 <ul class="dropdown-menu">
                                     <li><a>账号登录</a></li>
@@ -98,6 +98,7 @@
             </div>
         </nav>
 
+
         <router-view></router-view>
     </div>
 
@@ -105,45 +106,20 @@
 
 
 <script>
-//    import rentIn from '@/pages/sharePlatform/rentIn';
 
     export default {
         name: 'main',
         components: {
-//            rentIn
         },
         data() {
             return {
-                showShare: false,
-                showMyTrans: false,
-                btnActive: {
-                    a: 0,
-                    b: 0,
-                    c: 1
-                }
+                isShow: true
             }
         },
-        computed: {
-            hasLogin(){
-                return this.$store.state.hasLogin;
-            }
-        },
+        computed: {},
         methods: {
-            toggleShare(){
-                if (this.showShare) {
-                    this.$router.push('/main');
-                } else {
-                    this.$router.push('/main/sharePlatform');
-                }
-                this.showShare = !this.showShare;
-            },
-            toggleMyTrans(){
-                if (this.showMyTrans) {
-                    this.$router.push('/main');
-                } else {
-                    this.$router.push('/main/myTransport');
-                }
-                this.showMyTrans = !this.showMyTrans;
+            toggleShow(){
+                this.isShow = !this.isShow;
             }
         },
         mounted(){
@@ -222,6 +198,10 @@
                 margin-top: -3px;
             }
         }
+    }
+
+    .show {
+        display: none;
     }
 
     .slide-enter,
