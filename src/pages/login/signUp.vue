@@ -82,7 +82,8 @@
 
                 <div class="form-group signIn">
                     <div>
-                        <button type="button" class="btn btn-primary" @click="signIn">注册</button>
+                        <a  class="btn btn-raised btn-primary" @click="signIn">注册</a>
+
                         <!--<button type="button" class="btn btn-default" @click="signIn">登录</button>-->
                     </div>
                 </div>
@@ -138,5 +139,12 @@
     .signIn {
         text-align: center;
     }
+
+    @media (min-width: 768px){
+        .form-horizontal .control-label {
+            padding-top: 0px;
+        }
+    }
+
 
 </style>

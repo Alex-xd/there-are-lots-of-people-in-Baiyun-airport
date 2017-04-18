@@ -32,6 +32,7 @@
 
     .well {
         background-color: #fff;
+        min-width: 520px;
     }
 
 </style>
