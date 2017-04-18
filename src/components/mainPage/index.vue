@@ -1,6 +1,6 @@
 <template>
-    <div class="panel-container">
-        <div class="col-md-12">
+    <!--<div class="panel-container">-->
+        <div class="col-md-12 panel-container">
             <ul class="breadcrumb">
                 <li><router-link to="/main">首页</router-link></li>
                 <slot name="breadcrumb"></slot>
@@ -9,7 +9,7 @@
             <slot name="main"></slot>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </template>
 
 <script>
@@ -23,7 +23,7 @@
 
 <style lang="scss" scoped>
     .panel-container{
-        margin-top: 60px;
+        margin-top: 70px;
     }
     .well{
         height: 650px;
