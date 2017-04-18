@@ -31,6 +31,8 @@
 </template>
 
 <script>
+    import { LOG_IN } from '@/store/mutation-types';
+
     export default {
         name: 'signIn',
         data() {
@@ -38,7 +40,10 @@
         },
         methods: {
             signIn(){
+                // if(登陆成功)
+                this.$store.commit(LOG_IN);
                 this.$router.push("/main");
+                // else 弹窗
             },
             signUp(){
                 this.$router.push('/login/signUp');

@@ -85,12 +85,14 @@
                             <li v-if="hasLogin">
                                 <a class="btn" data-toggle="dropdown">账号设置</a>
                                 <ul class="dropdown-menu">
-                                    <li><a>账号登录</a></li>
                                     <li><a>我的订单</a></li>
                                     <li><a>账户管理</a></li>
                                     <li><a>用户认证</a></li>
+                                    <li class="divider"></li>
+                                    <li><a @click="logout">退出登录</a></li>
                                 </ul>
                             </li>
+                            <li v-else><router-link to="/login">登录</router-link></li>
                         </ul>
                         <div class="slider shor slider-success"></div>
                     </div>
@@ -104,6 +106,7 @@
 
 
 <script>
+    import { LOG_OUT } from '@/store/mutation-types';
     export default {
         name: 'main',
         components: {},
@@ -124,21 +127,8 @@
             }
         },
         methods: {
-            toggleShare(){
-                if (this.showShare) {
-                    this.$router.push('/main');
-                } else {
-                    this.$router.push('/main/sharePlatform');
-                }
-                this.showShare = !this.showShare;
-            },
-            toggleMyTrans(){
-                if (this.showMyTrans) {
-                    this.$router.push('/main');
-                } else {
-                    this.$router.push('/main/myTransport');
-                }
-                this.showMyTrans = !this.showMyTrans;
+            logout(){
+                this.$store.commit(LOG_OUT);
             }
         },
         mounted(){
