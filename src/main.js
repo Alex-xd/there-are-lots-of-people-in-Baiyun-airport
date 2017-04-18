@@ -37,6 +37,7 @@ import '../node_modules/bootstrap-material-design/dist/css/ripples.min.css';
 import '../node_modules/bootstrap-material-design/dist/js/material.min';
 import '../node_modules/bootstrap-material-design/dist/js/ripples.min';
 import globalConfig from '@/utils/globalConfig';
+import dialog from '@/utils/dialog';
 import FastClick from 'fastclick'
 
 if ('addEventListener' in document) {
@@ -45,10 +46,9 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-// 导入全局配置
+// 导入全局配置 & 安装插件
 Vue.use(globalConfig);
-
-Vue.config.productionTip = false;
+Vue.use(dialog);
 
 /* eslint-disable no-new */
 new Vue({

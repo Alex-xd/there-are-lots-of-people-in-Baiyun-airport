@@ -24,26 +24,33 @@
                 </div>
             </fieldset>
         </form>
+        <div v-if="showError" class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" @click="closeError">×</button>
+            <strong>登录失败！请检查用户名和密码</strong>
+        </div>
     </div>
 </template>
 
 <script>
-    import { LOG_IN } from '@/store/mutation-types';
 
     export default {
         name: 'signIn',
         data() {
-            return {}
+            return {
+                showError: false,
+            }
         },
         methods: {
             signIn(){
-                // if(登陆成功)
-                this.$store.commit(LOG_IN);
+                this.$auth.login();
                 this.$router.push("/main");
-                // else 弹窗
+
             },
             signUp(){
                 this.$router.push("/login/signUp");
+            },
+            closeError(){
+                this.showError = false;
             }
         }
     }
@@ -62,5 +69,10 @@
         width: 440px;
     }
 
-
+    .alert {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 </style>

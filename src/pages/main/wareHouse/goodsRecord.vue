@@ -1,23 +1,24 @@
 <template>
-    <mainPage>
+    <mainPage :showWrapper=false>
         <template slot="breadcrumb">
             <li class="active">货物记录</li>
         </template>
 
         <template slot="main">
-            <div class="container">
-                <template v-for="item in items">
-                    <div class="jumbotron">
+            <template v-for="item in items">
+                <div class="panel panel-default">
+                    <div class="panel-body">
                         <p>运输编号: {{item.num}}</p>
                         <p>发货时间：{{item.time | unixToTime}}</p>
                         <p>货物量：{{item.quantity}}</p>
                         <p>匹配结果：
-                            <router-link to="/main/transportInformation" class="btn btn-primary btn-lg">成功(查看详细信息)
+                            <router-link :to="{path:'/main/goodsRecord/goodsDetail',query:{id:item.num}}"
+                                         class="btn btn-primary btn-lg">成功(查看详细信息)
                             </router-link>
                         </p>
                     </div>
-                </template>
-            </div>
+                </div>
+            </template>
         </template>
     </mainPage>
 </template>
@@ -28,7 +29,7 @@
     import axios from 'axios';
 
     export default {
-        name: 'myTransport',
+        name: 'goodsRecord',
         components: {
             mainPage
         },
@@ -68,20 +69,6 @@
 
 <style lang="scss" scoped>
     .container {
-        width: 400px;
-        height: 774px;
-        overflow: auto;
-    }
-
-    .jumbotron {
-        background: none;
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px solid #ececec;
-        p {
-            /*margin: 0;*/
-            font-size: 18px;
-        }
     }
 </style>
 

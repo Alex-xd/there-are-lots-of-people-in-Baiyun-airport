@@ -11,7 +11,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="javascript:;">EXP-SOLVER</a>
+                        <router-link to="/main" class="navbar-brand">EXP-SOLVER</router-link>
                     </div>
                     <div class="navbar-collapse collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
@@ -38,6 +38,9 @@
                                     <li><a>车辆调配(免费)</a></li>
                                     <li>
                                         <router-link to="/main/recommendPath">推荐路径(免费)</router-link>
+                                    </li>
+                                    <li>
+                                        <router-link to="/main">往返综合业务(免费)</router-link>
                                     </li>
                                     <li class="divider"></li>
                                     <li><a>未来规划(付费)</a></li>
@@ -92,7 +95,9 @@
                                     <li><a @click="logout">退出登录</a></li>
                                 </ul>
                             </li>
-                            <li v-else><router-link to="/login">登录</router-link></li>
+                            <li v-else>
+                                <router-link to="/login">登录</router-link>
+                            </li>
                         </ul>
                         <div class="slider shor slider-success"></div>
                     </div>
@@ -100,19 +105,20 @@
             </div>
         </nav>
 
-        <router-view></router-view>
+        <transition name="fadein">
+            <router-view></router-view>
+        </transition>
     </div>
 
 </template>
 
 
 <script>
-    import { LOG_OUT } from '@/store/mutation-types';
+    import { LOG_IN } from '@/store/mutation-types';
 
     export default {
         name: 'main',
-        components: {
-        },
+        components: {},
         data() {
             return {
                 isShow: true
@@ -125,10 +131,13 @@
         },
         methods: {
             logout(){
-                this.$store.commit(LOG_OUT);
+                this.$auth.logout();
             }
         },
         mounted(){
+            if (this.$auth.checkIfLoggedIn()) {
+                this.$store.commit(LOG_IN)
+            }
         }
     }
 </script>
@@ -154,33 +163,32 @@
                 font-weight: 500;
             }
             &-collapse {
-                position: relative;
                 &[aria-expanded=true] {
                     .navbar-nav .spinner {
                         display: none;
                     }
                 }
                 .navbar-nav {
+                    .spinner {
+                        width: 20px;
+                    }
+                    .navbar-login {
+                        &:first-child {
+                            margin-left: 20px;
+                        }
+                        font-size: 14px;
+                        margin: 19px 5px;
+                        padding: 1px 15px;
+                        &:hover {
+                            color: #fff;
+                        }
+                    }
                     @media (min-width: 768px) {
                         float: right;
                         > li > a {
                             padding-left: 20px;
                             padding-right: 20px;
                             font-size: 16px;
-                        }
-                        .spinner {
-                            width: 20px;
-                        }
-                        .navbar-login {
-                            &:first-child {
-                                margin-left: 20px;
-                            }
-                            font-size: 14px;
-                            margin: 19px 5px;
-                            padding: 1px 15px;
-                            &:hover {
-                                color: #fff;
-                            }
                         }
                     }
                 }
@@ -204,13 +212,12 @@
         display: none;
     }
 
-    .slide-enter,
-    .slide-leave-active {
-        transform: translate3d(-410px, 0, 0);
+    .fadein-enter {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
     }
 
-    .slide-enter-active,
-    .slide-leave-active {
-        transition: all .3s ease-in-out;
+    .fadein-enter-active {
+        transition: all .6s ease-in-out;
     }
 </style>

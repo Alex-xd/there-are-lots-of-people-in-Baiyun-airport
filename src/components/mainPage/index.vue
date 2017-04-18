@@ -6,25 +6,30 @@
             </li>
             <slot name="breadcrumb"></slot>
         </ul>
-        <div class="well">
+
+        <div class="well" v-if="showWrapper">
             <slot name="main"></slot>
         </div>
+        <slot v-else name="main"></slot>
     </div>
 </template>
 
 <script>
     export default {
         name: 'mainPageBaseComponent',
-        data() {
-            return {}
+        props: {
+            showWrapper: {
+                type: Boolean,
+                default: true
+            }
         }
     }
 </script>
 
 <style lang="scss" scoped>
     .panel-container {
-        width:100%;
-        padding-top: 10px;
+        width: 100%;
+        padding-top: 70px;
         .breadcrumb {
             margin-bottom: 15px
         }

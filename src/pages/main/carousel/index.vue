@@ -49,6 +49,7 @@
 <style lang="scss" scoped>
     /*轮播*/
     .carousel-container {
+        transition: none !important; /*去除组件加载过度*/
         height: 100%;
         .carousel,
         .carousel-inner,
@@ -59,7 +60,7 @@
             li {
                 margin: 0 5px;
             }
-            bottom: 110px;
+            bottom: 60px;
         }
         .item img {
             width: 100%;

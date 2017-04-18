@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" :class="{active:isActive}">
+    <div class="modal" :class="{show:show}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -9,7 +9,7 @@
                     <h4 class="modal-title">运输详细信息</h4>
                 </div>
                 <div class="modal-body">
-                    <p>运输编号：{{item.numCode}}</p>
+                    <p>运输编号：{{item.number_code}}</p>
                     <p>开始时间：{{item.startTime | unixToTime}}</p>
                     <p>结束时间: {{item.endTime | unixToTime}}</p>
                     <p>货物量：{{item.quantity}}</p>
@@ -20,7 +20,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" @click="changeStore">关闭</button>
                     <button type="button" class="btn btn-primary">
-                        <router-link to="/main/myTransport">返回</router-link>
+                        <router-link to="/main/transportRecord">返回</router-link>
                     </button>
                 </div>
             </div>
@@ -35,9 +35,9 @@
         name: '',
         data() {
             return {
-                isActive: true,
+                show: true,
                 item: {
-                    numCode: 0,
+                    number_code: 0,
                     startTime: 14483000000,
                     endTime: 13245345436,
                     quantity: 40,
@@ -49,24 +49,18 @@
         },
         methods: {
             changeStore() {
-                this.isActive = !this.isActive;
+                this.show = !this.show;
             }
         },
-//        mounted(){
-//            // 从服务器拉取数据
-//            axois.get('/list_vechileinfos').then(rsp => {
-//                this.item = rsp.data;
-//            })
-//        }
+        mounted(){
+            // TODO:完善
+//            this.$API.list_vechileinfos({number_code:this.$route.params.number_code}).then()
+        }
     }
 
 </script>
 
 <style lang="scss" scoped>
-    .active {
-        display: block;
-    }
-
     .modal-dialog {
         margin: 150px auto;
     }

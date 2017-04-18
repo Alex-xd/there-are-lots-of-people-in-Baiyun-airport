@@ -3,8 +3,9 @@ import Router from 'vue-router';
 import App from '@/App';
 import auth from '@/utils/auth';
 
+// 按chunk分块
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
-const carousel = r => require.ensure([], () => r(require('@/pages/main/carousel')), 'main');
+const carousel = r => require.ensure([], () => r(require('@/pages/main/carousel/index')), 'main');
 
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login');
 const signUp = r => require.ensure([], () => r(require('@/pages/login/signUp')), 'login');
@@ -17,11 +18,12 @@ const searchGoods = r => require.ensure([], () => r(require('@/pages/main/shareP
 const shareDepot = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/shareDepot')), 'sharePlatform');
 const shareCar = r => require.ensure([], () => r(require('@/pages/main/sharePlatform/shareCar')), 'sharePlatform');
 
-
 const transportRecord = r => require.ensure([], () => r(require('@/pages/main/transportation/transportRecord')), 'transportation');
+const transportDetail = r => require.ensure([], () => r(require('@/pages/main/transportation/transportDetail/index')), 'transportation');
 const recommendPath = r => require.ensure([], () => r(require('@/pages/main/transportation/recommendPath')), 'transportation');
 
 const goodsRecord = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsRecord')), 'wareHouse');
+const goodsDetail = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsDetail/index')), 'wareHouse');
 const constructionPlan = r => require.ensure([], () => r(require('@/pages/main/wareHouse/constructionPlan')), 'wareHouse');
 
 
@@ -62,44 +64,70 @@ const router = new Router({
                             path: '', // 轮播
                             component: carousel
 
-                        }, {
-                            path: 'goodsRecord', //货物记录
-                            component: goodsRecord
-                        }, {
-                            path: 'constructionPlan', //建设规划
-                            component: constructionPlan
-                        },
-                        {
-                            path: 'transportRecord',//运输记录
-                            component: transportRecord
-                        },
-                        {
-                            path: 'recommendPath', //推荐路径
-                            component: recommendPath
                         },
                         {
                             path: 'rentIn',//仓库租用
-                            component: rentIn
+                            component: rentIn,
+                            meta: { requireLogin: true }
                         },
                         {
                             path: 'rentOut',//仓库出租
-                            component: rentOut
+                            component: rentOut,
+                            meta: { requireLogin: true }
                         },
                         {
                             path: 'searchCar',//货主寻车
-                            component: searchCar
+                            component: searchCar,
+                            meta: { requireLogin: true }
                         },
                         {
                             path: 'searchGoods',//车主寻货
-                            component: searchGoods
+                            component: searchGoods,
+                            meta: { requireLogin: true }
+                        },
+                        {
+                            path: 'goodsRecord', //货物记录
+                            component: goodsRecord,
+                            meta: { requireLogin: true },
+                            children: [
+                                {
+                                    path:'goodsDetail',
+                                    component: goodsDetail,
+                                    meta: { requireLogin: true }
+                                }
+                            ]
+                        },
+                        {
+                            path: 'transportRecord',//运输记录
+                            component: transportRecord,
+                            meta: { requireLogin: true },
+                            children: [
+                                {
+                                    path:'transportDetail',
+                                    component: transportDetail,
+                                    meta: { requireLogin: true }
+                                }
+                            ]
+                        },
+                        {
+                            path: 'constructionPlan', //建设规划
+                            component: constructionPlan,
+                            meta: { requireLogin: true }
+                        },
+                        {
+                            path: 'recommendPath', //推荐路径
+                            component: recommendPath,
+                            meta: { requireLogin: true }
                         },
                         {
                             path: 'shareDepot',//共享拼仓
-                            component: shareDepot
+                            component: shareDepot,
+                            meta: { requireLogin: true }
                         },
                         {
                             path: 'shareCar',//共享拼车
-                            component: shareCar
+                            component: shareCar,
+                            meta: { requireLogin: true }
                         },
 
                     ]
@@ -109,15 +137,15 @@ const router = new Router({
             ]
         },
     ],
-    mode: 'history',
+    mode: 'hash',
     strict: process.env.NODE_ENV !== 'production'
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        // 如果这个页面要求登录，检查是否登录了
+    if (to.matched.some(record => record.meta.requireLogin)) {
+        // 如果这个页面要求登录，则检查是否登录了
         // 如果未登录，则跳转到登录页面
-        if (!auth.checkIfLoggedIn()) {
+        if (!auth.checkIfLoggedIn()) {// TODO: 保存上一次请求的url，登陆后直接跳转过去
             next({
                 path: '/login',
                 query: { redirect: to.fullPath }
@@ -126,7 +154,7 @@ router.beforeEach((to, from, next) => {
             next()
         }
     } else {
-        next() // 确保一定要调用 next()
+        next()
     }
 });
 

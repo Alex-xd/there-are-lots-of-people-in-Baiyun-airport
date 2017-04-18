@@ -1,25 +1,28 @@
 <template>
-    <mainPage>
-        <template slot="breadcrumb">
-            <li class="active">运输记录</li>
-        </template>
+    <div>
+        <mainPage :showWrapper=false>
+            <template slot="breadcrumb">
+                <li class="active">运输记录</li>
+            </template>
 
-        <template slot="main">
-            <div class="container">
+            <template slot="main">
                 <template v-for="item in items">
-                    <div class="jumbotron">
-                        <p>运输编号: {{item.num}}</p>
-                        <p>发货时间：{{item.time | unixToTime}}</p>
-                        <p>货物量：{{item.quantity}}</p>
-                        <p>匹配结果：
-                            <router-link to="/main/transportInformation" class="btn btn-primary btn-lg">成功(查看详细信息)
-                            </router-link>
-                        </p>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>运输编号: {{item.number_code}}</p>
+                            <p>发货时间：{{item.time | unixToTime}}</p>
+                            <p>货物量：{{item.quantity}}</p>
+                            <p>匹配结果：
+                                <router-link :to="{path:'/main/transportRecord/transportDetail'}" class="btn btn-primary btn-lg">成功(查看详细信息)</router-link>
+                               <!--<a class="btn btn-primary btn-lg" @click="showDetail(item.number_code)">成功(查看详细信息)</a>-->
+                            </p>
+                        </div>
                     </div>
                 </template>
-            </div>
-        </template>
-    </mainPage>
+            </template>
+        </mainPage>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -28,7 +31,7 @@
     import axios from 'axios';
 
     export default {
-        name: 'myTransport',
+        name: 'transportRecord',
         components: {
             mainPage
         },
@@ -57,6 +60,14 @@
                 ]
             }
         },
+        methods: {
+//            showDetail(number_code){
+//                this.$showDialog({
+//                    title:'运输详细信息',
+//
+//                })
+//            }
+        },
 //        mounted(){
 //            // 从服务器拉取数据
 //            axois.get('/list_vechileinfos').then(rsp => {
@@ -67,21 +78,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .container {
-        width: 400px;
-        height: 774px;
-        overflow: auto;
-    }
 
-    .jumbotron {
-        background: none;
-        margin: 0;
-        padding: 0;
-        border-bottom: 1px solid #ececec;
-        p {
-            /*margin: 0;*/
-            font-size: 18px;
-        }
-    }
 </style>
 
