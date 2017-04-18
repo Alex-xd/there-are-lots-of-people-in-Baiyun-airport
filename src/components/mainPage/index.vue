@@ -1,6 +1,6 @@
 <template>
     <!--<div class="panel-container">-->
-        <div class="col-md-12 panel-container">
+        <div class="col-md-11 panel-container">
             <ul class="breadcrumb">
                 <li><router-link to="/main">首页</router-link></li>
                 <slot name="breadcrumb"></slot>
@@ -23,7 +23,9 @@
 
 <style lang="scss" scoped>
     .panel-container{
-        margin-top: 70px;
+        margin-top: 75px;
+        left: 50%;
+        transform: translateX(-50%);
     }
     .well{
         height: 650px;

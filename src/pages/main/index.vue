@@ -155,7 +155,7 @@
                 position: relative;
                 .navbar-nav {
                     position: absolute;
-                    left: 45%;
+                    right: 0;
                     margin-left: -244px;
                     /*font-weight: 100;*/
                     > li > a {
