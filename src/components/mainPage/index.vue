@@ -1,15 +1,15 @@
 <template>
-    <!--<div class="panel-container">-->
-        <div class="col-md-11 panel-container">
-            <ul class="breadcrumb">
-                <li><router-link to="/main">首页</router-link></li>
-                <slot name="breadcrumb"></slot>
-            </ul>
-            <div class="well">
+    <div class="col-md-11 panel-container">
+        <ul class="breadcrumb">
+            <li>
+                <router-link to="/main">首页</router-link>
+            </li>
+            <slot name="breadcrumb"></slot>
+        </ul>
+        <div class="well">
             <slot name="main"></slot>
-            </div>
         </div>
-    <!--</div>-->
+    </div>
 </template>
 
 <script>
@@ -22,14 +22,16 @@
 </script>
 
 <style lang="scss" scoped>
-    .panel-container{
-        margin-top: 75px;
-        left: 50%;
-        transform: translateX(-50%);
+    .panel-container {
+        width:100%;
+        margin-top: 10px;
+        .breadcrumb {
+            margin-bottom: 15px
+        }
     }
-    .well{
-        height: 650px;
-        background-color: #FFFFFF;
+
+    .well {
+        background-color: #fff;
     }
 
 </style>
