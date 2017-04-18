@@ -32,7 +32,7 @@
 
 <script>
     export default {
-        name: 'login',
+        name: 'signIn',
         data() {
             return {}
         },
@@ -41,7 +41,7 @@
                 this.$router.push("/main");
             },
             signUp(){
-                this.$router.push('/login/register');
+                this.$router.push('/login/signUp');
             }
         }
     }

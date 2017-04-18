@@ -1,7 +1,7 @@
 <template>
-    <leftPanel>
+    <mainPage>
         <template slot="breadcrumb">
-            <li class="active">我的运输</li>
+            <li class="active">货物记录</li>
         </template>
 
         <template slot="main">
@@ -12,31 +12,25 @@
                         <p>发货时间：{{item.time | unixToTime}}</p>
                         <p>货物量：{{item.quantity}}</p>
                         <p>匹配结果：
-
-
-
                             <router-link to="/main/transportInformation" class="btn btn-primary btn-lg">成功(查看详细信息)
-
-
-
                             </router-link>
                         </p>
                     </div>
                 </template>
             </div>
         </template>
-    </leftPanel>
+    </mainPage>
 </template>
 
 <script>
-    import leftPanel from '@/components/leftPanel';
+    import mainPage from '@/components/mainPage';
     import unixToTime from '@/utils/formateDate';
     import axios from 'axios';
 
     export default {
         name: 'myTransport',
         components: {
-            leftPanel
+            mainPage
         },
         data() {
             return {

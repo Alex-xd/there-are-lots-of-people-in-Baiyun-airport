@@ -83,7 +83,7 @@
                 <div class="form-group signIn">
                     <div>
                         <button type="button" class="btn btn-primary" @click="signIn">注册</button>
-                        <button type="button" class="btn btn-default" @click="signIn">登录</button>
+                        <!--<button type="button" class="btn btn-default" @click="signIn">登录</button>-->
                     </div>
                 </div>
 
@@ -94,7 +94,7 @@
 
 <script>
     export default {
-        name: 'login',
+        name: 'signUp',
         data() {
             return {}
         },
