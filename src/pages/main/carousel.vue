@@ -85,7 +85,7 @@
         width: 100%;
         background: rgba(0, 0, 0, .3);
         .foot-tips {
-            width: 1200px;
+            max-width: 1200px;
             height: 100%;
             margin: 0 auto;
             text-align: center;

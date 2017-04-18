@@ -1,10 +1,10 @@
 <template>
     <div class="wrapper">
-        <!--<keep-alive>-->
+        <keep-alive>
             <transition>
                 <router-view></router-view>
             </transition>
-        <!--</keep-alive>-->
+        </keep-alive>
 
         <!-- 动画 -->
         <ul class="bg-bubbles">
