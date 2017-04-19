@@ -40,7 +40,7 @@
                                         <router-link to="/main/recommendPath">推荐路径(免费)</router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/main">往返综合业务(免费)</router-link>
+                                        <router-link to="/main/cBusiness">往返综合业务(免费)</router-link>
                                     </li>
                                     <li class="divider"></li>
                                     <li><a>未来规划(付费)</a></li>

@@ -21,6 +21,9 @@ const shareCar = r => require.ensure([], () => r(require('@/pages/main/sharePlat
 const transportRecord = r => require.ensure([], () => r(require('@/pages/main/transportation/transportRecord')), 'transportation');
 const transportDetail = r => require.ensure([], () => r(require('@/pages/main/transportation/transportDetail/index')), 'transportation');
 const recommendPath = r => require.ensure([], () => r(require('@/pages/main/transportation/recommendPath')), 'transportation');
+const cBusiness = r => require.ensure([], () => r(require('@/pages/main/transportation/cBusiness')), 'transportation');
+const cBusinessDetail = r => require.ensure([], () => r(require('@/pages/main/cBusinessDetail/index')), 'transportation');
+
 
 const goodsRecord = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsRecord')), 'wareHouse');
 const goodsDetail = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsDetail/index')), 'wareHouse');
@@ -118,6 +121,19 @@ const router = new Router({
                             path: 'recommendPath', //推荐路径
                             component: recommendPath,
                             meta: { requireLogin: true }
+                        },
+                        {
+                            path: 'cBusiness', //往返综合业务
+                            component: cBusiness,
+                            meta: { requireLogin: true },
+                            children: [
+                                {
+                                    path:'cBusinessDetail',
+                                    component: cBusinessDetail,
+                                    meta: { requireLogin: true }
+                                }
+                            ]
+
                         },
                         {
                             path: 'shareDepot',//共享拼仓
