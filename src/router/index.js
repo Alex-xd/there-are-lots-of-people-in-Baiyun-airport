@@ -22,7 +22,7 @@ const transportRecord = r => require.ensure([], () => r(require('@/pages/main/tr
 const transportDetail = r => require.ensure([], () => r(require('@/pages/main/transportation/transportDetail/index')), 'transportation');
 const recommendPath = r => require.ensure([], () => r(require('@/pages/main/transportation/recommendPath')), 'transportation');
 const cBusiness = r => require.ensure([], () => r(require('@/pages/main/transportation/cBusiness')), 'transportation');
-const cBusinessDetail = r => require.ensure([], () => r(require('@/pages/main/cBusinessDetail/index')), 'transportation');
+const cBusinessDetail = r => require.ensure([], () => r(require('@/pages/main/transportation/cBusinessDetail/index')), 'transportation');
 
 
 const goodsRecord = r => require.ensure([], () => r(require('@/pages/main/wareHouse/goodsRecord')), 'wareHouse');
