@@ -27,9 +27,9 @@
                     <p class="help-block">请输入您预计租用的时间</p>
                 </div>
                 <div class="form-group label-floating">
-                    <label class="control-label" for="focusedInput5">仓储租用时间</label>
+                    <label class="control-label" for="focusedInput5">价格区间</label>
                     <input class="form-control" id="focusedInput5" type="text">
-                    <p class="help-block">请输入您预计租用的时间</p>
+                    <p class="help-block">请输入您可以接受的价格区间</p>
                 </div>
                 <div class="wrap">
                     <a class="btn btn-raised btn-primary" style="float: right;" @click="submit">提交</a>
