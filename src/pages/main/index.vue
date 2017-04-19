@@ -201,6 +201,9 @@
         .dropdown-menu {
             a {
                 text-indent: 5px;
+                &:hover{
+                    color: #009688 !important;
+                }
             }
             i {
                 margin-top: -3px;
