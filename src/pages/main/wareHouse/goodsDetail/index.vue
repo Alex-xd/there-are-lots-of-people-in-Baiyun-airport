@@ -54,7 +54,7 @@
         },
         mounted(){
             // TODO:完善
-//            this.$API.list_vechileinfos({number_code:this.$route.params.number_code}).then()
+            this.$API.list_vechileinfos({number_code:this.$route.params.number_code}).then()
         }
     }
 

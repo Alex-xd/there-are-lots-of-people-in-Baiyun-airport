@@ -46,7 +46,7 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-// 导入全局配置 & 安装插件
+// 全局配置 && 插件
 Vue.use(globalConfig);
 Vue.use(dialog);
 

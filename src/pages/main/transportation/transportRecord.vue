@@ -13,7 +13,7 @@
                             <p>发货时间：{{item.time | unixToTime}}</p>
                             <p>货物量：{{item.quantity}}</p>
                             <p>匹配结果：
-                                <router-link :to="{path:'/main/transportRecord/transportDetail'}" class="btn btn-primary btn-lg">成功(查看详细信息)</router-link>
+                                <router-link :to="{path:'/main/transportRecord/transportDetail',query:{number_code:item.number_code}}" class="btn btn-primary btn-lg">成功(查看详细信息)</router-link>
                                <!--<a class="btn btn-primary btn-lg" @click="showDetail(item.number_code)">成功(查看详细信息)</a>-->
                             </p>
                         </div>
@@ -61,12 +61,6 @@
             }
         },
         methods: {
-//            showDetail(number_code){
-//                this.$showDialog({
-//                    title:'运输详细信息',
-//
-//                })
-//            }
         },
 //        mounted(){
 //            // 从服务器拉取数据

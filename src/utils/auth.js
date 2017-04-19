@@ -11,7 +11,7 @@ export default {
     },
     logout(){
         // TODO: ajax请求登出
-        cookies.remove('sessionId');
+        cookies.remove('sessionId', { path: '/', domain: domain });
         store.commit(LOG_OUT);
     },
     checkIfLoggedIn(){

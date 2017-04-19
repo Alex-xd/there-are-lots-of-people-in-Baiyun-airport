@@ -9,7 +9,7 @@ import apiList from './apiList';
 import mock from './mock';
 
 if (process.env.NODE_ENV === 'development') {
-    mock();
+    // mock();
 }
 
 export default {

@@ -79,14 +79,21 @@
             submit(){
                 const _this = this;
                 this.$API.match_vehicle(this.params).then((rsp) => {
-                    this.$showDialog({
-                        title: '成功',
-                        content: '您的信息已提交，是否跳转至运输管理页面？',
-                        close: '取消',
-                        onPositive: function () {
-                            _this.$router.push('/main/transportRecord')
-                        }
-                    })
+                    if(rsp.data.status===1){
+                        this.$showDialog({
+                            title: '成功',
+                            content: '您的信息已提交，是否跳转至运输管理页面？',
+                            close: '取消',
+                            onPositive: function () {
+                                _this.$router.push('/main/transportRecord')
+                            }
+                        })
+                    }else{
+                        this.$showDialog({
+                            title: '出错了',
+                            content: rsp.data.status
+                        })
+                    }
                 }).catch((e) => {
                     this.$showDialog({
                         title: '出错了',
