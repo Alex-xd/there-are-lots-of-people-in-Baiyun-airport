@@ -1,0 +1,518 @@
+{
+	"variables": [],
+	"info": {
+		"name": "互联网加接口",
+		"_postman_id": "6544f04e-ab6b-87d5-161c-966cc5453bee",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "仓库",
+			"description": "",
+			"item": [
+				{
+					"name": "仓库信息发布/match_storehouse",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"suc\"] = jsonData.status === '1';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://162.243.154.46:8000/match_storehouse?amount=3&start_time=2017-04-14 20:00:00&duration=2&rent_want=1",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "## 1）请求地址\n\n>/match_storehouse\n\n## 2）调用方式：HTTP post\n\n## 3）接口描述\n\n* 用户发布仓库信息，并立即返回信息发布是否发布成功\n* 不能立即返回匹配结果\n\n## 4）请求参数：\n\n|字段名称       |字段说明         |类型            |必填            |备注     |\n| -------------|:--------------:|:--------------:|:--------------:| ------:|\n|amount| 容量大小|string| Y| 以吨为单位|\n|start_time | 开始时间 |string |Y | 无|\n|duration | 时间长度 |int |Y| 以小时为单位|\n|rent_want | 仓库出租或租用 |int |Y| 0代表出租，1代表租用|\n\n### 5）返回结果\n\n成功:\n\n```\n{\n    status:1  \n}\n```\n\n失败\n\n```\n{\n    status:0\n}\n```"
+					},
+					"response": []
+				},
+				{
+					"name": "显示所有发布信息/list_storerecords",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"postman.setGlobalVariable(\"store_number_code\", jsonData[0].number_code);",
+									"",
+									"",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://162.243.154.46:8000/list_storerecords",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "## 1）请求地址\n\n>/list_storerecords\n\n## 2）调用方式：HTTP get\n\n## 3）接口描述：\n\n* 显示当前用户已发布的所有仓库信息\n* 显示每一条仓库信息的状态\n\n## 4）请求参数：\n\n无\n\n## 5）返回结果\n\n```\n[\n\t{\n\t\tstart_time:\"2017-04-05 00:00:00\"\n\t\tduration:'90'\n\t\tnumber_code:'xx'\n\t\trent_want:'0'/'1'\n\t\tif_matched:'0'/'1'\n\t\tmatched_pairs:['xx','yy'...]\n\t\tamount:'40'\n\t}\n\t{\n\t\t````\n\t}\n]\n```"
+					},
+					"response": [
+						{
+							"id": "2d3b2026-5442-4e18-86c9-204f44efe221",
+							"name": "suc",
+							"originalRequest": {
+								"url": "http://162.243.154.46:8000/list_storerecords",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "x-requested-with",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "1786",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 19 Apr 2017 14:21:15 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Etag",
+									"key": "Etag",
+									"value": "\"53bf02dc7e1441c434064e270d68f7f0c1a230ed\"",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "TornadoServer/4.5",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 405,
+							"body": "[{\"if_matched\": 0, \"start_time\": \"2017-04-1420:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"695\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:0\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"486\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"419\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"565\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"570\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"188\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"152\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"617\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"563\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"483\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"731\", \"amount\": \"3\"}, {\"if_matched\": 0, \"start_time\": \"2017-04-14 20:00:00\", \"matched_pairs\": [], \"rent_want\": \"1\", \"duration\": \"2\", \"number_code\": \"882\", \"amount\": \"3\"}]"
+						}
+					]
+				},
+				{
+					"name": "获取匹配结果/get_matched_storerecords",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"suc\"] = jsonData.status === '1';"
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://162.243.154.46:8000/get_matched_storerecords?number_code={{store_number_code}}",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "## 1）请求地址\n\n> /get\\_matched\\_storerecords\n\n## 2）调用方式：HTTP get\n\n## 3）接口描述：\n\n* 获取匹配结果\n\n## 4）请求参数：\n\n|字段名称       |字段说明         |类型            |必填            |备注     |\n| -------------|:--------------:|:--------------:|:--------------:| ------:|\n|number_code| 仓库记录编号 |string| Y| 无|\n\n## 5）返回结果：\n\n\n```\n[\n\t{\n\t\tstart_time:\"2017-04-05 00:00:00\"\n\t\tduration:'90'\n\t\tnumber_code:'xx'\n\t\trent_want:'0'/'1'\n\t\tif_matched:'0'/'1'\n\t\tmatched_pairs:['xx','yy'...]\n\t\tamount:'40'\n\t}\n\t{\n\t\t````\n\t}\n\t`````\n]\n```"
+					},
+					"response": [
+						{
+							"id": "7c13a351-27d0-4e5c-b703-3e46a43f096d",
+							"name": "suc",
+							"originalRequest": {
+								"url": "http://162.243.154.46:8000/get_matched_storerecords?number_code={{store_number_code}}",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "x-requested-with",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "27",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 19 Apr 2017 14:20:38 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Etag",
+									"key": "Etag",
+									"value": "\"9150faa2ddc21c0712736eb03461bcfd6c3273f4\"",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "TornadoServer/4.5",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 340,
+							"body": "{\"staus\": \"1\", \"res\": \"[]\"}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "车辆运输",
+			"description": "",
+			"item": [
+				{
+					"name": "发布车辆信息/match_vehicle",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"suc\"] = jsonData.status === '1';"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://162.243.154.46:8000/match_vehicle?start_time=2017-04-12 20:20:00&duration=2&quantity=20&if_vehicle=1",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "## 1）请求地址\n\n>／match_vehicle\n\n## 2）调用方式：HTTP post\n\n## 3）接口描述：\n* 发布车辆信息，并匹配\n\n\n\n## 4）请求参数:\n|字段名称       |字段说明         |类型            |必填            |备注     |\n| -------------|:--------------:|:--------------:|:--------------:| ------:|\n|number_code| 车辆信息编号 |string| Y| 无|\n|start_time |预计发货时间 |时间字符串 |Y |格式为：’Y-m-d H:M:S’|\n|duration |最长等待时间 |int |Y| 以小时为单位|\n|quantity |发货量 |int |Y |以吨为单位，区间为10至90|\n|if_vehicle |是否有车 |int| Y| 0表示无车，1表示有车|\n\n\n\n\n## 5）请求返回结果:\n\n成功:\n\n```\n{\n    status:1  \n}\n```\n\n失败\n\n```\n{\n    status:1  \n}\n```"
+					},
+					"response": [
+						{
+							"id": "d68c2b63-f24a-490d-a452-dbf76db00813",
+							"name": "suc",
+							"originalRequest": {
+								"url": "http://162.243.154.46:8000/match_vehicle?start_time=2017-04-12 20:20:00&duration=2&quantity=20&if_vehicle=1",
+								"method": "POST",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "x-requested-with",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "15",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 19 Apr 2017 14:20:46 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "TornadoServer/4.5",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 331,
+							"body": "{\"status\": \"1\"}"
+						}
+					]
+				},
+				{
+					"name": "展示车辆信息/list_vechileinfos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://162.243.154.46:8000/list_vechileinfos",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "展示车辆信息"
+					},
+					"response": [
+						{
+							"id": "5df9bf1f-75fa-460f-8045-8fd46d4d363c",
+							"name": "suc",
+							"originalRequest": {
+								"url": "http://162.243.154.46:8000/list_vechileinfos",
+								"method": "GET",
+								"header": [],
+								"body": {}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "html",
+							"_postman_previewtype": "text",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Headers",
+									"key": "Access-Control-Allow-Headers",
+									"value": "x-requested-with",
+									"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+								},
+								{
+									"name": "Access-Control-Allow-Methods",
+									"key": "Access-Control-Allow-Methods",
+									"value": "POST, GET, OPTIONS",
+									"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+								},
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "1339",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "text/html; charset=UTF-8",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Wed, 19 Apr 2017 14:20:54 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Etag",
+									"key": "Etag",
+									"value": "\"bf5ec9c13d6e4c916bfac2e445feb9ce1fb3e9b1\"",
+									"description": "An identifier for a specific version of a resource, often a message digest"
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "TornadoServer/4.5",
+									"description": "A name for the server"
+								}
+							],
+							"cookie": [],
+							"responseTime": 326,
+							"body": "[{\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 0}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 2}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 4}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 6}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 8}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 10}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 12}, {\"if_matched\": \"0\", \"start_time\": \"2017-04-12 20:20:00\", \"matched_pairs\": [], \"end_time\": \"2017-04-12 22:20:00\", \"quantity\": 20, \"if_vehicle\": \"1\", \"number_code\": 14}]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "路径匹配/path_recommend",
+			"request": {
+				"url": "http://162.243.154.46:8000/path_recommend?startVertex=V0&endVertex=V7&proportion=0.5",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "参数 startVertex=V0&endVertex=V7&proportion=0.5"
+			},
+			"response": [
+				{
+					"id": "808242cd-77fa-4a42-8c79-28b0a112f997",
+					"name": "suc",
+					"originalRequest": {
+						"url": "http://162.243.154.46:8000/path_recommend?startVertex=V0&endVertex=V7&proportion=0.5",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "html",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "Access-Control-Allow-Headers",
+							"key": "Access-Control-Allow-Headers",
+							"value": "x-requested-with",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"name": "Access-Control-Allow-Methods",
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"name": "Access-Control-Allow-Origin",
+							"key": "Access-Control-Allow-Origin",
+							"value": "*",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"name": "Content-Length",
+							"key": "Content-Length",
+							"value": "45",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "Content-Type",
+							"key": "Content-Type",
+							"value": "text/html; charset=UTF-8",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "Date",
+							"key": "Date",
+							"value": "Wed, 19 Apr 2017 14:21:06 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "Etag",
+							"key": "Etag",
+							"value": "\"9d86ba87ed9a0b4b11bb28f63b5ee92d95272397\"",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"name": "Server",
+							"key": "Server",
+							"value": "TornadoServer/4.5",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 327,
+					"body": "{\"results\": \"V0 --> V1 --> V3 --> V5 --> V7\"}"
+				}
+			]
+		}
+	]
+}
