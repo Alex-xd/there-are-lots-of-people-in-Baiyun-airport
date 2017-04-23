@@ -36,7 +36,6 @@ module.exports = {
         // allow debugger during development
         'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
         'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
-        "indent": ["error", 4],
         "comma-dangle": 0,
         "semi": 0,
         "global-require": 0,
@@ -62,6 +61,6 @@ module.exports = {
         "no-undef": 0,
         "max-len": 0,
         "padded-blocks": 1,
-        "arrow-parens": 0
+        "arrow-parens": 0,
     }
 };

@@ -12,6 +12,8 @@ export default function plugin(Vue) {
         return
     }
 
+    Vue.prototype.$echarts = window.echarts;
+
     // 注册全局filters
     Vue.filter('unixToTime', unixToTime);
 

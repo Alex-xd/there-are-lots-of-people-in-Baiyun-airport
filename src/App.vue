@@ -4,15 +4,6 @@
 
 <script>
     export default {
-        mounted() {
-            // 初始化MD点击涟漪效果
-            /* eslint-disable no-undef */
-            $.material.init();
-        },
-        updated() {
-            /* eslint-disable no-undef */
-            $.material.init();
-        }
     };
 </script>
 

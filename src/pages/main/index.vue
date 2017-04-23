@@ -73,6 +73,18 @@
 
 
 <script>
+    import 'bootstrap';
+    // 加载roboto字体和字体图标
+    import 'assets/fonts/roboto/roboto.css';
+    import 'assets/fonts/material-icons/index.css';
+    // 加载bootstrap样式
+    import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+    // 加载Material Design UI 库
+    import 'node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
+    import 'node_modules/bootstrap-material-design/dist/css/ripples.min.css';
+    import 'node_modules/bootstrap-material-design/dist/js/material.min';
+    import 'node_modules/bootstrap-material-design/dist/js/ripples.min';
+    // 热图和标尺
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
     import {
@@ -80,7 +92,6 @@
         UPDATE_DATA
     } from '@/store/mutation-types';
     import rightPanel from '@/pages/main/rightPanel';
-    import echarts from '@/vendor/echarts.min';
 
     export default {
         name: 'main',
@@ -193,6 +204,9 @@
                 rsp = JSON.parse(rsp);
                 this.$store.commit(INIT_DEFAULT_DATA, rsp);
             }
+
+            // 点击涟漪效果初始化
+            $.material.init();
         }
     }
 </script>

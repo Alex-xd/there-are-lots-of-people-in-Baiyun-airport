@@ -12,6 +12,11 @@
 <div id="app">
     <router-view></router-view>
 </div>
+
+<!--这些直接引入，在webpack中配置externals，模块中使用直接import即可-->
+<script src="static/vendor/jquery.min.js"></script>
+<script src="static/vendor/md5.js"></script>
+<script src="static/vendor/echarts.min.js"></script>
 <!-- built files will be auto injected -->
 </body>
 </html>

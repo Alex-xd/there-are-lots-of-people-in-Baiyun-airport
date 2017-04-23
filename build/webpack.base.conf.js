@@ -1,4 +1,5 @@
 var path = require('path')
+var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
@@ -23,7 +24,8 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.esm.js',
             '@': resolve('src'),
-            'assets': resolve('src/assets')
+            'assets': resolve('src/assets'),
+            'node_modules': resolve('node_modules')
         }
     },
     module: {
@@ -65,4 +67,4 @@ module.exports = {
             }
         ]
     }
-}
+};
