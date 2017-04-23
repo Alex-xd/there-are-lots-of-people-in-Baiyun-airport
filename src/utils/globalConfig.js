@@ -5,10 +5,13 @@
 import API from '@/api';
 import constant from './constants';
 import storage from './storage';
-import echarts from 'echarts';
 import { unixToTime } from './formateDate';
 
 export default function plugin(Vue) {
+    if (plugin.installed) {
+        return
+    }
+
     // 注册全局filters
     Vue.filter('unixToTime', unixToTime);
 
@@ -20,7 +23,4 @@ export default function plugin(Vue) {
 
     // 浏览器存储注入
     Vue.prototype.$storage = storage;
-
-    // 注入echarts构造函数
-    Vue.prototype.$echarts = echarts;
 }

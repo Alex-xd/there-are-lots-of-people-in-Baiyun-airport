@@ -19,16 +19,17 @@
 ======`-.____`-.___\_____/___.-`____.-'======
                    `=---='
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                佛祖保佑，永无BUG!
+              佛祖保佑，永无BUG!
 
 */
 import Vue from 'vue';
+import '@/vendor/jquery.min';
 import 'bootstrap';
 import router from './router';
 import store from '@/store';
 // 加载roboto字体和字体图标
-import '../static/fonts/roboto/roboto.css';
-import '../static/fonts/material-icons/index.css';
+import 'assets/fonts/roboto/roboto.css';
+import 'assets/fonts/material-icons/index.css';
 // 加载bootstrap样式
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // 加载Material Design UI 库

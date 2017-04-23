@@ -80,6 +80,7 @@
         UPDATE_DATA
     } from '@/store/mutation-types';
     import rightPanel from '@/pages/main/rightPanel';
+    import echarts from '@/vendor/echarts.min';
 
     export default {
         name: 'main',
