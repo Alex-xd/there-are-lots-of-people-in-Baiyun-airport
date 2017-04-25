@@ -62,5 +62,6 @@ module.exports = {
         "max-len": 0,
         "padded-blocks": 1,
         "arrow-parens": 0,
+        "no-use-before-define": 0
     }
 };

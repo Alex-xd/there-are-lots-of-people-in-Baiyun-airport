@@ -10,31 +10,25 @@
         <template slot="main">
             <section class="content">
                 <header class="clear-fix">{{section.name}}人流量预测
-                    <div v-show="section.state !== 0" class="btn-group">
+                    <div v-show="section.state !== 0" class="btn-group" @click="takeAction($event)">
                         <a class="btn" :class="section.state===1 ? 'btn-warning':'btn-danger'">{{stateText}}</a>
                         <a data-target="#" class="btn btn-warning dropdown-toggle"
                            data-toggle="dropdown"><span class="caret"></span></a>
-                        <ul v-if="section.state===1" class="dropdown-menu">
-                            <li><a>向警卫部发送该警告</a></li>
-                            <li><a>通知塔台</a></li>
-                            <li><a>提升预警等级</a></li>
+
+                        <ul class="dropdown-menu">
+                            <li v-show="section.state===2"><a class="no-backend">向警卫部发送该警告</a></li>
+                            <li><a class="no-backend">通知塔台</a></li>
+                            <li><a @click="upper">提升预警等级</a></li>
                             <li class="divider"></li>
-                            <li><a>忽略此条预警</a></li>
+                            <li><a @click="ignore">忽略此条预警</a></li>
                         </ul>
-                        <ul v-else class="dropdown-menu">
-                            <li><a>向警卫部发送该警告</a></li>
-                            <li><a>通知塔台</a></li>
-                            <li class="divider"></li>
-                            <li><a>忽略此条预警</a></li>
-                        </ul>
+
                     </div>
                 </header>
                 <div class="echart-leftpanel">
                     <div id="J_echart-leftpanel"></div>
-                    <!--<template v-show="echart">-->
                     <div class="spinner"></div>
                     <span class="now">当前时间：{{curTime}}</span>
-                    <!--</template>-->
                 </div>
             </section>
         </template>
@@ -52,8 +46,8 @@
         },
         data() {
             return {
-                echart: null, // echart实例
-                data: [] // echart数据
+                echart: false, // echart实例
+                data: [], // echart数据
             }
         },
         computed: {
@@ -74,6 +68,21 @@
             },
             curTime(){
                 return unixToTime(this.$store.getters.curTime);
+            }
+        },
+        methods: {
+            takeAction(event){
+                if (event.target.className === 'no-backend') {
+                    this.$showDialog({ title: '操作成功', content: '由于数据为固定的模拟数据，所以暂时无法看到采取操作后的成效' })
+                }
+            },
+            ignore(){
+                this.section.state = 0;
+            },
+            upper(){
+                if (this.section.state < 2) {
+                    this.section.state += 1;
+                }
             }
         },
         watch: {
@@ -108,7 +117,6 @@
                     })
                 });
             }
-
 
             this.echart = this.$echarts.init(document.querySelector('#J_echart-leftpanel'));
             this.echart.setOption({

@@ -166,6 +166,7 @@
 
     .right-panel {
         position: fixed;
+        z-index: 99999;
         top: 70px;
         right: 10px;
         width: 700px;

@@ -25,11 +25,24 @@
 import Vue from 'vue';
 import router from './router';
 import store from '@/store';
-
+import dialog from '@/utils/dialog';
 import globalConfig from '@/utils/globalConfig';
 
-// 导入全局配置
+import 'bootstrap';
+// 加载roboto字体和字体图标
+import 'assets/fonts/roboto/roboto.css';
+import 'assets/fonts/material-icons/index.css';
+// 加载bootstrap样式
+import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+// 加载Material Design UI 库
+import 'node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
+import 'node_modules/bootstrap-material-design/dist/css/ripples.min.css';
+import 'node_modules/bootstrap-material-design/dist/js/material.min';
+import 'node_modules/bootstrap-material-design/dist/js/ripples.min';
+
+// 全局配置 && 插件
 Vue.use(globalConfig);
+Vue.use(dialog);
 
 Vue.config.productionTip = false;
 

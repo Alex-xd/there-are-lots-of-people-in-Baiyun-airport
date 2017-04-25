@@ -6,7 +6,7 @@
 
             <h1>机场人流量时空分布大数据预测系统</h1>
 
-            <p>您已安全下线</p>
+            <p>您已安全下线，{{secLeft}} 秒后返回登录界面</p>
 
         </div>
     </div>
@@ -16,7 +16,19 @@
     export default {
         name: 'logout',
         data() {
-            return {}
+            return {
+                secLeft: 3
+            }
+        },
+        mounted(){
+            const timer = setInterval(() => {
+                if (this.secLeft > 0) {
+                    this.secLeft -= 1;
+                } else {
+                    clearInterval(timer);
+                    this.$router.push('/login');
+                }
+            }, 1000)
         }
     }
 </script>

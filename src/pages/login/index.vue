@@ -8,9 +8,9 @@
 
             <p>请先登录</p>
 
-            <div id="login" class="btn" @click="toggleLogin">Login</div>
+            <div id="login" class="welcome-btn" @click="toggleLogin">Login</div>
 
-            <div id="register" class="btn" @click="toggleRegister">register</div>
+            <div id="register" class="welcome-btn" @click="toggleRegister">register</div>
 
         </div>
 
@@ -30,7 +30,8 @@
                 </div>
 
                 <div class="form-group submit-ctn">
-                    <button type="submit" id="login-submit" class="btn" @click="login">login Now!</button>
+                    <button type="submit" id="login-submit" class="welcome-btn" @click.prevent="login">login Now!
+                    </button>
                 </div>
 
             </form>
@@ -68,7 +69,9 @@
                 </div>
 
                 <div class="form-group submit-ctn">
-                    <button type="submit" id="register-submit" class="btn" @click="register">Register Now!</button>
+                    <button type="submit" id="register-submit" class="welcome-btn" @click.prevent="register">
+                        Register Now!
+                    </button>
                 </div>
 
             </form>
@@ -107,6 +110,8 @@
 </script>
 
 <style lang="scss" scoped>
+    @import '~@/styles/common/variables.scss';
+
     .showLayer {
         width: 100vw !important;
         height: 100vh !important;
@@ -157,7 +162,7 @@
         letter-spacing: 5px;
     }
 
-    .btn {
+    .welcome-btn {
         display: inline-block;
         width: 100px;
         height: 40px;
@@ -169,10 +174,10 @@
 
     #login {
         margin: 20px;
-        background: #0f9;
+        background: lighten($main-color, 17%);
     }
 
-    .btn:hover {
+    .welcome-btn:hover {
         box-shadow: 0 0 10px 2px #ccc;
     }
 
@@ -254,14 +259,14 @@
     }
 
     #login-submit {
-        background: #3f9;
+        background: lighten($main-color, 17%);
         border: none;
         box-sizing: border-box;
         color: #666;
     }
 
     #register-submit {
-        background: #6cf;
+        background: lighten($main-color, 17%);
         border: none;
         color: #fff;
         box-sizing: border-box;

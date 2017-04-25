@@ -29,7 +29,8 @@
                                             class="material-icons">pause_circle_outline</i> 暂停系统</a></li>
                                         <li><a @click="stop"><i
                                             class="material-icons">power_settings_new</i>
-                                            关闭系统</a></li>
+                                            关闭系统</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li :class="{active:showRightPanel}"><a @click="toggleRightPanel">数据统计</a></li>
@@ -73,17 +74,6 @@
 
 
 <script>
-    import 'bootstrap';
-    // 加载roboto字体和字体图标
-    import 'assets/fonts/roboto/roboto.css';
-    import 'assets/fonts/material-icons/index.css';
-    // 加载bootstrap样式
-    import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
-    // 加载Material Design UI 库
-    import 'node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
-    import 'node_modules/bootstrap-material-design/dist/css/ripples.min.css';
-    import 'node_modules/bootstrap-material-design/dist/js/material.min';
-    import 'node_modules/bootstrap-material-design/dist/js/ripples.min';
     // 热图和标尺
     import h337 from 'heatmap.js';
     import initTooltips from '@/utils/heatmapTooltips';
@@ -108,7 +98,7 @@
                     timer: null, // 自动播放计时器引用
                     config: { // 相关配置
                         el: '#J_heatmap',
-                        interval: 2500,  // 自动播放间隔
+                        interval: this.$const.interval,  // 自动播放间隔
                         size: { // 画布大小
                             width: `${this.$const.heatmapSize.width}px`,
                             height: `${this.$const.heatmapSize.height}px`
@@ -144,11 +134,14 @@
             },
             // 停止热图 销毁dom
             stop(){
-                this.heatmap.playing = false;
-                clearInterval(this.heatmap.timer);
-                this.heatmap.instance = null;
-                document.querySelector(this.heatmap.config.el)
-                    .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
+                if (this.heatmap.playing) {
+                    this.heatmap.playing = false;
+                    clearInterval(this.heatmap.timer);
+                    this.heatmap.instance = null;
+                    document.querySelector(this.heatmap.config.el)
+                        .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
+                }
+                this.$router.push('/logout');
             },
             // 初始化热图
             initHM(){

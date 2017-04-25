@@ -27,6 +27,7 @@ export default new Router({
                 {// 登出页
                     path: '/logout',
                     component: logout
+
                 },
                 {// 主页面
                     path: '/main',

@@ -10,6 +10,8 @@ module.exports = {
         delta: 600000   // 10分钟
     },
 
+    interval: 4000, // 刷新间隔
+
     // 地图宽高（单位px）
     heatmapSize: {
         width: 2308,
