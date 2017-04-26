@@ -1,0 +1,160 @@
+// ------------------------------
+// BASICS
+// ------------------------------
+
+html,
+body {
+    font-family: $font;
+    background: #e7e7e7;
+}
+
+
+
+
+
+// ------------------------------
+// 通用类
+// ------------------------------
+
+.hidden {
+    display: none !important;
+}
+
+.clear-fix {
+    *zoom: 1;
+    content: "";
+    display: block;
+    clear: both;
+}
+
+
+
+
+
+
+// ------------------------------
+// 渲染性能优化
+// ------------------------------
+
+.performance {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+
+
+
+
+
+
+// ------------------------------
+// 动画keyframes
+// ------------------------------
+
+@keyframes animationStyle1 {
+    0% {
+        opacity: 0;
+        transform: rotateY(-90deg) translate3d(0, 30px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg) translate3d(0, 0, 0);
+    }
+}
+
+@keyframes animationStyle2 {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg) rotateY(-90deg) translate3d(-50%, 50px, 0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) translate3d(-50%, -50%, 0);
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: rotateX(0deg) rotateY(0deg) translate3d(-50%, -50%, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: rotateX(-90deg) rotateY(90deg) translate3d(-50%, 50px, 0);
+    }
+}
+
+@keyframes rotating {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+
+
+
+
+
+
+// ------------------------------
+// 浏览器滚动条
+// ------------------------------
+
+::-webkit-scrollbar {
+    background-color: #f1f1f1;
+    overflow: visible;
+    width: 3px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(64, 70, 93, .8);
+    background-clip: padding-box;
+    min-height: 15px;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+}
+
+::-webkit-scrollbar-thumb:vertical:hover {
+    background-color: rgba(0, 0, 0, .3);
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 0 0 0 4px;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+::selection {
+    background: #d1d1d1;
+}
+
+::-moz-selection {
+    background: #d1d1d1;
+}

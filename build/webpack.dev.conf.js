@@ -1,30 +1,35 @@
-const path = require('path');
-const webpack = require('webpack');
-const config = require('./webpack.base.conf');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SRC_PATH = path.resolve(__dirname, '../src');
+var utils = require('./utils')
+var webpack = require('webpack')
+var config = require('../config')
+var merge = require('webpack-merge')
+var baseWebpackConfig = require('./webpack.base.conf')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
-config.devtool = '#source-map';
+// add hot-reload related code to entry chunks
+Object.keys(baseWebpackConfig.entry).forEach(function (name) {
+  baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
+})
 
-config.output.publicPath = '/';
-
-config.plugins = (config.plugins || []).concat([
-    new HtmlWebpackPlugin({
-        chunks: ['main/main', 'common/common'],
-        // chunksSortMode: 'dependency',
-        title: 'Demo',
-        filename: 'index.html',
-        template: SRC_PATH + '/pages/main/index.html',
-        inject: 'body',
-        // favicon: 'src/assets/favicon.png',
+module.exports = merge(baseWebpackConfig, {
+  module: {
+    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
+  },
+  // cheap-module-eval-source-map is faster for development
+  devtool: '#cheap-module-eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': config.dev.env
     }),
-]);
-
-config.devServer = {
-    historyApiFallback: true,
-    // noInfo: true,
-    port: 8000
-};
-
-module.exports = config;
-
+    // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    // https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true
+    }),
+    new FriendlyErrorsPlugin()
+  ]
+})
