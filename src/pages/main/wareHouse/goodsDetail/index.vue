@@ -53,7 +53,7 @@
             }
         },
         mounted(){
-            // TODO:完善
+            // TODO:完善GET 获取匹配结果/get_matched_storerecords
             this.$API.list_vechileinfos({number_code:this.$route.params.number_code}).then()
         }
     }

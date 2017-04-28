@@ -37,8 +37,9 @@
         },
         data(){
             return {}
-        },
+        }
     }
+    //TODO: GET 路径匹配/path_recommend
 </script>
 
 <style lang="scss" scoped>
