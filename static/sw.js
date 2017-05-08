@@ -1,0 +1,1 @@
+importScripts("./sw-toolbox.js"),toolbox.router.get("/",self.toolbox.fastest,{cache:{name:"home-cache-v1",maxEntries:10}}),toolbox.router.get(/\.html$/,self.toolbox.fastest,{cache:{name:"page-cache-v1",maxEntries:200}});
