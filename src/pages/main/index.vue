@@ -202,9 +202,6 @@
         rsp = JSON.parse(rsp);
         this.$store.commit(INIT_DEFAULT_DATA, rsp);
       }
-
-      // 点击涟漪效果初始化
-      $.material.init();
     }
   }
 </script>
