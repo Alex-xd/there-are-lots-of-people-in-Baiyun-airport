@@ -11,42 +11,42 @@ const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/lef
 Vue.use(Router);
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            component: App, // 顶层路由，对应index.html
-            children: [  // 二级路由。对应App.vue
-                {// 地址为空时跳转landing登录页
-                    path: '',
-                    redirect: '/login'
-                },
-                {// 登录页
-                    path: '/login',
-                    component: login
-                },
-                {// 登出页
-                    path: '/logout',
-                    component: logout
-
-                },
-                {// 主页面
-                    path: '/main',
-                    component: main,
-                    children: [
-                        {
-                            path: 'ctrlPanel',
-                            component: ctrlPanel
-                        },
-                        {
-                            path: 'sectionDetails/:section',
-                            name: 'sectionDetails',
-                            component: sectionDetails
-                        }
-                    ]
-                }
-            ]
+  routes: [
+    {
+      path: '/',
+      component: App, // 顶层路由，对应index.html
+      children: [  // 二级路由。对应App.vue
+        {// 地址为空时跳转landing登录页
+          path: '',
+          redirect: '/login'
         },
-    ],
-    mode: 'hash',
-    strict: process.env.NODE_ENV !== 'production'
+        {// 登录页
+          path: '/login',
+          component: login
+        },
+        {// 登出页
+          path: '/logout',
+          component: logout
+
+        },
+        {// 主页面
+          path: '/main',
+          component: main,
+          children: [
+            {
+              path: 'ctrlPanel',
+              component: ctrlPanel
+            },
+            {
+              path: 'sectionDetails/:section',
+              name: 'sectionDetails',
+              component: sectionDetails
+            }
+          ]
+        }
+      ]
+    },
+  ],
+  mode: 'hash',
+  strict: process.env.NODE_ENV !== 'production'
 });

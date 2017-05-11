@@ -1,5 +1,5 @@
 /**
- * 全局配置
+ * 全局资源引入
  */
 
 import API from '@/api';

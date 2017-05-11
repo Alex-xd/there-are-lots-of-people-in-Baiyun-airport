@@ -1,6 +1,6 @@
 /**
  * css reset
- * 
+ *
  * @author ZhangBoyuan
  */
 html,
@@ -84,28 +84,28 @@ time,
 mark,
 audio,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    height: 100%;
-    position: relative;
-    -webkit-overflow-scrolling: touch;
-    -webkit-font-smoothing: antialiased;
+  height: 100%;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 /* HTML5 display-role reset for older browsers */
@@ -121,40 +121,40 @@ hgroup,
 menu,
 nav,
 section {
-    display: block;
+  display: block;
 }
 
 body {
-    line-height: 1;
+  line-height: 1;
 }
 
 ol,
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 blockquote,
 q {
-    quotes: none;
+  quotes: none;
 }
 
 blockquote {
-    &:before,
-    &:after {
-        content: '';
-        content: none;
-    }
+  &:before,
+  &:after {
+    content: '';
+    content: none;
+  }
 }
 
 q {
-    &:before,
-    &:after {
-        content: '';
-        content: none;
-    }
+  &:before,
+  &:after {
+    content: '';
+    content: none;
+  }
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }

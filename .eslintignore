@@ -1,6 +1,5 @@
 build/*.js
 config/*.js
 src/utils/node-handleFiles.js
-src/vendor/*.js
 src/assets/**
 src/pages/login/**

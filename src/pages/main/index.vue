@@ -21,7 +21,7 @@
                 </li>
                 <li class="dropdown">
                   <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">数据统计
-                                        <b class="caret"></b></a>
+                    <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a @click="toggleRightPanel">数据总览</a></li>
                     <li><a>上传数据</a></li>
@@ -30,7 +30,7 @@
                 </li>
                 <li class="dropdown">
                   <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
-                                        <b class="caret"></b></a>
+                    <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a @click="startUp">启动系统</a></li>
                     <li><a @click="pause">暂停系统</a></li>
