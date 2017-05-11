@@ -1,4 +1,6 @@
-# 机场人流量分布预测系统  大型Vue Web应用
+# 机场人流量分布预测系统  Vue Web应用
+
+线上预览： [baiyun.alexxd.com](baiyun.alexxd.com)
 
 ## 0.所需素材
 
