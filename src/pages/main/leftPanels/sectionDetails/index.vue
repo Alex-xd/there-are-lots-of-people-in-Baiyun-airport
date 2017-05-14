@@ -1,5 +1,5 @@
 <template>
-  <leftPanel>
+  <leftPanelBaseUI>
     <template slot="breadcrumb">
       <li>
         <router-link to="/main/ctrlPanel">控制面板</router-link>
@@ -32,17 +32,17 @@
         </div>
       </section>
     </template>
-  </leftPanel>
+  </leftPanelBaseUI>
 </template>
 
 <script>
-  import leftPanel from '@/components/leftPanel';
+  import leftPanelBaseUI from '@/components/leftPanelBaseUI';
   import { unixToTime } from '@/utils/formateDate';
 
   export default {
     name: 'sectionDetails',
     components: {
-      leftPanel
+      leftPanelBaseUI
     },
     data() {
       return {

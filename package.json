@@ -13,7 +13,7 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "init": "./node_modules/.bin/commitizen init cz-conventional-changelog --save-dev --save-exact",
+    "init": "./node_modules/.bin/commitizen init cz-conventional-changelog --save-dev --save-exact --force",
     "commit": "git-cz"
   },
   "dependencies": {

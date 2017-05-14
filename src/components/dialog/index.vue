@@ -1,26 +1,27 @@
 <template>
-  <div class="modal" :class="{show:visible}">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">×
-          </button>
-          <h4 class="modal-title">{{title}}</h4>
-        </div>
-        <div class="modal-body">
-          <p>{{content}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" @click="positive">{{positiveTxt}}</button>
-        </div>
-      </div>
+  <dialogBaseUI :visible="visible">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">×
+      </button>
+      <h4 class="modal-title">{{title}}</h4>
     </div>
-  </div>
+    <div class="modal-body">
+      <p>{{content}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" @click="positive">{{positiveText}}</button>
+    </div>
+  </dialogBaseUI>
 </template>
 
 <script>
+  import dialogBaseUI from './baseUI';
+
   export default {
     name: 'dialog',
+    components: {
+      dialogBaseUI
+    },
     props: {
       visible: {
         type: Boolean
@@ -31,9 +32,9 @@
       },
       content: {
         type: String,
-        default: '内容'
+        default: ''
       },
-      positiveTxt: {
+      positiveText: {
         type: String,
         default: '确定'
       },

@@ -24,7 +24,7 @@
                     <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a @click="toggleRightPanel">数据总览</a></li>
-                    <li><a>上传数据</a></li>
+                    <li><a @click="updateData">上传数据</a></li>
                     <li><a>历史数据</a></li>
                   </ul>
                 </li>
@@ -65,12 +65,17 @@
         </div>
       </div>
     </div>
+
     <transition name="slide">
       <router-view></router-view>
     </transition>
 
     <keep-alive>
       <rightPanel v-if="showRightPanel"></rightPanel>
+    </keep-alive>
+
+    <keep-alive>
+      <predictConfirm :visible="showPredictConfirm"></predictConfirm>
     </keep-alive>
   </div>
 </template>
@@ -84,15 +89,18 @@
     UPDATE_DATA
   } from '@/store/mutation-types';
   import rightPanel from '@/pages/main/rightPanel';
+  import predictConfirm from './predictConfirm';
 
   export default {
     name: 'main',
     components: {
-      rightPanel
+      rightPanel,
+      predictConfirm
     },
     data() {
       return {
         showRightPanel: false,
+        showPredictConfirm: false,
         heatmap: { // 热图相关
           instance: null,
           playing: false,
@@ -189,6 +197,17 @@
       // 显示隐藏数据统计面板
       toggleRightPanel(){
         this.showRightPanel = !this.showRightPanel;
+      },
+      // 点击上传数据
+      updateData(){
+        const _this = this;
+        this.$showDialog({
+          title: '是否进行预测？',
+          positiveText: '预测',
+          onPositive: () => {
+            _this.showPredictConfirm = true;
+          }
+        })
       }
     },
     async mounted(){

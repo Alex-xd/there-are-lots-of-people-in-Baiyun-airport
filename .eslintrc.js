@@ -60,6 +60,7 @@ module.exports = {
     "arrow-parens": 0,
     "no-use-before-define": 0,
     "import/no-extraneous-dependencies": 0,
-    "import/no-mutable-exports": 0
+    "import/no-mutable-exports": 0,
+    "object-curly-spacing": 0
   }
 };

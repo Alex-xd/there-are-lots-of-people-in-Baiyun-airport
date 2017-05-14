@@ -19,7 +19,7 @@
 
 <script>
   export default {
-    name: 'leftPanelBaseComponent',
+    name: 'leftPanelBaseUI',
     methods: {
       goBack(){
         this.$router.go(-1);

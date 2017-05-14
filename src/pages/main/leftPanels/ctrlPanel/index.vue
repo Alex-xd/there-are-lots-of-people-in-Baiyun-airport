@@ -1,5 +1,5 @@
 <template>
-  <leftPanel>
+  <leftPanelBaseUI>
     <template slot="breadcrumb">
       <li class="active">控制面板</li>
     </template>
@@ -12,17 +12,17 @@
         </template>
       </section>
     </template>
-  </leftPanel>
+  </leftPanelBaseUI>
 </template>
 
 <script>
-  import leftPanel from '@/components/leftPanel';
+  import leftPanelBaseUI from '@/components/leftPanelBaseUI';
   import listItem from './listItem';
 
   export default {
     name: 'ctrlPanel',
     components: {
-      leftPanel,
+      leftPanelBaseUI,
       listItem
     },
     data(){
