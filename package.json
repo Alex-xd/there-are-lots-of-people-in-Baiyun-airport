@@ -21,7 +21,7 @@
     "bootstrap-material-design": "^0.5.10",
     "heatmap.js": "^2.0.5",
     "js-cookie": "^2.1.4",
-    "vue": "^2.2.2"
+    "vue": "^2.3.3"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

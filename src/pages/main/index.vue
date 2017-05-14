@@ -71,11 +71,11 @@
     </transition>
 
     <keep-alive>
-      <rightPanel v-if="showRightPanel"></rightPanel>
+      <dataStatistics v-if="showRightPanel"></dataStatistics>
     </keep-alive>
 
     <keep-alive>
-      <predictConfirm :visible="showPredictConfirm"></predictConfirm>
+      <predictConfirm :visible.sync="showPredictConfirm"></predictConfirm>
     </keep-alive>
   </div>
 </template>
@@ -88,13 +88,13 @@
     INIT_DEFAULT_DATA,
     UPDATE_DATA
   } from '@/store/mutation-types';
-  import rightPanel from '@/pages/main/rightPanel';
+  import dataStatistics from '@/pages/main/dataStatistics';
   import predictConfirm from './predictConfirm';
 
   export default {
     name: 'main',
     components: {
-      rightPanel,
+      dataStatistics,
       predictConfirm
     },
     data() {

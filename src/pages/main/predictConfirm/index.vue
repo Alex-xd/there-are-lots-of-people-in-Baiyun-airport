@@ -1,18 +1,13 @@
 <template>
-  <predictConfirm :visible="visible">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">×
-      </button>
-      <h4 class="modal-title">请确认预测时间</h4>
-    </div>
-    <div class="modal-body">
-      <p>ssssss</p>
-    </div>
+  <predictConfirm :visible.sync="visible"
+          title="请输入预测时间"
+          :onPositive="predict">
+    <p>adsdasads</p>
   </predictConfirm>
 </template>
 
 <script>
-  import predictConfirm from '@/components/dialog/baseUI';
+  import predictConfirm from '@/components/dialog';
 
   export default {
     name: 'predict-confirm',
@@ -28,8 +23,8 @@
       return {}
     },
     methods: {
-      close() {
-        this.visible = false;
+      predict(){
+        alert('预测成功！')
       }
     }
   }

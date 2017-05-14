@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    // 过去2小时到未来4小时（共6小时，数据间隔10分钟）的数据，共36组数据，键值为时间戳。  defaultData为初始数据
+    // 过去2小时到未来4小时（共6小时，数据间隔10分钟）的数据，共36组数据，键值为时间戳。  API中的getInitialData 的defaultData为初始数据
     data: null
   },
   getters,

@@ -1,27 +1,27 @@
 <template>
-  <dialogBaseUI :visible="visible">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">×
-      </button>
-      <h4 class="modal-title">{{title}}</h4>
+  <div class="modal" :class="{show:visible}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" @click="close">×
+          </button>
+          <h4 class="modal-title">{{title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p v-if="content">{{content}}</p>
+          <slot></slot>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" @click="positive">{{positiveText}}</button>
+        </div>
+      </div>
     </div>
-    <div class="modal-body">
-      <p>{{content}}</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" @click="positive">{{positiveText}}</button>
-    </div>
-  </dialogBaseUI>
+  </div>
 </template>
 
 <script>
-  import dialogBaseUI from './baseUI';
-
   export default {
     name: 'dialog',
-    components: {
-      dialogBaseUI
-    },
     props: {
       visible: {
         type: Boolean
@@ -58,7 +58,7 @@
 
 <style lang="scss" scoped>
   .modal {
-    z-index: 999999999;
+    z-index: 99999;
   }
 
   .modal-dialog {
