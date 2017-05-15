@@ -2,7 +2,7 @@
   <predictConfirm :visible.sync="visible"
           title="请输入预测时间"
           :onPositive="predict">
-    <p>adsdasads</p>
+
   </predictConfirm>
 </template>
 
