@@ -24,8 +24,8 @@
                     <b class="caret"></b></a>
                   <ul class="dropdown-menu">
                     <li><a @click="toggleRightPanel">数据总览</a></li>
-                    <li><a @click="updateData">上传数据</a></li>
-                    <li><a @click="toggleTimeDialog">历史数据</a></li>
+                    <li><a @click="uploadData">上传数据</a></li>
+                    <li><a @click="">历史数据</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -66,21 +66,14 @@
       </div>
     </div>
 
-    <transition name="slide">
-      <router-view></router-view>
-    </transition>
+    <router-view></router-view>
 
-    <keep-alive>
-      <dataStatistics v-if="showRightPanel"></dataStatistics>
-    </keep-alive>
+    <dataStatistics :visible="showRightPanel"></dataStatistics>
 
-    <keep-alive>
-      <predictConfirm :visible.sync="showPredictConfirm"></predictConfirm>
-    </keep-alive>
 
-    <keep-alive>
-      <time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>
-    </keep-alive>
+    <!--<keep-alive>-->
+    <!--<time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>-->
+    <!--</keep-alive>-->
   </div>
 </template>
 
@@ -93,24 +86,20 @@
     UPDATE_DATA
   } from '@/store/mutation-types';
   import dataStatistics from '@/pages/main/dataStatistics';
-  import predictConfirm from './predictConfirm';
-  import timeDialog from '@/components/dialog/timeDialog';
-  import API from '@/api';
 
   export default {
     name: 'main',
     components: {
-      dataStatistics,
-      predictConfirm,
-      timeDialog
+      dataStatistics
     },
     data() {
       return {
         showRightPanel: false,
-        showPredictConfirm: false,
-        showTimeDialog: false,
-        timeReturn: false,
-        timeResult: [],
+        showPredictTime: false,
+        predictTime: 3,
+//        showTimeDialog: false,
+//        timeReturn: false,
+//        timeResult: [],
         heatmap: { // 热图相关
           instance: null,
           playing: false,
@@ -163,7 +152,7 @@
           clearInterval(this.heatmap.timer);
           this.heatmap.instance = null;
           document.querySelector(this.heatmap.config.el)
-            .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
+          .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
         }
         this.$router.push('/logout');
       },
@@ -208,20 +197,42 @@
       toggleRightPanel(){
         this.showRightPanel = !this.showRightPanel;
       },
-      // 显示隐藏历史时间输入框
-      toggleTimeDialog(){
-        this.showTimeDialog = !this.showTimeDialog;
-      },
+//      // 显示隐藏历史时间输入框
+//      toggleTimeDialog(){
+//        this.showTimeDialog = !this.showTimeDialog;
+//      },
       // 点击上传数据
-      updateData(){
+      // 上传预测所需源数据
+      uploadData(){
         const _this = this;
         this.$showDialog({
-          title: '是否进行预测？',
-          positiveText: '预测',
+          type: 'file',
+          title: '请上传预测所需源数据',
+          positiveText: '上传',
           onPositive: () => {
-            _this.showPredictConfirm = true;
+// TODO:此处正确的逻辑应该是先上传数据到服务器，在服务器端预测，然后返回预测结果，前端展示。 但无后台，只能粗暴的让数据变了一下，模拟效果
+            _this.$nextTick(() => {
+              _this.predictConfirm();
+            });
           }
         })
+      },
+      // 根据上传的数据进行预测
+      predictConfirm(){
+        const _this = this;
+        this.$showDialog({
+          type: 'time',
+          title: '请输入要预测的时间',
+          positiveText: '预测',
+          onPositive: ({time}) => {
+            _this.predict(time);
+          }
+        })
+      },
+      // 预测
+      predict(time){
+        // TODO:同上一个todo所说，仅改变一下数据就好
+        console.log(`预测 ${time}`)
       }
     },
     async mounted(){
@@ -237,35 +248,35 @@
       }
     },
     watch: {
-      async timeReturn(v) {
-        if (v === true) {
-//          let timeString = '';
-//          this.timeResult.forEach((item) => {
-//            timeString = timeString + item.toString() + '-';
-//          });
-//          timeString = timeString.slice(0, -1);
-//          let date = Date.parse(new Date(timeString));
-//          const rsp = await API.getHeatmapData(date);
-          if (this.heatmap.playing) {
-            clearInterval(this.heatmap.timer);
-            this.heatmap.playing = false;
-          }
-          if (this.heatmap.instance === null) {
-            this.initHM();
-          }
-          this.heatmap.playing = true;
+      /* async timeReturn(v) {
+         if (v === true) {
+ //          let timeString = '';
+ //          this.timeResult.forEach((item) => {
+ //            timeString = timeString + item.toString() + '-';
+ //          });
+ //          timeString = timeString.slice(0, -1);
+ //          let date = Date.parse(new Date(timeString));
+ //          const rsp = await API.getHeatmapData(date);
+           if (this.heatmap.playing) {
+             clearInterval(this.heatmap.timer);
+             this.heatmap.playing = false;
+           }
+           if (this.heatmap.instance === null) {
+             this.initHM();
+           }
+           this.heatmap.playing = true;
 
-          // 自动播放
-          clearInterval(this.heatmap.timer);
-          this.heatmap.timer = setInterval(() => {
-            // 更新数据 & 更新热图（当前时间）
-            this.$store.dispatch('timeForward');
-            this.updateHM(this.$store.getters.curData.points);
-          }, this.heatmap.config.interval);
+           // 自动播放
+           clearInterval(this.heatmap.timer);
+           this.heatmap.timer = setInterval(() => {
+             // 更新数据 & 更新热图（当前时间）
+             this.$store.dispatch('timeForward');
+             this.updateHM(this.$store.getters.curData.points);
+           }, this.heatmap.config.interval);
 
-          this.timeReturn = false;
-        }
-      }
+           this.timeReturn = false;
+         }
+       }*/
     }
   }
 </script>
@@ -350,13 +361,4 @@
     }
   }
 
-  .slide-enter,
-  .slide-leave-active {
-    transform: translate3d(-410px, 0, 0);
-  }
-
-  .slide-enter-active,
-  .slide-leave-active {
-    transition: transform .3s ease-in-out !important;
-  }
 </style>

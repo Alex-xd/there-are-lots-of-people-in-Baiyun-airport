@@ -1,6 +1,6 @@
 <template>
   <transition name="slide">
-    <div class="panel panel-default right-panel">
+    <div class="panel panel-default right-panel" v-show="visible">
       <div class="panel-heading">未来1小时分布预测和预警 （ {{data.timeStamp | unixToTime}} ）</div>
       <div class="panel-body">
         <div id="J_echart-bars"></div>
@@ -22,6 +22,12 @@
 
   export default {
     name: 'rightPanel',
+    props: {
+      visible: {
+        type: Boolean,
+        default: false
+      }
+    },
     data() {
       return {
         barsChart: null,

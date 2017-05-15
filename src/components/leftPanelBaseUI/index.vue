@@ -1,20 +1,22 @@
 <template>
-  <div class="panel leftpanel">
-    <header class="leftpanel-header">
-      <ul class="breadcrumb leftpanel-breadcrumb">
-        <li>
-          <router-link to="/main">主界面</router-link>
-        </li>
-        <slot name="breadcrumb"></slot>
-      </ul>
-      <p class="btn-group-sm">
-        <a class="btn btn-primary btn-fab leftpanel-btn" @click="goBack"><i slot="btn"
-                                                                            class="material-icons">reply</i></a>
-      </p>
-    </header>
+  <transition name="slide">
+    <div class="panel leftpanel">
+      <header class="leftpanel-header">
+        <ul class="breadcrumb leftpanel-breadcrumb">
+          <li>
+            <router-link to="/main">主界面</router-link>
+          </li>
+          <slot name="breadcrumb"></slot>
+        </ul>
+        <p class="btn-group-sm">
+          <a class="btn btn-primary btn-fab leftpanel-btn" @click="goBack"><i slot="btn"
+                                                                              class="material-icons">reply</i></a>
+        </p>
+      </header>
 
-    <slot name="main"></slot>
-  </div>
+      <slot name="main"></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -78,5 +80,13 @@
     }
   }
 
+  .slide-enter,
+  .slide-leave-active {
+    transform: translate3d(-410px, 0, 0);
+  }
 
+  .slide-enter-active,
+  .slide-leave-active {
+    transition: transform .3s ease-in-out !important;
+  }
 </style>

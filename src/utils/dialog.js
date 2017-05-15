@@ -10,6 +10,7 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin)
 }
 
+plugin.installed = false;
 export default function plugin(Vue) {
   if (plugin.installed) {
     return
@@ -19,13 +20,14 @@ export default function plugin(Vue) {
   const vm = new Component({el: document.createElement('div')});
   document.body.appendChild(vm.$el);
 
-  function showDialog({title = '提示', content = '', positiveText = '确定', onPositive}) {
+  function showDialog({type = 'text', title = '', content = '', positiveText = '', onPositive}) {
+    vm.type = type;
     vm.title = title;
     vm.content = content;
     vm.positiveText = positiveText;
     vm.onPositive = onPositive || function () {
       };
-    vm.visible = true
+    vm.visible = true;
   }
 
   window.addEventListener('hashchange', () => {
@@ -35,4 +37,7 @@ export default function plugin(Vue) {
   }, false);
 
   Vue.prototype.$showDialog = showDialog;
+  plugin.installed = true;
 }
+
+
