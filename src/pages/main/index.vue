@@ -25,7 +25,7 @@
                   <ul class="dropdown-menu">
                     <li><a @click="toggleRightPanel">数据总览</a></li>
                     <li><a @click="updateData">上传数据</a></li>
-                    <li><a>历史数据</a></li>
+                    <li><a @click="toggleTimeDialog">历史数据</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -77,6 +77,10 @@
     <keep-alive>
       <predictConfirm :visible.sync="showPredictConfirm"></predictConfirm>
     </keep-alive>
+
+    <keep-alive>
+      <time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>
+    </keep-alive>
   </div>
 </template>
 
@@ -90,17 +94,23 @@
   } from '@/store/mutation-types';
   import dataStatistics from '@/pages/main/dataStatistics';
   import predictConfirm from './predictConfirm';
+  import timeDialog from '@/components/dialog/timeDialog';
+  import API from '@/api';
 
   export default {
     name: 'main',
     components: {
       dataStatistics,
-      predictConfirm
+      predictConfirm,
+      timeDialog
     },
     data() {
       return {
         showRightPanel: false,
         showPredictConfirm: false,
+        showTimeDialog: false,
+        timeReturn: false,
+        timeResult: [],
         heatmap: { // 热图相关
           instance: null,
           playing: false,
@@ -153,7 +163,7 @@
           clearInterval(this.heatmap.timer);
           this.heatmap.instance = null;
           document.querySelector(this.heatmap.config.el)
-          .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
+            .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
         }
         this.$router.push('/logout');
       },
@@ -198,6 +208,10 @@
       toggleRightPanel(){
         this.showRightPanel = !this.showRightPanel;
       },
+      // 显示隐藏历史时间输入框
+      toggleTimeDialog(){
+        this.showTimeDialog = !this.showTimeDialog;
+      },
       // 点击上传数据
       updateData(){
         const _this = this;
@@ -220,6 +234,37 @@
       } else {
         rsp = JSON.parse(rsp);
         this.$store.commit(INIT_DEFAULT_DATA, rsp);
+      }
+    },
+    watch: {
+      async timeReturn(v) {
+        if (v === true) {
+//          let timeString = '';
+//          this.timeResult.forEach((item) => {
+//            timeString = timeString + item.toString() + '-';
+//          });
+//          timeString = timeString.slice(0, -1);
+//          let date = Date.parse(new Date(timeString));
+//          const rsp = await API.getHeatmapData(date);
+          if (this.heatmap.playing) {
+            clearInterval(this.heatmap.timer);
+            this.heatmap.playing = false;
+          }
+          if (this.heatmap.instance === null) {
+            this.initHM();
+          }
+          this.heatmap.playing = true;
+
+          // 自动播放
+          clearInterval(this.heatmap.timer);
+          this.heatmap.timer = setInterval(() => {
+            // 更新数据 & 更新热图（当前时间）
+            this.$store.dispatch('timeForward');
+            this.updateHM(this.$store.getters.curData.points);
+          }, this.heatmap.config.interval);
+
+          this.timeReturn = false;
+        }
       }
     }
   }
