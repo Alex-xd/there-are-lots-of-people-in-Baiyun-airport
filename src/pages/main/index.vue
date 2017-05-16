@@ -25,7 +25,7 @@
                   <ul class="dropdown-menu">
                     <li><a @click="toggleRightPanel">数据总览</a></li>
                     <li><a @click="uploadData">上传数据</a></li>
-                    <li><a @click="">历史数据</a></li>
+                    <li><a @click="toggleTimeDialog">历史数据</a></li>
                   </ul>
                 </li>
                 <li class="dropdown">
@@ -70,10 +70,9 @@
 
     <dataStatistics :visible="showRightPanel"></dataStatistics>
 
-
-    <!--<keep-alive>-->
-    <!--<time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>-->
-    <!--</keep-alive>-->
+    <keep-alive>
+      <time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>
+    </keep-alive>
   </div>
 </template>
 
@@ -86,20 +85,21 @@
     UPDATE_DATA
   } from '@/store/mutation-types';
   import dataStatistics from '@/pages/main/dataStatistics';
+  import timeDialog from '@/components/dialog/timeDialog';
+  import { getDataByTime } from '@/store';
 
   export default {
     name: 'main',
     components: {
-      dataStatistics
+      dataStatistics,
+      timeDialog
     },
     data() {
       return {
         showRightPanel: false,
-        showPredictTime: false,
-        predictTime: 3,
-//        showTimeDialog: false,
-//        timeReturn: false,
-//        timeResult: [],
+        showTimeDialog: false,
+        timeReturn: false,
+        timeResult: [],
         heatmap: { // 热图相关
           instance: null,
           playing: false,
@@ -197,10 +197,10 @@
       toggleRightPanel(){
         this.showRightPanel = !this.showRightPanel;
       },
-//      // 显示隐藏历史时间输入框
-//      toggleTimeDialog(){
-//        this.showTimeDialog = !this.showTimeDialog;
-//      },
+      // 显示隐藏历史时间输入框
+      toggleTimeDialog(){
+        this.showTimeDialog = !this.showTimeDialog;
+      },
       // 点击上传数据
       // 上传预测所需源数据
       uploadData(){
@@ -232,8 +232,10 @@
       // 预测
       predict(time){
         // TODO:同上一个todo所说，仅改变一下数据就好
-        console.log(`预测 ${time}`)
-      }
+        console.log(`预测 ${time}`);
+        this.initHM();
+        this.updateHM(this.$store.getters.fur1hourData.points);
+      },
     },
     async mounted(){
       // 载入起始数据
@@ -248,7 +250,7 @@
       }
     },
     watch: {
-      /* async timeReturn(v) {
+      async timeReturn(v) {
          if (v === true) {
  //          let timeString = '';
  //          this.timeResult.forEach((item) => {
@@ -276,7 +278,7 @@
 
            this.timeReturn = false;
          }
-       }*/
+       }
     }
   }
 </script>

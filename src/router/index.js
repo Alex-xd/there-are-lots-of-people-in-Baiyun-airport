@@ -5,8 +5,8 @@ import App from '@/App';
 const login = r => require.ensure([], () => r(require('@/pages/login')), 'login');
 const logout = r => require.ensure([], () => r(require('@/pages/logout')), 'logout');
 const main = r => require.ensure([], () => r(require('@/pages/main')), 'main');
-const ctrlPanel = r => require.ensure([], () => r(require('@/pages/main/leftPanels/ctrlPanel')), 'panels');
-const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/leftPanels/sectionDetails')), 'panels');
+const ctrlPanel = r => require.ensure([], () => r(require('@/pages/main/leftPanels/ctrlPanel')), 'main');
+const sectionDetails = r => require.ensure([], () => r(require('@/pages/main/leftPanels/sectionDetails')), 'main');
 
 Vue.use(Router);
 

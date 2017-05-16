@@ -18,7 +18,7 @@
                      @keyup.enter="positive">
             </div>
 
-            <div v-else-if="type==='file'" class="form-group">
+            <div v-else-if="type==='file'" class="form-group is-fileinput" >
               <label for="inputFile" class="col-md-2 control-label">选择文件</label>
               <div class="col-md-10">
                 <input type="text" readonly="" class="form-control" placeholder="浏览文件...">
