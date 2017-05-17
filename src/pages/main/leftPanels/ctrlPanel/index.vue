@@ -1,17 +1,13 @@
 <template>
   <leftPanelBaseUI>
-    <template slot="breadcrumb">
-      <li class="active">控制面板</li>
-    </template>
+    <li class="active" slot="breadcrumb">控制面板</li>
 
-    <template slot="main">
-      <section class="content">
-        <template v-for="(value, key, index) in sectionInfo">
-          <listItem :section="value" :key="key" @click.native="showDetails(key)"></listItem>
-          <div v-if="index < 8" class="my-list-group-separator"></div> <!--最后一项不渲染-->
-        </template>
-      </section>
-    </template>
+    <section class="content" slot="main">
+      <template v-for="(value, key, index) in sectionInfo">
+        <listItem :section="value" :key="key" @click.native="showDetails(key)"></listItem>
+        <div v-if="index < 8" class="my-list-group-separator"></div> <!--最后一项不渲染-->
+      </template>
+    </section>
   </leftPanelBaseUI>
 </template>
 
