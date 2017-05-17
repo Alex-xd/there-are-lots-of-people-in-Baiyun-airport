@@ -40,6 +40,26 @@
     },
     methods: {
       showDetails(section){
+        const PAGEWIDTH = document.body.scrollWidth;
+        const PAGEHEIGHT = document.body.scrollHeight;
+        switch (section) {
+          case 'T1' : window.scrollTo(PAGEWIDTH / 5, PAGEHEIGHT / 4);
+            break;
+          case 'W1' : window.scrollTo(0, 0);
+            break;
+          case 'W2' : window.scrollTo(0, PAGEHEIGHT / 4);
+            break;
+          case 'W3' : window.scrollTo(0, PAGEHEIGHT);
+            break;
+          case 'WC' : window.scrollTo(0, PAGEHEIGHT / 4);
+            break;
+          case 'E1' : window.scrollTo(PAGEWIDTH, 0);
+            break;
+          case 'E2' : window.scrollTo(PAGEWIDTH / 2, PAGEHEIGHT / 4);
+            break;
+          default: break;
+        }
+
         this.$router.push({name: 'sectionDetails', params: {section: section}});
       }
     }

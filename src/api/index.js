@@ -35,42 +35,42 @@ export default {
             state: 0 // 0：normal    1：warning   2：danger
           },
           W1: {
-            name: 'W1 主航站楼',
+            name: 'W1 候机区',
             pNum: 0,
             state: 0
           },
           W2: {
-            name: 'W2 主航站楼',
+            name: 'W2 候机区',
             pNum: 0,
             state: 0
           },
           W3: {
-            name: 'W3 主航站楼',
+            name: 'W3 候机区',
             pNum: 0,
             state: 0
           },
           WC: {
-            name: 'WC 主航站楼',
+            name: 'WC 西侧通道',
             pNum: 0,
             state: 0
           },
           E1: {
-            name: 'E1 主航站楼',
+            name: 'E1 候机区',
             pNum: 0,
             state: 0
           },
           E2: {
-            name: 'E2 主航站楼',
+            name: 'E2 候机区',
             pNum: 0,
             state: 0
           },
           E3: {
-            name: 'E3 主航站楼',
+            name: 'E3 候机区',
             pNum: 0,
             state: 0
           },
           EC: {
-            name: 'EC 主航站楼',
+            name: 'EC 东侧通道',
             pNum: 0,
             state: 0
           }
