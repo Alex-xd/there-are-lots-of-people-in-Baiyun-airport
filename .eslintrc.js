@@ -61,6 +61,8 @@ module.exports = {
     "no-use-before-define": 0,
     "import/no-extraneous-dependencies": 0,
     "import/no-mutable-exports": 0,
-    "object-curly-spacing": 0
+    "object-curly-spacing": 0,
+    "quotes": 0,
+    "no-alert": 0
   }
 };

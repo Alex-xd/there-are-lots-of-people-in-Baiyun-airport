@@ -20,15 +20,6 @@
                   <a @click="toggleCtrlPanel">控制面板</a>
                 </li>
                 <li class="dropdown">
-                  <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">数据统计
-                    <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a @click="toggleRightPanel">数据总览</a></li>
-                    <li><a @click="uploadData">上传数据</a></li>
-                    <li><a @click="toggleTimeDialog">历史数据</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown">
                   <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">系统控制
                     <b class="caret"></b></a>
                   <ul class="dropdown-menu">
@@ -36,6 +27,15 @@
                     <li><a @click="pause">暂停系统</a></li>
                     <li><a @click="stop">关闭并退出</a>
                     </li>
+                  </ul>
+                </li>
+                <li class="dropdown">
+                  <a data-target="#" class="dropdown-toggle" data-toggle="dropdown">数据统计
+                    <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a @click="toggleRightPanel">数据总览</a></li>
+                    <li><a @click="getHistoryData">历史数据</a></li>
+                    <li><a @click="uploadData">上传数据</a></li>
                   </ul>
                 </li>
               </ul>
@@ -66,40 +66,35 @@
       </div>
     </div>
 
+    <!--左侧面板-->
     <router-view></router-view>
 
+    <!--右侧数据分析面板-->
     <dataStatistics :visible="showRightPanel"></dataStatistics>
 
-    <keep-alive>
-      <time-dialog :visible.sync="showTimeDialog" :finish.sync="timeReturn" :result.sync="timeResult" :title="'请确认你要查看的历史时间'"></time-dialog>
-    </keep-alive>
   </div>
 </template>
 
 
 <script>
+//  TODO:在某些操作后，加入一个加载loading效果，比如上传数据后预测等
   import h337 from 'heatmap.js';
   import initTooltips from '@/utils/heatmapTooltips';
   import {
     INIT_DEFAULT_DATA,
-    UPDATE_DATA
+    UPDATE_DATA,
+    UPDATE_SINGLE_ONE
   } from '@/store/mutation-types';
   import dataStatistics from '@/pages/main/dataStatistics';
-  import timeDialog from '@/components/dialog/timeDialog';
-  import { getDataByTime } from '@/store';
 
   export default {
     name: 'main',
     components: {
-      dataStatistics,
-      timeDialog
+      dataStatistics
     },
     data() {
       return {
         showRightPanel: false,
-        showTimeDialog: false,
-        timeReturn: false,
-        timeResult: [],
         heatmap: { // 热图相关
           instance: null,
           playing: false,
@@ -129,7 +124,7 @@
           this.initHM();
         }
         this.heatmap.playing = true;
-
+        this.$store.commit(UPDATE_SINGLE_ONE, false); // 进入连播模式
         // 自动播放
         clearInterval(this.heatmap.timer);
         this.heatmap.timer = setInterval(() => {
@@ -147,14 +142,24 @@
       },
       // 停止热图 销毁dom
       stop(){
-        if (this.heatmap.playing) {
-          this.heatmap.playing = false;
-          clearInterval(this.heatmap.timer);
-          this.heatmap.instance = null;
-          document.querySelector(this.heatmap.config.el)
-          .removeChild(document.querySelector(`${this.heatmap.config.el} canvas`));
+        const vm = this;
+
+        this.$showDialog({
+          title: '确定要退出系统吗？',
+          onPositive: () => {
+            _byebye();
+          }
+        });
+        function _byebye() {
+          if (vm.heatmap.playing) {
+            vm.heatmap.playing = false;
+            clearInterval(vm.heatmap.timer);
+            vm.heatmap.instance = null;
+            document.querySelector(vm.heatmap.config.el)
+            .removeChild(document.querySelector(`${vm.heatmap.config.el} canvas`));
+          }
+          vm.$router.push('/logout');
         }
-        this.$router.push('/logout');
       },
       // 初始化热图
       initHM(){
@@ -204,81 +209,78 @@
       // 点击上传数据
       // 上传预测所需源数据
       uploadData(){
-        const _this = this;
+        const vm = this;
         this.$showDialog({
           type: 'file',
           title: '请上传预测所需源数据',
           positiveText: '上传',
           onPositive: () => {
 // TODO:此处正确的逻辑应该是先上传数据到服务器，在服务器端预测，然后返回预测结果，前端展示。 但无后台，只能粗暴的让数据变了一下，模拟效果
-            _this.$nextTick(() => {
-              _this.predictConfirm();
+            vm.$nextTick(() => {
+              vm.predictConfirm();
             });
           }
         })
       },
       // 根据上传的数据进行预测
       predictConfirm(){
-        const _this = this;
+        const vm = this;
         this.$showDialog({
           type: 'time',
           title: '请输入要预测的时间',
           positiveText: '预测',
-          onPositive: ({time}) => {
-            _this.predict(time);
+          onPositive: ({ time }) => {
+            vm.predict(time);
           }
         })
       },
       // 预测
-      predict(time){
+      async predict(time){
         // TODO:同上一个todo所说，仅改变一下数据就好
         console.log(`预测 ${time}`);
-        this.initHM();
-        this.updateHM(this.$store.getters.fur1hourData.points);
+        this.pause();
+        if (this.heatmap.instance === null) {
+          this.initHM();
+        }
+        const rsp = await this.$API.getHeatmapData(time);
+        if (rsp.status === 200) {
+          this.$store.commit(UPDATE_SINGLE_ONE, rsp.data);
+          this.updateHM(rsp.data.points);
+        } else {
+          alert('出错了');
+        }
       },
+      // 历史数据
+      getHistoryData(){
+        const vm = this;
+        this.$showDialog({
+          type: 'time',
+          title: '请输入日期时间',
+          onPositive: ({ time }) => {
+            vm.predict(time);
+          }
+        })
+      }
     },
     async mounted(){
       // 载入起始数据
-      let rsp = this.$storage.getStore('defaultData1');
+      const version = '1.6';
+      let rsp = this.$storage.getStore(`defaultData${version}`);
+
       if (!rsp) {
         rsp = await this.$API.getInitialData();
-        this.$store.commit(INIT_DEFAULT_DATA, rsp.data);
-        this.$storage.setStore('defaultData1', rsp.data);
+        if (rsp.status === 200) {
+          this.$store.commit(INIT_DEFAULT_DATA, rsp.data);
+          this.$storage.setStore(`defaultData${version}`, rsp.data);
+        } else {
+          alert('出错了');
+        }
       } else {
         rsp = JSON.parse(rsp);
         this.$store.commit(INIT_DEFAULT_DATA, rsp);
       }
-    },
-    watch: {
-      async timeReturn(v) {
-         if (v === true) {
- //          let timeString = '';
- //          this.timeResult.forEach((item) => {
- //            timeString = timeString + item.toString() + '-';
- //          });
- //          timeString = timeString.slice(0, -1);
- //          let date = Date.parse(new Date(timeString));
- //          const rsp = await API.getHeatmapData(date);
-           if (this.heatmap.playing) {
-             clearInterval(this.heatmap.timer);
-             this.heatmap.playing = false;
-           }
-           if (this.heatmap.instance === null) {
-             this.initHM();
-           }
-           this.heatmap.playing = true;
-
-           // 自动播放
-           clearInterval(this.heatmap.timer);
-           this.heatmap.timer = setInterval(() => {
-             // 更新数据 & 更新热图（当前时间）
-             this.$store.dispatch('timeForward');
-             this.updateHM(this.$store.getters.curData.points);
-           }, this.heatmap.config.interval);
-
-           this.timeReturn = false;
-         }
-       }
+//      const rsp = await this.$API.getInitialData();
+//      this.$store.commit(INIT_DEFAULT_DATA, rsp.data);
     }
   }
 </script>
@@ -318,7 +320,7 @@
   .heatmap-wrapper {
     position: relative;
     padding: 0 !important;
-    margin: 10px 0 19px 0 !important;
+    margin: 10px auto 19px !important;
     box-sizing: content-box;
     @at-root .map {
       background-size: 100% 100%;

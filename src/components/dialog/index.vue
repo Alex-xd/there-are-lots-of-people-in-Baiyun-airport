@@ -18,7 +18,7 @@
                      @keyup.enter="positive">
             </div>
 
-            <div v-else-if="type==='file'" class="form-group is-fileinput" >
+            <div v-else-if="type==='file'" class="form-group is-fileinput">
               <label for="inputFile" class="col-md-2 control-label">选择文件</label>
               <div class="col-md-10">
                 <input type="text" readonly="" class="form-control" placeholder="浏览文件...">
@@ -39,6 +39,8 @@
 </template>
 
 <script>
+  import { unixToTime } from '@/utils/formateDate';
+
   //  TODO：添加可拖动功能
   export default {
     name: 'dialog',
@@ -74,20 +76,34 @@
       }
     },
     methods: {
-      positive(){
-        let cbParams = null;
-
+      positive() { // TODO:用策略模式重构下这部分
         if (this.type === 'time') {
-          cbParams = {
-            time: Date.parse(this.time)
+          const unixTime = Date.parse(this.time);
+          if (unixTime > this.$const.time.start && unixTime < this.$const.time.end) {
+            this.onPositive({ time: unixTime });
+            this.close();
+          } else if (!this.time) {
+            // TODO:写一个toast代替alert
+            alert('请输入时间');
+          } else {
+            alert(`很抱歉! 没有找到${unixToTime(unixTime)}分的数据`);
           }
+        } else {
+          this.onPositive();
+          this.close();
         }
-        this.onPositive(cbParams);
-        this.close();
       },
       close() {
         this.visible = false;
       }
+    },
+    created(){
+      const vm = this;
+      window.document.addEventListener('keyup', (e) => {
+        if (e.which === 27) {
+          vm.close();
+        }
+      }, false);
     }
   }
 </script>

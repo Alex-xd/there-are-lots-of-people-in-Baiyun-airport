@@ -17,10 +17,10 @@ export default function plugin(Vue) {
   }
 
   const Component = Vue.extend(dialog);
-  const vm = new Component({el: document.createElement('div')});
+  const vm = new Component({ el: document.createElement('div') });
   document.body.appendChild(vm.$el);
 
-  function showDialog({type = 'text', title = '', content = '', positiveText = '', onPositive}) {
+  function showDialog({ type = 'text', title = '', content = '', positiveText = '确定', onPositive }) {
     vm.type = type;
     vm.title = title;
     vm.content = content;

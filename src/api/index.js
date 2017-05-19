@@ -5,7 +5,7 @@
 import axios from 'axios';
 
 const staticFileRes = axios.create({   // 用于ajax请求静态资源时调用，保持永远缓存，资源更新时打hash
-  headers: {'Cache-Control': 'max-age=31104000'},
+  headers: { 'Cache-Control': 'max-age=31104000' },
   timeout: 5000
 });
 
@@ -118,6 +118,13 @@ export default {
           }
         });
 
+        // 人数乘一个倍数，满足产品经理的人数过少的需求
+        for (const p in sectionInfo) {
+          if (sectionInfo.hasOwnProperty(p)) {
+            sectionInfo[p].pNum *= 3;
+          }
+        }
+
         // 接口返回数据
         return {
           timeStamp: timeStamp,
@@ -131,6 +138,6 @@ export default {
    * 获取初始数据
    */
   getInitialData(){
-    return axios.get('https://zhangboyuan-10039837.file.myqcloud.com/baiyun5/defaultData.json');
-  }
+    return axios.get('http://zhangboyuan-10039837.cossh.myqcloud.com/defaultData.json')
+  },
 }

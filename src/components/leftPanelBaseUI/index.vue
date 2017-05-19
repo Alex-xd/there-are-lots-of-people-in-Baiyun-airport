@@ -14,7 +14,9 @@
         </p>
       </header>
 
-      <slot name="main"></slot>
+      <section class="main">
+        <slot name="main"></slot>
+      </section>
     </div>
   </transition>
 </template>
@@ -77,6 +79,21 @@
           background-color: lighten(#028775, 5%) !important;
         }
       }
+    }
+    .main {
+      overflow: auto;
+      transition: height .4s;
+      @media all and (min-height: 1181px) {
+        height: 924px;
+      }
+      @media all and (max-height: 1180px) {
+        height: 620px;
+      }
+      @media all and (max-height: 880px) {
+        height: 420px;
+      }
+
+      padding: 12px 15px 15px 15px;
     }
   }
 

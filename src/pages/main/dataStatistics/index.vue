@@ -1,9 +1,20 @@
 <template>
   <transition name="slide">
     <div class="panel panel-default right-panel" draggable="true" v-show="visible">
-      <div class="panel-heading">未来1小时分布预测和预警 （ {{data.timeStamp | unixToTime}} ）</div>
+      <div class="panel-heading">
+        <span v-if="isSingleOneData">{{data.timeStamp | unixToTime}} 分历史数据</span>
+        <span v-else>未来1小时分布预测和预警 （ {{data.timeStamp | unixToTime}} ）</span>
+      </div>
+
       <div class="panel-body">
         <div id="J_echart-bars"></div>
+        <ul v-if="!isSingleOneData" class="measures">
+          <li v-for="section in data.sectionInfo"
+              v-show="section.state > 0"
+              @click="showMeasure(section)"
+              :class="[section.state == 2 ? 'danger' : 'warning']"
+          ><i class="material-icons">priority_high</i></li>
+        </ul>
         <div id="J_echart-radar"></div>
       </div>
     </div>
@@ -31,17 +42,34 @@
     data() {
       return {
         barsChart: null,
-        radarChart: null
+        radarChart: null,
       }
     },
     computed: {
       data(){
-        if (this.$store.state.data) {
+        if (this.$store.state.singleOne) {
+          return this.$store.state.singleOneData;
+        } else if (this.$store.state.data) {
           return this.$store.getters.fur1hourData;
         }
         return {
           timeStamp: 0
         }
+      },
+      isSingleOneData(){
+        return this.$store.state.singleOne;
+      }
+    },
+    methods: {
+      showMeasure(section){
+        // 随机挑一个建议措施拿出来
+        const measures = this.$const.measures[section.state];
+        const randomMeasure = measures[Math.floor(Math.random() * measures.length)];
+
+        this.$showDialog({
+          title: Number(section.state) === 1 ? '预警' : '警告！',
+          content: randomMeasure
+        })
       }
     },
     watch: {
@@ -127,15 +155,15 @@
         },
         radar: {
           indicator: [
-            {name: 'T1 主航站楼', max: 800},
-            {name: 'W1 西一', max: 800},
-            {name: 'W2 西二', max: 800},
-            {name: 'W3 西三', max: 800},
-            {name: 'WC 西侧通道', max: 800},
-            {name: 'E1 东一', max: 800},
-            {name: 'E2 东二', max: 800},
-            {name: 'E3 东三', max: 800},
-            {name: 'EC 东侧通道', max: 800},
+            { name: 'T1 主航站楼', max: 2500 },
+            { name: 'W1 西一', max: 2500 },
+            { name: 'W2 西二', max: 2500 },
+            { name: 'W3 西三', max: 2500 },
+            { name: 'WC 西侧通道', max: 2500 },
+            { name: 'E1 东一', max: 2500 },
+            { name: 'E2 东二', max: 2500 },
+            { name: 'E3 东三', max: 2500 },
+            { name: 'EC 东侧通道', max: 2500 },
           ],
           center: ['50%', '55%'],
           radius: 100,
@@ -182,9 +210,36 @@
     &:hover {
       box-shadow: $boxShadowNormal;
     }
+    .measures {
+      position: absolute;
+      top: 384px;
+      width: 242px;
+      margin: 0;
+      left: 64px;
+      > li {
+        position: absolute;
+        top: 0;
+        font-size: 18px;
+        cursor: pointer;
+        @for $i from 0 through 8 {
+          &:nth-child(#{$i+1}) {
+            left: 26.8px * $i;
+          }
+        }
+      }
+    }
+  }
+
+  .danger {
+    color: #B62626;
+  }
+
+  .warning {
+    color: #FFA91B;
   }
 
   #J_echart-bars {
+    position: relative;
     float: left;
     width: 300px;
     height: 330px;

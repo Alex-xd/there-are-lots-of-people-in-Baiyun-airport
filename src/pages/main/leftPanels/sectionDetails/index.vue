@@ -9,7 +9,9 @@
 
     <template slot="main">
       <section class="content">
-        <header class="clear-fix">{{section.name}}人流量预测
+        <header class="clear-fix">
+          <span v-if="isSingleOneData">单个时间点数据暂不提供预测曲线</span>
+          <span v-else>{{section.name}}人流量预测</span>
           <div v-show="section.state !== 0" class="btn-group" @click="takeAction($event)">
             <a class="btn" :class="section.state===1 ? 'btn-warning':'btn-danger'">{{stateText}}</a>
             <a data-target="#" class="btn btn-warning dropdown-toggle"
@@ -22,10 +24,10 @@
               <li class="divider"></li>
               <li><a @click="ignore">忽略此条预警</a></li>
             </ul>
-
           </div>
         </header>
-        <div class="echart-leftpanel">
+
+        <div class="echart-leftpanel" v-if="!isSingleOneData">
           <div id="J_echart-leftpanel"></div>
           <div class="spinner"></div>
           <span class="now">当前时间：{{curTime}}</span>
@@ -52,8 +54,11 @@
     },
     computed: {
       section(){
-        if (this.$store.state.data) {
-          return this.$store.getters.curData.sectionInfo[this.$route.params.section];
+        const thisSecName = this.$route.params.section;
+        if (this.$store.state.singleOne) {
+          return this.$store.state.singleOneData.sectionInfo[thisSecName];
+        } else if (this.$store.state.data) {
+          return this.$store.getters.curData.sectionInfo[thisSecName];
         }
         return {
           name: '-',
@@ -68,12 +73,15 @@
       },
       curTime(){
         return unixToTime(this.$store.getters.curTime);
+      },
+      isSingleOneData(){
+        return this.$store.state.singleOne;
       }
     },
     methods: {
       takeAction(event){
         if (event.target.className === 'no-backend') {
-          this.$showDialog({title: '操作成功', content: '由于数据为固定的模拟数据，所以暂时无法看到采取操作后的成效'})
+          this.$showDialog({ title: '操作成功', content: '由于数据为固定的模拟数据，所以暂时无法看到采取操作后的成效' })
         }
       },
       ignore(){
@@ -172,6 +180,7 @@
   }
 
   .btn-group {
+    float: right;
     margin: 0 0 0 15px;
     .btn {
       padding: 8px 5px;

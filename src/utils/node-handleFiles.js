@@ -6,9 +6,13 @@ const axios = require('axios');
 const fs = require('fs');
 const sectionSettings = require('./constants.js').sectionSettings;
 
-// 数据过滤 JSON原始数据 => { sectionInfo, points }
+/**
+ * 数据过滤
+ * JSON原始数据 => { sectionInfo, points }
+ * @param timeStamp 时间戳
+ */
 function getHeatmapData(timeStamp) {
-  const url = `http://zhangboyuan-10039837.cos.myqcloud.com/baiyun5/data_${timeStamp}.json`;
+  const url = `https://zhangboyuan-10039837.file.myqcloud.com/baiyun5/data_${timeStamp}.json`;
   return axios.request({
     url: url,
     method: 'get',
@@ -106,8 +110,17 @@ function getHeatmapData(timeStamp) {
         }
       });
 
+      // 人数乘一个倍数，满足产品经理的人数过少的需求
+      for (const p in sectionInfo) {
+        if (sectionInfo.hasOwnProperty(p)) {
+          sectionInfo[p].pNum *= 3;
+        }
+      }
+
+      console.log(sectionInfo.T1.pNum);
       // 接口返回数据
       return {
+        timeStamp: timeStamp,
         sectionInfo: sectionInfo,
         points: points
       }
