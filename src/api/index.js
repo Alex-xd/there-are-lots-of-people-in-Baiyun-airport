@@ -138,6 +138,6 @@ export default {
    * 获取初始数据
    */
   getInitialData(){
-    return axios.get('http://zhangboyuan-10039837.cossh.myqcloud.com/defaultData.json')
+    return axios.get('https://zhangboyuan-10039837.cossh.myqcloud.com/defaultData.json')
   },
 }

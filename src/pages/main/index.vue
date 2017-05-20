@@ -237,7 +237,6 @@
       // 预测
       async predict(time){
         // TODO:同上一个todo所说，仅改变一下数据就好
-        console.log(`预测 ${time}`);
         this.pause();
         if (this.heatmap.instance === null) {
           this.initHM();

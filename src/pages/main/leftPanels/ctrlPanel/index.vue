@@ -2,7 +2,7 @@
   <leftPanelBaseUI>
     <li class="active" slot="breadcrumb">
       <span>控制面板</span>
-      <span v-show="isSingleOneData" class="history-time">{{data.timeStamp | unixToTime}} 分历史数据</span>
+      <span v-if="isSingleOneData" class="history-time">{{data.timeStamp | unixToTime}} 分历史数据</span>
     </li>
 
     <template v-for="(value, key, index) in data.sectionInfo" slot="main">
@@ -34,6 +34,9 @@
           return this.$store.state.singleOneData;
         } else if (this.$store.state.data) {
           return this.$store.getters.curData;
+        }
+        return {
+          timeStamp: 0
         }
       },
       isSingleOneData(){

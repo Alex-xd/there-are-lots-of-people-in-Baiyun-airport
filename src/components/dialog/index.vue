@@ -8,30 +8,34 @@
             </button>
             <h4 class="modal-title">{{title}}</h4>
           </div>
-          <div class="modal-body">
-            <p v-if="type==='text'">{{content}}</p>
 
-            <div v-else-if="type==='time'" class="form-group label-floating is-empty">
-              <label class="control-label" for="focusedInput1">日/月/年&nbsp;&nbsp;小时/分钟</label>
-              <input class="form-control" id="focusedInput1" type="datetime-local"
-                     v-model="time"
-                     @keyup.enter="positive">
-            </div>
+          <form>
+            <div class="modal-body">
+              <p v-if="type==='text'">{{content}}</p>
 
-            <div v-else-if="type==='file'" class="form-group is-fileinput">
-              <label for="inputFile" class="col-md-2 control-label">选择文件</label>
-              <div class="col-md-10">
-                <input type="text" readonly="" class="form-control" placeholder="浏览文件...">
-                <input type="file" id="inputFile" multiple="">
+              <div v-else-if="type==='time'" class="form-group label-floating is-empty">
+                <label class="control-label" for="focusedInput1">日/月/年&nbsp;&nbsp;小时/分钟</label>
+                <input class="form-control" id="focusedInput1" type="datetime-local" required
+                       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+                       v-model="time"
+                       @keyup.enter="positive">
               </div>
+
+              <div v-else-if="type==='file'" class="form-group is-fileinput">
+                <label for="inputFile" class="col-md-2 control-label">选择文件</label>
+                <div class="col-md-10">
+                  <input type="text" readonly="" class="form-control" placeholder="浏览文件...">
+                  <input type="file" id="inputFile" multiple="">
+                </div>
+              </div>
+
+              <slot v-else-if="type==='custom'"></slot>
             </div>
 
-            <slot v-else-if="type==='custom'"></slot>
-          </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="positive">{{positiveText}}</button>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" @click="positive">{{positiveText}}</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -78,7 +82,15 @@
     methods: {
       positive() { // TODO:用策略模式重构下这部分
         if (this.type === 'time') {
-          const unixTime = Date.parse(this.time);
+          if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}$/.test(this.time)) {
+            alert('输入格式错误，请重新输入');
+            return;
+          }
+          // 只允许10分钟倍数的输入
+          let time = this.time.slice(0, -1);
+          time = `${time}0`;
+
+          const unixTime = Date.parse(time);
           if (unixTime > this.$const.time.start && unixTime < this.$const.time.end) {
             this.onPositive({ time: unixTime });
             this.close();
