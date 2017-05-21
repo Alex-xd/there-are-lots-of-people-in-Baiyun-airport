@@ -9,5 +9,5 @@
 
 <style lang="scss">
     /*引入全局样式*/
-    @import "./styles/common/index";
+    @import "assets/css/common/index";
 </style>

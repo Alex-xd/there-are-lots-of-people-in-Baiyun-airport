@@ -2,13 +2,13 @@
 // THE BASICS
 // ------------------------------
 
-@import './reset';
-@import './variables';
+@import 'reset';
+@import 'variables';
 
 // ------------------------------
 // GLOBAL STYLES
 // ------------------------------
-@import './global';
+@import 'global';
 
 // ------------------------------
 // COMPONENTS
@@ -18,7 +18,7 @@
 // ------------------------------
 // MEDIA QUERIES
 // ------------------------------
-@import './media-queries';
+@import 'media-queries';
 
 
 // ------------------------------

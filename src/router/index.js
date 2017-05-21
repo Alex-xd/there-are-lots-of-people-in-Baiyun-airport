@@ -51,7 +51,7 @@ export default new Router({
   //   if (savedPosition) {
   //     return savedPosition
   //   }
-  //   return { x: 0, y: 0 }
+  //   return { x: 0, y: 500 }
   // },
   strict: process.env.NODE_ENV !== 'production'
 });

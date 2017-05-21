@@ -110,7 +110,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/styles/common/variables.scss';
+  @import '~assets/css/common/variables.scss';
 
   .showLayer {
     width: 100vw !important;
